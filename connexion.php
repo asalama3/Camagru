@@ -1,7 +1,13 @@
 <?php
 session_start();
-
-$bdd = new PDO('mysql:localhost=8889;dbname=Camagru', 'root', 'root');
+try
+{
+  $bdd = new PDO('mysql:localhost=8889;dbname=Camagru', 'root', 'root');
+}
+catch (Exception $e)
+{
+  die('Erreur: ' . $e->getMessage());
+}
 
 if (isset($_POST['formconnect']))
 {
@@ -71,3 +77,8 @@ if (isset($_POST['formconnect']))
     </footer>
   </body>
 </html>
+
+
+
+//echo '<a href="'.$file_path.$file_new_name.'"><img src="'.$file_path.$file_new_name.'"'.$style.'></a></br />';
+///$style = "style='height:500px ; width: 500px'"; ?>

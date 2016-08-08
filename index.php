@@ -1,7 +1,33 @@
 <!DOCTYPE html>
 <?php
+try
+{
+  $bdd = new PDO('mysql:localhost=8889;dbname=Camagru', 'root', 'root');
+}
+catch (Exception $e)
+{
+  die('Erreur: ' . $e->getMessage());
 
-$bdd = new PDO('mysql:localhost=8889;dbname=Camagru', 'root', 'root');
+}
+
+$header="MIME-Version: 1.0\r\n";
+$header.='From:"andreasalama2@gmail.com"<andreasalama2@gmail.com>'."\n";
+$header.='Content-Type:text/html; charset="uft-8"'."\n";
+$header.='Content-Transfer-Encoding: 8bit';
+
+
+$message='
+<html>
+<body>
+<div>
+J\'anvoye ce mail avec php.
+</div>
+</body>
+</html>
+';
+
+mail("andreasalama2@gmail.com", "salut test", $message, $header);
+
 
 if(isset($_POST['inscription']))
 {
