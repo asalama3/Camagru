@@ -58,3 +58,8 @@
     }, false);
 
 })();
+
+startbutton.click(function(){
+  $("canvas").addClass("sepia");
+
+});

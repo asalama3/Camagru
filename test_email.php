@@ -1,6 +1,7 @@
 <?php
-ini_set('error_reporting', E_ALL);
- ini_set('display_errors', 1);
+error_reporting(-1);
+ini_set('display_errors', 'On');
+set_error_handler("var_dump");
 
 
 if(isset($_POST['mailform']))
@@ -16,7 +17,7 @@ $message='
 <html>
 <body>
 <div>
-J\'anvoye ce mail avec php.
+test php.
 </div>
 </body>
 </html>

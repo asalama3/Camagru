@@ -85,5 +85,15 @@ table{
   text-decoration: underline solid white;
   color: white;
   font-family:'Freight Sans Bold', helvetica, arial, sans-serif !important;
+}
 
+.forgotpasswd{
+  color: white;
+  font-size: 20px;
+  font-family:'Freight Sans Bold', helvetica, arial, sans-serif !important;
+}
+
+.forgotpasswd a{
+  text-decoration: underline solid white;
+  color: green;
 }

@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <?php
 try
 {
@@ -7,28 +6,10 @@ try
 catch (Exception $e)
 {
   die('Erreur: ' . $e->getMessage());
-
 }
-
-$header="MIME-Version: 1.0\r\n";
-$header.='From:"andreasalama2@gmail.com"<andreasalama2@gmail.com>'."\n";
-$header.='Content-Type:text/html; charset="uft-8"'."\n";
-$header.='Content-Transfer-Encoding: 8bit';
-
-
-$message='
-<html>
-<body>
-<div>
-J\'anvoye ce mail avec php.
-</div>
-</body>
-</html>
-';
-
-mail("andreasalama2@gmail.com", "salut test", $message, $header);
-
-
+error_reporting(-1);
+ini_set('display_errors', 'On');
+set_error_handler("var_dump");
 if(isset($_POST['inscription']))
 {
   $pseudo = htmlspecialchars($_POST['pseudo']);
@@ -47,10 +28,34 @@ if(isset($_POST['inscription']))
         $mailexists = $reqmail->rowCount();
         if ($mailexists == 0)
         {
-          $insertuser = $bdd->prepare("INSERT INTO users(username, email, password) VALUES(?, ?, ?)");
-          $insertuser->execute(array($pseudo, $mail, $mdp));
-          $erreur = "Votre compte a bien été crée ! <a href=\"connexion.php\">Login</a>";
-          header('Location: index.php');
+          $keylength = 12;
+          $key = "";
+          for($i=1;$i<$keylength;$i++)
+          {
+            $key .= mt_rand(0, 9);
+          }
+          $insertuser = $bdd->prepare("INSERT INTO users(username, email, password, confirmkey) VALUES(?, ?, ?, ?)");
+          $insertuser->execute(array($pseudo, $mail, $mdp, $key));
+
+          $subject = 'Confirmation de compte';
+          $header='MIME-Version: 1.0' . "\r\n";
+          $header.='From:"andreasalama2@gmail.com"<andreasalama2@gmail.com>'. "\r\n";
+          $header.='Content-Type:text/html; charset="utf-8"'. "\r\n";
+          $header.='Content-Transfer-Encoding: 8bit';
+          $message='
+          <html>
+            <body>
+              <div align="center">
+                <a href="http://localhost:8888/Camagru/confirmation.php?username='.urldecode($pseudo).'&key='.$key.'">Confirmez votre compte !</a>
+              </div>
+            </body>
+          </html>
+          ';
+
+          mail($mail, $subject, $message, $header);
+
+          $erreur = "Votre compte a bien été crée ! </br>
+          Veuillez confirmer votre compte grace au lien envoye sur votre mail: .$mail.";
         }
         else
         {

@@ -68,6 +68,9 @@ if (isset($_POST['formconnect']))
         echo '<font color="red">' .$erreur. "</font>";
       }
       ?>
+      <div class="forgotpasswd">
+        <p>Forgot Password? <a href="./forgotyourpasswd.php">Click here to reset your password!</a></p>
+      </div>
       <div class="member">
         <p> Not a member yet ? <a href="./index.php">Sign up !</a></p>
       </div>
