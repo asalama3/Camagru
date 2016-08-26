@@ -42,8 +42,6 @@ if (isset($_GET['id']) AND $_GET['id'] > 0)
     <canvas id="canvas" width="320" height="240" style="display: none;"></canvas>
     <div id="stack" class="playground" style="background-color: darkgray;">
       <?php
-      //$photo = $_POST['canvas'];
-
       $allimages = $bdd->prepare("SELECT * FROM images WHERE user_id= ?");
       $allimages->execute(array($_SESSION['id']));
       while($user_image = $allimages->fetch())
@@ -52,6 +50,7 @@ if (isset($_GET['id']) AND $_GET['id'] > 0)
       <img src="<?php echo $user_image['lien_image'];?>" />
       <?php } ?>
     </div>
+
     <div class="margin">
       <p>
         <div id="filterButtons"></div>
@@ -74,6 +73,30 @@ if (isset($_GET['id']) AND $_GET['id'] > 0)
           <input type="checkbox" name="snake" id="snake"/><label for ="snake"><img src="./images/serpent.png"></label>
           <input type="checkbox" name="cadre" id="cadre" /><label for ="cadre"><img src="./images/cadre.png"></label>
           </form>
+          <div class="container" id="Saved">
+          <b>Saved</b><span id="loading"></span><img id="uploaded" src=""/>
+        </div>
+
+        <form name="upload" method="post" id="myform" action="profil.js" enctype="multipart/form-data">
+          <input type="file" name="photo_upload" id="file_photo" />
+        </form>
+          <?php
+          // $encoded_data = $_POST['photo_upload'];
+          // $binary_data = base64_decode( $encoded_data );
+          // // save to server (beware of permissions)
+          // $result = file_put_contents( 'webcam.jpg', $binary_data );
+          // if (!$result) die("Could not save image!  Check file permissions.");
+
+          // define('UPLOAD_DIR', 'uploads/');
+          // $img = $_POST['stack'];
+          // $img = str_replace('data:image/jpeg;base64,', '', $img);
+          // $img = str_replace(' ', '+', $img);
+          // $data = base64_decode($img);
+          // $file = UPLOADS_ . uniqid() . '.png';
+          // $success = file_put_contents($file, $data);
+          // echo $file;
+          //  print $success ? $file : 'Unable to save the file.';
+           ?>
     <script type="text/javascript" src="./profil.js"></script>
   </body>
 </html>

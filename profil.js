@@ -54,7 +54,7 @@
         return Math.floor(Math.random() * max);
       }
 
-      function takePhoto() {
+      function takePhoto(data_uri) {
         canvasContext.drawImage(video, 0, 0, 320, 240);
         var element = document.createElement("img");
         element.src = canvas.toDataURL();
@@ -67,8 +67,30 @@
         element.style.webkitFilter = video.style.webkitFilter;
         element.className = "photo";
         element.addEventListener('dragstart', dragStart, false);
-        document.getElementById("stack").appendChild(element);
+
+        var file = document.getElementById("stack").appendChild(element);
+        var formdata = new FormData();
+        formdata.append("stack", file);
+        var ajax = new XMLHttpRequest();
+        ajax.addEventListener("load", function(event) { uploadcomplete(event);}, false);
+        ajax.open("POST", "profil.php");
+        ajax.send(formdata);
       }
+      function uploadcomplete(event){
+          document.getElementById("loading").innerHTML="";
+          var image_return=event.target.responseText;
+          var showup=document.getElementById("uploaded").src=image_return;
+      }
+
+//test save images in php//
+      // Webcam.snap( function(data_uri) {
+      //        var raw_image_data = data_uri.replace(/^data\:image\/\w+\;base64\,/, '');
+      //
+      //        document.getElementById('photo_upload').value = raw_image_data;
+      //        document.getElementById('myform').submit();
+      //    } );
+//
+
 
       var draggedElement;
       var x, y, z = 0;
@@ -159,4 +181,9 @@
 
       alert("Sorry, you can't capture video from your webcam in this web browser. Try the latest desktop version of Firefox, Chrome or Opera.");
     }
+
+
+    // window.location = "profil.php?element="+element;
+
+
   })();
