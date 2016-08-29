@@ -22,49 +22,76 @@
                }
            };
        };
-       function addoverlay(){
-         $('.text').css("display","block");
-       };
-       document.getElementById('text').innerHTML = '';
 
-       function addoverlaycoeur(){
-         $('.textcoeur').css("display","block");
-       };
-       document.getElementById('textcoeur').innerHTML = '';
-       
-       function addoverlaycadre(){
-         $('.textcadre').css("display","block");
-       };
-       document.getElementById('textcadre').innerHTML = '';
+      //    function addoverlay(button){
+      //      var x = button.id;
+      //      switch (x) {
+      //        case '1':
+      //           addoverlaydog(x);
+      //         break;
+      //        case '2':
+      //           addoverlaycoeur(x);
+      //         break;
+      //         case '3':
+      //           addoverlaycadre(x);
+      //           break;
+      //         default:
+      //         return false;
+      //         }
+      // };
+      // function addoverlaydog(){
+      //    $('.text').css("display","block");
+      //   };
+      //   function addoverlaycoeur(){
+      //     $('.textcoeur').css("display","block");
+      //   };
+      //   function addoverlaycadre(){
+      //     $('.textcadre').css("display","block");
+      //   };
 
+      //  function addoverlaydog(){
+      //    $('.text').css("display","block");
+      //  };
+      //  document.getElementById('text').innerHTML = '';
+       //
+      //  function addoverlaycoeur(){
+      //    $('.textcoeur').css("display","block");
+      //  };
+      //  document.getElementById('textcoeur').innerHTML = '';
+       //
+      //  function addoverlaycadre(){
+      //    $('.textcadre').css("display","block");
+      //  };
+      //  document.getElementById('textcadre').innerHTML = '';
+       //
 
-      //  function uncheck()
-      //  {
-      //   document.getElementById('dog').checked = false;
-      //  }
-      //  function check()
-      //  {
-      //   document.getElementById('dog').checked = true;
-      //  }
-      //  document.getElementById('dog').checked = false>
-
+       $('input[type=radio]').change(function() {
+    $("video").removeClass();
+    if($(this).val() == "zero"){
+        $('video').addClass('text');
+    }
+    else if($(this).val() == "one"){
+        $('video').addClass('textcoeur');
+    }
+    else if($(this).val() == "two"){
+        $('video').addClass('textcadre');
+    }
+});
     </script>
 </head>
 <body>
   <div class="hero">
     <video id="video" width="640" height="480" autoplay></video>
-    <div class="text">
+    <!-- <div class="text">
       </div>
       <div class="textcoeur">
       </div>
       <div class="textcadre">
-      </div>
+      </div> -->
       <!-- <input type="checkbox" name="dog" id="dog" onclick='addoverlay()'/><label for ="dog"><img src="./images/chien.png"></label> -->
-      <input type="radio" name="re" value="zero" id="dog" onclick='addoverlay()' checked="checked" /><label for ="dog"><img src="./images/chien.png"></label>
-      <input type="radio" name="re" value="one" id="heart" onclick='addoverlaycoeur()' checked="checked"/><label for ="heart"><img src="./images/COEUR.png"></label>
-      <input type="radio" name="re" value = "two" id="cadre" onclick='addoverlaycadre()' checked="checked"><label for ="cadre"><img src="./images/cadre.png"></label>
-      <!-- <button onclick="uncheck();">Uncheck</button> -->
-      <!-- <button onclick="check();">Check</button> -->
+      <input type="radio" name="re" value="zero" id="1" /><label for ="dog"><img src="./images/chien.png"></label>
+      <input type="radio" name="re" value="one" id="2" /><label for ="heart"><img src="./images/COEUR.png"></label>
+      <input type="radio" name="re" value = "two" id="3" /><label for ="cadre"><img src="./images/cadre.png"></label>
     </div>
     <canvas id="canvas" width="320" height="240" style="display: none;"></canvas>
     <p class="button" id="photo">Take Photo</p>
