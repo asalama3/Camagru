@@ -28,7 +28,7 @@ span {
   position: relative;
 }
 
-video.text {
+.text {
   position: absolute;
   top:50%;
   left: 10%;
@@ -81,10 +81,10 @@ video.textcadre {
 }
 
 
-button {
-    position:relative; /* Or absolute, inline-block, inline */
-}
+/*button {*/
+    /*position:relative; [> Or absolute, inline-block, inline <]*/
+/*}*/
 
-button:hover {
-    cursor:pointer;
-}
+/*button:hover {*/
+    /*cursor:pointer;*/
+/*}*/

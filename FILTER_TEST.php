@@ -8,20 +8,20 @@
 
     <script type="text/javascript">
 
-    var allRadios = document.getElementsByName('re');
-       var booRadio;
-       var x = 0;
-       for(x = 0; x < allRadios.length; x++){
+    //var allRadios = document.getElementsByName('re');
+       //var booRadio;
+       //var x = 0;
+       //for(x = 0; x < allRadios.length; x++){
 
-           allRadios[x].onclick = function() {
-               if(booRadio == this){
-                   this.checked = false;
-                   booRadio = null;
-               }else{
-                   booRadio = this;
-               }
-           };
-       };
+           //allRadios[x].onclick = function() {
+               //if(booRadio == this){
+                   //this.checked = false;
+                   //booRadio = null;
+               //}else{
+                   //booRadio = this;
+               //}
+           //};
+       //};
 
       //    function addoverlay(button){
       //      var x = button.id;
@@ -39,9 +39,11 @@
       //         return false;
       //         }
       // };
-      // function addoverlaydog(){
-      //    $('.text').css("display","block");
-      //   };
+       function addoverlaydog(){
+          $('.filter').css('opacity', 0);
+          // check kell radio button is checked
+          $('.CORRECT RADIO BUTTON').css('opacity', 100);
+         };
       //   function addoverlaycoeur(){
       //     $('.textcoeur').css("display","block");
       //   };
@@ -81,15 +83,38 @@
 </head>
 <body>
   <div class="hero">
+  <!-- move inline css to .css -->
     <video id="video" width="640" height="480" autoplay></video>
-    <!-- <div class="text">
+        <img class="chien filter" src="./images/chien.png" style="
+    position: absolute;
+    top: 20%;
+    left: 58%;
+    opacity: 0;
+    z-index: 999;
+">
+<img class="heart filter" src="./images/chien.png" style="
+    position: absolute;
+    top: 20%;
+    left: 58%;
+    opacity: 0;
+    z-index: 999;
+">
+<img class="cadre filter" src="./images/chien.png" style="
+    position: absolute;
+    top: 20%;
+    left: 58%;
+    opacity: 0;
+    z-index: 999;
+">
+
+    <div class="text">
       </div>
       <div class="textcoeur">
       </div>
       <div class="textcadre">
-      </div> -->
-      <!-- <input type="checkbox" name="dog" id="dog" onclick='addoverlay()'/><label for ="dog"><img src="./images/chien.png"></label> -->
-      <input type="radio" name="re" value="zero" id="1" /><label for ="dog"><img src="./images/chien.png"></label>
+      </div>
+       <input type="checkbox" name="dog" id="dog" onclick='addoverlaydog()'/><label for ="dog"><img src="./images/chien.png"></label>
+      <!--input type="radio" name="re" value="zero" id="1" /><label for ="dog"><img src="./images/chien.png"></label>-->
       <input type="radio" name="re" value="one" id="2" /><label for ="heart"><img src="./images/COEUR.png"></label>
       <input type="radio" name="re" value = "two" id="3" /><label for ="cadre"><img src="./images/cadre.png"></label>
     </div>
