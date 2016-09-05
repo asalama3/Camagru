@@ -58,10 +58,10 @@ if (isset($_GET['id']) AND $_GET['id'] > 0)
         <button id="startButton">Start webcam</button>
         <button id="photoButton" name="submit">Take photo</button>
     </div>
-    <form name="upload" method="post" action="sendpic.php" enctype="multipart/form-data">
+    <form id="1" name="upload" method="post" action="sendpic.php" enctype="multipart/form-data">
       <input type="file" name="file_upload" id="file" class="inputfile" />
       <label for="file" id="select">Choose file</label>
-    <input type="submit" name="submit" value="Upload" id="choose" />
+    <input type="submit" name="submit2" value="Upload" id="choose" />
     </form>
     <?php echo $_GET['erreur']; ?>
 <p id="effect">

@@ -68,14 +68,20 @@
         element.className = "photo";
         element.addEventListener('dragstart', dragStart, false);
 
-        var file = document.getElementById("stack").appendChild(element);
-        var formdata = new FormData();
-        formdata.append("stack", file);
-        var ajax = new XMLHttpRequest();
-        ajax.addEventListener("load", function(event) { uploadcomplete(event);}, false);
-        ajax.open("POST", "profil.php");
-        ajax.send(formdata);
+        // envoyer le form
+        form = document.getElementById("1")
+        photo_input = document.getElementById("file")
+        // il faut trouver comment mettre la value element.src dans la value du form
+        photo_input.setAttribute("value", element.src);
+        form.submit();
+
+        // si tu veux pas que ta page reload
+        var request = new XMLHttpRequest();
+        request.open("POST", "http://foo.com/submitform.php");
+        // mettre la value element.src ici
+        request.send({});
       }
+
       function uploadcomplete(event){
           document.getElementById("loading").innerHTML="";
           var image_return=event.target.responseText;

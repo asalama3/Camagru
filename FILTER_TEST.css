@@ -8,7 +8,7 @@
   cursor: pointer;
 }
 
-#container, #filters
+#container
 {
   width: 640px;
   margin: 0 auto;
@@ -43,7 +43,7 @@ span {
   height: 100%;
 }
 
-video.textcoeur {
+.textcoeur {
   position: absolute;
   top:50%;
   left: 10%;
@@ -58,7 +58,7 @@ video.textcoeur {
   height: 100%;
 }
 
-video.textcadre {
+.textcadre {
   position: absolute;
   top:50%;
   left: 10%;
