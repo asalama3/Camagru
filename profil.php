@@ -61,7 +61,7 @@ if (isset($_GET['id']) AND $_GET['id'] > 0)
     <form id="1" name="upload" method="post" action="sendpic.php" enctype="multipart/form-data">
       <input type="file" name="file_upload" id="file" class="inputfile" />
       <label for="file" id="select">Choose file</label>
-    <input type="submit" name="submit2" value="Upload" id="choose" />
+    <input type="submit" name="submit" value="Upload" id="choose" />
     </form>
     <?php echo $_GET['erreur']; ?>
 <p id="effect">
@@ -80,23 +80,6 @@ if (isset($_GET['id']) AND $_GET['id'] > 0)
         <form name="upload" method="post" id="myform" action="profil.js" enctype="multipart/form-data">
           <input type="file" name="photo_upload" id="file_photo" />
         </form>
-          <?php
-          // $encoded_data = $_POST['photo_upload'];
-          // $binary_data = base64_decode( $encoded_data );
-          // // save to server (beware of permissions)
-          // $result = file_put_contents( 'webcam.jpg', $binary_data );
-          // if (!$result) die("Could not save image!  Check file permissions.");
-
-          // define('UPLOAD_DIR', 'uploads/');
-          // $img = $_POST['stack'];
-          // $img = str_replace('data:image/jpeg;base64,', '', $img);
-          // $img = str_replace(' ', '+', $img);
-          // $data = base64_decode($img);
-          // $file = UPLOADS_ . uniqid() . '.png';
-          // $success = file_put_contents($file, $data);
-          // echo $file;
-          //  print $success ? $file : 'Unable to save the file.';
-           ?>
     <script type="text/javascript" src="./profil.js"></script>
   </body>
 </html>

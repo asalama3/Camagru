@@ -67,26 +67,28 @@
         element.style.webkitFilter = video.style.webkitFilter;
         element.className = "photo";
         element.addEventListener('dragstart', dragStart, false);
+        document.getElementById("stack").appendChild(element);
 
-        // envoyer le form
-        form = document.getElementById("1")
-        photo_input = document.getElementById("file")
-        // il faut trouver comment mettre la value element.src dans la value du form
-        photo_input.setAttribute("value", element.src);
-        form.submit();
 
-        // si tu veux pas que ta page reload
-        var request = new XMLHttpRequest();
-        request.open("POST", "http://foo.com/submitform.php");
-        // mettre la value element.src ici
-        request.send({});
-      }
-
-      function uploadcomplete(event){
-          document.getElementById("loading").innerHTML="";
-          var image_return=event.target.responseText;
-          var showup=document.getElementById("uploaded").src=image_return;
-      }
+      //   // envoyer le form
+      //   form = document.getElementById("1")
+      //   photo_input = document.getElementById("file")
+      //   // il faut trouver comment mettre la value element.src dans la value du form
+      //   photo_input.setAttribute("value", element.src);
+      //   form.submit();
+      //
+      //   // si tu veux pas que ta page reload
+      //   var request = new XMLHttpRequest();
+      //   request.open("POST", "http://foo.com/submitform.php");
+      //   // mettre la value element.src ici
+      //   request.send({});
+      // }
+      //
+      // function uploadcomplete(event){
+      //     document.getElementById("loading").innerHTML="";
+      //     var image_return=event.target.responseText;
+      //     var showup=document.getElementById("uploaded").src=image_return;
+      // }
 
 //test save images in php//
       // Webcam.snap( function(data_uri) {

@@ -22,7 +22,7 @@
   <div class="hero">
   <!-- move inline css to .css -->
     <video id="video" width="640" height="480" autoplay></video>
-        <img class="chien filter" src="./images/chien.png" style="
+        <!-- <img class="chien filter" src="./images/chien.png" style="
     position: absolute;
     top: 20%;
     left: 58%;
@@ -42,7 +42,7 @@
     left: 58%;
     opacity: 0;
     z-index: 999;
-">
+"> -->
 
     <div class="text">
       </div>
