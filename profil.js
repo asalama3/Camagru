@@ -54,7 +54,7 @@
         return Math.floor(Math.random() * max);
       }
 
-      function takePhoto(data_uri) {
+      function takePhoto() {
         canvasContext.drawImage(video, 0, 0, 320, 240);
         var element = document.createElement("img");
         element.src = canvas.toDataURL();
@@ -68,7 +68,7 @@
         element.className = "photo";
         element.addEventListener('dragstart', dragStart, false);
         document.getElementById("stack").appendChild(element);
-
+}
 
       //   // envoyer le form
       //   form = document.getElementById("1")
@@ -98,7 +98,6 @@
       //        document.getElementById('myform').submit();
       //    } );
 //
-
 
       var draggedElement;
       var x, y, z = 0;

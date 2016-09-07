@@ -42,6 +42,9 @@ if (isset($_GET['id']) AND $_GET['id'] > 0)
     <canvas id="canvas" width="320" height="240" style="display: none;"></canvas>
     <div id="stack" class="playground" style="background-color: darkgray;">
       <?php
+      $img = $_POST['img'];
+      echo $img;
+
       $allimages = $bdd->prepare("SELECT * FROM images WHERE user_id= ?");
       $allimages->execute(array($_SESSION['id']));
       while($user_image = $allimages->fetch())
@@ -61,7 +64,7 @@ if (isset($_GET['id']) AND $_GET['id'] > 0)
     <form id="1" name="upload" method="post" action="sendpic.php" enctype="multipart/form-data">
       <input type="file" name="file_upload" id="file" class="inputfile" />
       <label for="file" id="select">Choose file</label>
-    <input type="submit" name="submit" value="Upload" id="choose" />
+    <input type="submit" name="submit2" value="Upload" id="choose" />
     </form>
     <?php echo $_GET['erreur']; ?>
 <p id="effect">
@@ -73,13 +76,13 @@ if (isset($_GET['id']) AND $_GET['id'] > 0)
           <input type="checkbox" name="snake" id="snake"/><label for ="snake"><img src="./images/serpent.png"></label>
           <input type="checkbox" name="cadre" id="cadre" /><label for ="cadre"><img src="./images/cadre.png"></label>
           </form>
-          <div class="container" id="Saved">
-          <b>Saved</b><span id="loading"></span><img id="uploaded" src=""/>
-        </div>
+          <!-- <div class="container" id="Saved"> -->
+          <!-- <b>Saved</b><span id="loading"></span><img id="uploaded" src=""/> -->
+        <!-- </div> -->
 
-        <form name="upload" method="post" id="myform" action="profil.js" enctype="multipart/form-data">
-          <input type="file" name="photo_upload" id="file_photo" />
-        </form>
+        <!-- <form name="upload" method="post" id="myform" action="profil.js" enctype="multipart/form-data"> -->
+          <!-- <input type="file" name="photo_upload" id="file_photo" /> -->
+        <!-- </form> -->
     <script type="text/javascript" src="./profil.js"></script>
   </body>
 </html>
