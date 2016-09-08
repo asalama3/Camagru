@@ -43,8 +43,8 @@ if (isset($_GET['id']) AND $_GET['id'] > 0)
     <canvas id="canvas" width="320" height="240" style="display: none;"></canvas>
     <div id="stack" class="playground" style="background-color: darkgray;">
       <?php
-      $allimages = $bdd->prepare("SELECT * FROM images WHERE user_id= ?");
-      $allimages->execute(array($_SESSION['id']));
+        $allimages = $bdd->prepare("SELECT * FROM images WHERE user_id= ?");
+        $allimages->execute(array($_SESSION['id']));
       while($user_image = $allimages->fetch())
       {
       ?>

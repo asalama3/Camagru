@@ -46,7 +46,7 @@ if(isset($_POST['inscription']))
           <html>
             <body>
               <div align="center">
-                <a href="http://localhost:8888/Camagru/confirmation.php?username='.urldecode($pseudo).'&key='.$key.'">Confirmez votre compte !</a>
+                <a href="http://'.$_SERVER["HTTP_HOST"].'/Camagru/confirmation.php?username='.urldecode($pseudo).'&key='.$key.'">Confirmez votre compte !</a>
               </div>
             </body>
           </html>
