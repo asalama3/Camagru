@@ -38,22 +38,38 @@ if (isset($_GET['id']) AND $_GET['id'] > 0)
       ?>
     </header>
     <h2>MY ALBUM</h2>
+    <video id="video"></video>
     <video id="video" width="320" height="240"></video>
     <canvas id="canvas" width="320" height="240" style="display: none;"></canvas>
     <div id="stack" class="playground" style="background-color: darkgray;">
       <?php
-      $img = $_POST['img'];
-      echo $img;
-
       $allimages = $bdd->prepare("SELECT * FROM images WHERE user_id= ?");
       $allimages->execute(array($_SESSION['id']));
       while($user_image = $allimages->fetch())
       {
       ?>
       <img src="<?php echo $user_image['lien_image'];?>" />
-      <?php } ?>
-    </div>
+      <?php }
 
+      // if (isset($_POST['img'])) {
+        // $img = base64_decode(substr(explode(";",$_POST['img'])[1], 7));
+// }
+
+if (isset($_POST['img'])) {
+
+            define('uploads/');
+           $img = $_POST['img'];
+           $img = str_replace('data:image/png;base64,', '', $img);
+           $img = str_replace(' ', '+', $img);
+           $data = base64_decode($img);
+           $file = UPLOADS_ . uniqid() . '.png';
+           $success = file_put_contents($file, $data);
+           echo $file;
+            print $success ? $file : 'Unable to save the file.';
+}
+
+      ?>
+    </div>
     <div class="margin">
       <p>
         <div id="filterButtons"></div>
@@ -76,13 +92,6 @@ if (isset($_GET['id']) AND $_GET['id'] > 0)
           <input type="checkbox" name="snake" id="snake"/><label for ="snake"><img src="./images/serpent.png"></label>
           <input type="checkbox" name="cadre" id="cadre" /><label for ="cadre"><img src="./images/cadre.png"></label>
           </form>
-          <!-- <div class="container" id="Saved"> -->
-          <!-- <b>Saved</b><span id="loading"></span><img id="uploaded" src=""/> -->
-        <!-- </div> -->
-
-        <!-- <form name="upload" method="post" id="myform" action="profil.js" enctype="multipart/form-data"> -->
-          <!-- <input type="file" name="photo_upload" id="file_photo" /> -->
-        <!-- </form> -->
     <script type="text/javascript" src="./profil.js"></script>
   </body>
 </html>

@@ -57,7 +57,7 @@
       function takePhoto() {
         canvasContext.drawImage(video, 0, 0, 320, 240);
         var element = document.createElement("img");
-        element.src = canvas.toDataURL();
+        element.src = canvas.toDataURL('image/png');
         var angle = getRandomNumberWithMax(30) - 15;
         element.style.transform="rotate(" + angle + "deg)";
         element.style.top = getRandomNumberWithMax(50) + "px";
@@ -68,6 +68,16 @@
         element.className = "photo";
         element.addEventListener('dragstart', dragStart, false);
         document.getElementById("stack").appendChild(element);
+
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(this.responseText);
+        }
+    };
+        xhr.open("POST", "save_img.php", true);
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+        xhr.send(element.src);
 }
 
       //   // envoyer le form
@@ -82,7 +92,7 @@
       //   request.open("POST", "http://foo.com/submitform.php");
       //   // mettre la value element.src ici
       //   request.send({});
-      // }
+      //
       //
       // function uploadcomplete(event){
       //     document.getElementById("loading").innerHTML="";
@@ -90,14 +100,6 @@
       //     var showup=document.getElementById("uploaded").src=image_return;
       // }
 
-//test save images in php//
-      // Webcam.snap( function(data_uri) {
-      //        var raw_image_data = data_uri.replace(/^data\:image\/\w+\;base64\,/, '');
-      //
-      //        document.getElementById('photo_upload').value = raw_image_data;
-      //        document.getElementById('myform').submit();
-      //    } );
-//
 
       var draggedElement;
       var x, y, z = 0;

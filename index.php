@@ -81,7 +81,7 @@ if(isset($_POST['inscription']))
     <title>Camagru</title>
   </head>
   <body>
-      <!-- <div id="register"> -->
+      <div id="register">
         <section id="formpage">
       <h1>Sign Up !</h1>
       <form method='POST' action="">
@@ -111,6 +111,6 @@ if(isset($_POST['inscription']))
       }
       ?>
     </section>
-    <!-- </div> -->
+    </div>
   </body>
 </html>
