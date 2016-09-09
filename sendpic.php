@@ -43,7 +43,7 @@ catch (Exception $e)
                   try {
                     $insertimage = $bdd->prepare("INSERT INTO images(user_id, name, lien_image) VALUES(?, ?, ?)");
                     $insertimage->execute(array($_SESSION['id'], 'salut', $file_path . $file_new_name));
-                  }
+                     }
                   catch (PDOException $e)
                   {
                     die('Erreur: ' . $e->getMessage());

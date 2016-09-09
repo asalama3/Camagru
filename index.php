@@ -14,7 +14,7 @@ if(isset($_POST['inscription']))
 {
   $pseudo = htmlspecialchars($_POST['pseudo']);
   $mail = htmlspecialchars($_POST['mail']);
-  $mdp = sha1($_POST['mdp']);
+  $mdp = password_hash($_POST['mdp'], PASSWORD_BCRYPT);
 
   if (!empty($_POST['pseudo']) AND !empty($_POST['mail']) AND !empty($_POST['mdp']))
   {

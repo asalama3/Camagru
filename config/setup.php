@@ -19,7 +19,6 @@ catch (PDOException $e)
 {
     die('Erreur: ' . $e->getMessage());
 }
-// create tables
 try {
     $user = "CREATE TABLE IF NOT EXISTS camagru.users (
                       id INT NOT NULL AUTO_INCREMENT,
@@ -70,6 +69,7 @@ catch (PDOException $e)
 {
     die('Erreur: ' . $e->getMessage());
 }
+
 
 
 

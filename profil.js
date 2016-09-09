@@ -1,19 +1,21 @@
 (function() {
     // A button for each filter will be created dynamically
-    var filters = [ {
-      name: "Reset",
-      filter: ""
-    }, {
-      name: "Blur",
-      filter: "blur(3px)"
-    }, {
-      name: "BnW",
-      filter: "grayscale(100%)"
-    }];
+    // var filters = [ {
+    //   name: "Reset",
+    //   filter: ""
+    // }, {
+    //   name: "Blur",
+    //   filter: "blur(3px)"
+    // }, {
+    //   name: "BnW",
+    //   filter: "grayscale(100%)"
+    // }];
 
     var video = document.getElementById('video');
     var canvas = document.getElementById('canvas');
     var canvasContext = canvas.getContext('2d');
+    var filter = null;
+
 
     navigator.getUserMedia = (navigator.getUserMedia ||
       navigator.webkitGetUserMedia ||
@@ -55,50 +57,71 @@
       }
 
       function takePhoto() {
-        canvasContext.drawImage(video, 0, 0, 320, 240);
-        var element = document.createElement("img");
-        element.src = canvas.toDataURL('image/png');
-        var angle = getRandomNumberWithMax(30) - 15;
-        element.style.transform="rotate(" + angle + "deg)";
-        element.style.top = getRandomNumberWithMax(50) + "px";
-        element.style.left = getRandomNumberWithMax(50) + "px";
-        element.style.zIndex = z;
-        element.style.filter = video.style.filter;
-        element.style.webkitFilter = video.style.webkitFilter;
-        element.className = "photo";
-        element.addEventListener('dragstart', dragStart, false);
-        document.getElementById("stack").appendChild(element);
+          if (filter) {
+              canvasContext.drawImage(video, 0, 0, 320, 240);
+              var element = document.createElement("img");
+              element.src = canvas.toDataURL('image/png');
+              var angle = getRandomNumberWithMax(30) - 15;
+              element.style.transform="rotate(" + angle + "deg)";
+              element.style.top = getRandomNumberWithMax(50) + "px";
+              element.style.left = getRandomNumberWithMax(50) + "px";
+              element.style.zIndex = z;
+              element.style.filter = video.style.filter;
+              element.style.webkitFilter = video.style.webkitFilter;
+              element.className = "photo";
+              element.addEventListener('dragstart', dragStart, false);
+              // document.getElementById("stack").appendChild(element);
 
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            console.log(this.responseText);
+
+              // recuperer mes data dans responsetext//
+              // la connexion avec le php s'est bien passe //
+               var xhr = new XMLHttpRequest();
+              xhr.onreadystatechange = function() {
+                  if (this.readyState == 4 && this.status == 200) {
+                      console.log(this.responseText);
+                      filter = null;
+          }
+
         }
     };
+    // send to php my photo //
         xhr.open("POST", "save_img.php", true);
         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
-        xhr.send(element.src);
-}
+        xhr.send("img=" + element.src +"&filter=" + filter);
 
-      //   // envoyer le form
-      //   form = document.getElementById("1")
-      //   photo_input = document.getElementById("file")
-      //   // il faut trouver comment mettre la value element.src dans la value du form
-      //   photo_input.setAttribute("value", element.src);
-      //   form.submit();
-      //
-      //   // si tu veux pas que ta page reload
-      //   var request = new XMLHttpRequest();
-      //   request.open("POST", "http://foo.com/submitform.php");
-      //   // mettre la value element.src ici
-      //   request.send({});
-      //
-      //
-      // function uploadcomplete(event){
-      //     document.getElementById("loading").innerHTML="";
-      //     var image_return=event.target.responseText;
-      //     var showup=document.getElementById("uploaded").src=image_return;
-      // }
+       // if (document.getElementById('dog').checked){
+       //     xhr.open("POST", 'save.php?filter=dog', true);
+       //     document.getElementById('heart').checked = false;
+       //     document.get
+       // }
+
+       }
+
+      var radio = document.getElementsByClassName('radio');
+
+        function ffilter(event) {
+            console.log("test");
+            filter = event.target.id;
+            console.log(filter);
+        }
+
+        for (var i = 0; i < radio.length; i++) {
+            radio[i].onclick = ffilter;
+         }
+
+
+
+         // display_photo();
+
+         // function display_photo(){
+         //     var ajax = new XMLHttpRequest();
+         //     ajax.onreadystatechange = function(){
+         //         if (ajax.readyState === 4 && ajax.status === 200) {
+         //             document.getElementById("stack").innerHTML = ajax.responseText;
+         //         }
+         //
+         //     };
+
 
 
       var draggedElement;

@@ -87,11 +87,19 @@ if (isset($_POST['img'])) {
   Choose an effect for your photo:
 </p>
     <form method='POST' action="" />
-          <input type="checkbox" name="dog" id="dog" /><label for ="dog"><img src="./images/chien.png"></label>
-          <input type="checkbox" name="heart" id="heart"/><label for ="heart"><img src="./images/COEUR.png"></label>
-          <input type="checkbox" name="snake" id="snake"/><label for ="snake"><img src="./images/serpent.png"></label>
-          <input type="checkbox" name="cadre" id="cadre" /><label for ="cadre"><img src="./images/cadre.png"></label>
+          <input class="radio" type="radio" name="dog" id="dog" onclick="filter()" /><label for ="dog"><img src="./images/chien.png"></label>
+          <input class="radio" type="radio" name="dog" id="heart" onclick="filter()"/><label for ="heart"><img src="./images/COEUR.png"></label>
+          <input class="radio" type="radio" name="dog" id="snake" onclick="filter()"/><label for ="snake"><img src="./images/serpent.png"></label>
+          <input class="radio" type="radio" name="dog" id="cadre" onclick="filter()"/><label for ="cadre"><img src="./images/cadre.png"></label>
           </form>
+
+    <input type="radio" name="optionsRadios" value="option1" />
+    <input type="radio" name="optionsRadios"  value="option2" />
     <script type="text/javascript" src="./profil.js"></script>
+    <script>
+      function handleClick(myRadio) {
+        alert('New value: ' + myRadio.value);
+      }
+    </script>
   </body>
 </html>
