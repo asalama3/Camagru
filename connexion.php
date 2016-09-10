@@ -2,35 +2,45 @@
 session_start();
 try
 {
-  $bdd = new PDO('mysql:localhost=8889;dbname=Camagru', 'root', 'root');
+  $bdd = new PDO('mysql:localhost=8889;dbname=camagru', 'root', 'root');
 }
 catch (Exception $e)
 {
   die('Erreur: ' . $e->getMessage());
 }
 
+
+
 if (isset($_POST['formconnect']))
 {
   $mailconnect = htmlspecialchars($_POST['mailconnect']);
-  $mdpconnect = sha1($_POST['mdpconnect']);
-  if (!empty($mailconnect) AND !empty($mdpconnect))
-  {
-    $requser = $bdd->prepare("SELECT * FROM users WHERE email = ? AND password = ?");
-    $requser->execute(array($mailconnect, $mdpconnect));
-    $userexists = $requser->rowCount();
-    if ($userexists == 1)
-    {
-      $userinfo = $requser->fetch();
-      $_SESSION['id'] = $userinfo['id'];
-      $_SESSION['username'] = $userinfo['username'];
-      $_SESSION['email'] = $userinfo['email'];
-      header("Location: ./profil.php?id=".$_SESSION['id']);
+  $mdpconnect = $_POST['mdpconnect'];
+
+  $hash = $bdd->prepare("SELECT password FROM users WHERE email = ?");
+  $hash->execute(array($mailconnect));
+  $test = $hash->fetch();
+  $hsh = $test[0];
+  if (password_verify($mdpconnect, $hsh)) {
+
+
+    if (!empty($mailconnect) AND !empty($mdpconnect)) {
+      $requser = $bdd->prepare("SELECT * FROM users WHERE email = ?");
+      $requser->execute(array($mailconnect));
+      $userexists = $requser->rowCount();
+      if ($userexists == 1) {
+        $userinfo = $requser->fetch();
+        $_SESSION['id'] = $userinfo['id'];
+        $_SESSION['username'] = $userinfo['username'];
+        $_SESSION['email'] = $userinfo['email'];
+        header("Location: ./profil.php?id=" . $_SESSION['id']);
+      }
     }
+  }
     else
     {
       $erreur = "Mauvais email ou mot de passe";
     }
-  }
+
   else
   {
     $erreur = "Tous les champs doivent etre completes !";

@@ -51,9 +51,7 @@ if (isset($_GET['id']) AND $_GET['id'] > 0)
       <img src="<?php echo $user_image['lien_image'];?>" />
       <?php }
 
-      // if (isset($_POST['img'])) {
-        // $img = base64_decode(substr(explode(";",$_POST['img'])[1], 7));
-// }
+
 
 if (isset($_POST['img'])) {
 
@@ -93,13 +91,7 @@ if (isset($_POST['img'])) {
           <input class="radio" type="radio" name="dog" id="cadre" onclick="filter()"/><label for ="cadre"><img src="./images/cadre.png"></label>
           </form>
 
-    <input type="radio" name="optionsRadios" value="option1" />
-    <input type="radio" name="optionsRadios"  value="option2" />
     <script type="text/javascript" src="./profil.js"></script>
-    <script>
-      function handleClick(myRadio) {
-        alert('New value: ' + myRadio.value);
-      }
-    </script>
+
   </body>
 </html>

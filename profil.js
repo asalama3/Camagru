@@ -70,7 +70,7 @@
               element.style.webkitFilter = video.style.webkitFilter;
               element.className = "photo";
               element.addEventListener('dragstart', dragStart, false);
-              // document.getElementById("stack").appendChild(element);
+              document.getElementById("stack").appendChild(element);
 
 
               // recuperer mes data dans responsetext//
@@ -87,7 +87,7 @@
     // send to php my photo //
         xhr.open("POST", "save_img.php", true);
         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
-        xhr.send("img=" + element.src +"&filter=" + filter);
+        xhr.send(element.src +"&filter=" + filter);
 
        // if (document.getElementById('dog').checked){
        //     xhr.open("POST", 'save.php?filter=dog', true);
