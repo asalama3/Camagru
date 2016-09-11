@@ -13,23 +13,28 @@ catch (Exception $e)
 //die;
 $json = file_get_contents("php://input");
 $json = str_replace('data:image/png;base64,', "", $json);
-//$unencodedData = base64_decode($photo);
+$json = preg_replace("/&filter=.*/", "", $json);
+$unencodedData = base64_decode($json);
 
-//$dest = imagecreatefromstring($unencodedData);
+$dest = imagecreatefromstring($unencodedData);
 
-//$file = "./images/".$_POST['filter'].".png";
-//$src = imagecreatefrompng($file);
-
-
-//imagecopy($dest, $src, 152, 78, 0 , 560, 420);
+$file = "./images/".$_POST['filter'].".png";
+$src = imagecreatefrompng($file);
 
 
-//imagejpeg($dest);
+imagecopy($dest, $src, 152, 78, 0, 0, 560, 420);
 
+// grace a echo on envoie une reponse a l'ajaax, ma photo finale
+// ob sert a convertir mon image en string pour ensuite la reconvertir en base64 pour l'envoyer a ajax et la save
+// dans database.
 
+ob_start();
+imagepng($dest);
+$contents =  ob_get_contents();
+ob_end_clean();
+echo 'data:image/png;base64,' . base64_encode($contents);
 
-
-$req = $bdd->prepare("INSERT INTO images(name, lien_image) VALUES(?, ?)");
-$req->execute(array($json, "salut"));
+$req = $bdd->prepare("INSERT INTO images(name, lien_image, user_id) VALUES(?, ?, ?)");
+$req->execute(array('data:image/png;base64,' . base64_encode($contents), "salut", $_SESSION['id']));
 
  ?>

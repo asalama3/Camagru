@@ -11,8 +11,7 @@ catch (Exception $e)
 
 
 
-if (isset($_POST['formconnect']))
-{
+if (isset($_POST['formconnect'])) {
   $mailconnect = htmlspecialchars($_POST['mailconnect']);
   $mdpconnect = $_POST['mdpconnect'];
 
@@ -35,12 +34,11 @@ if (isset($_POST['formconnect']))
         header("Location: ./profil.php?id=" . $_SESSION['id']);
       }
     }
-  }
-    else
-    {
-      $erreur = "Mauvais email ou mot de passe";
+      else
+        {
+          $erreur = "Mauvais email ou mot de passe";
+        }
     }
-
   else
   {
     $erreur = "Tous les champs doivent etre completes !";

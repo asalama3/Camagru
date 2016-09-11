@@ -60,7 +60,7 @@
           if (filter) {
               canvasContext.drawImage(video, 0, 0, 320, 240);
               var element = document.createElement("img");
-              element.src = canvas.toDataURL('image/png');
+              var im = canvas.toDataURL('image/png');
               var angle = getRandomNumberWithMax(30) - 15;
               element.style.transform="rotate(" + angle + "deg)";
               element.style.top = getRandomNumberWithMax(50) + "px";
@@ -70,39 +70,39 @@
               element.style.webkitFilter = video.style.webkitFilter;
               element.className = "photo";
               element.addEventListener('dragstart', dragStart, false);
-              document.getElementById("stack").appendChild(element);
 
 
-              // recuperer mes data dans responsetext//
+              // recuperer mes data dans this.responseText - mon img recuprer du php grace a echo l'ajx a recu la reponse//
               // la connexion avec le php s'est bien passe //
                var xhr = new XMLHttpRequest();
               xhr.onreadystatechange = function() {
                   if (this.readyState == 4 && this.status == 200) {
-                      console.log(this.responseText);
-                      filter = null;
-          }
+                      element.src = this.responseText;
+                      document.getElementById("stack").appendChild(element);
+                    //   filter = null;
+                 }
 
-        }
-    };
+              };
+              xhr.open("POST", "save_img.php", true);
+              xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+              xhr.send(im +"&filter=" + filter);
+
+          }
     // send to php my photo //
-        xhr.open("POST", "save_img.php", true);
-        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
-        xhr.send(element.src +"&filter=" + filter);
 
        // if (document.getElementById('dog').checked){
        //     xhr.open("POST", 'save.php?filter=dog', true);
        //     document.getElementById('heart').checked = false;
        //     document.get
        // }
-
-       }
+      }
 
       var radio = document.getElementsByClassName('radio');
 
         function ffilter(event) {
             console.log("test");
             filter = event.target.id;
-            console.log(filter);
+            console.log("filter is : " + filter);
         }
 
         for (var i = 0; i < radio.length; i++) {

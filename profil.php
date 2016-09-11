@@ -1,8 +1,9 @@
 <?php
 session_start();
+print_r($_SESSION);
 try
 {
-  $bdd = new PDO('mysql:localhost=8889;dbname=Camagru', 'root', 'root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+  $bdd = new PDO('mysql:localhost=8889;dbname=camagru', 'root', 'root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 }
 catch (Exception $e)
 {
@@ -45,28 +46,28 @@ if (isset($_GET['id']) AND $_GET['id'] > 0)
       <?php
         $allimages = $bdd->prepare("SELECT * FROM images WHERE user_id= ?");
         $allimages->execute(array($_SESSION['id']));
+      $user_image = $allimages->fetch();
       while($user_image = $allimages->fetch())
       {
-      ?>
-      <img src="<?php echo $user_image['lien_image'];?>" />
-      <?php }
+        echo "<img src=\"" . $user_image['name'] . "\" />";
+      }
 
 
 
-if (isset($_POST['img'])) {
-
-            define('uploads/');
-           $img = $_POST['img'];
-           $img = str_replace('data:image/png;base64,', '', $img);
-           $img = str_replace(' ', '+', $img);
-           $data = base64_decode($img);
-           $file = UPLOADS_ . uniqid() . '.png';
-           $success = file_put_contents($file, $data);
-           echo $file;
-            print $success ? $file : 'Unable to save the file.';
-}
-
-      ?>
+//if (isset($_POST['img'])) {
+//
+//            define('uploads/');
+//           $img = $_POST['img'];
+//           $img = str_replace('data:image/png;base64,', '', $img);
+//           $img = str_replace(' ', '+', $img);
+//           $data = base64_decode($img);
+//           $file = UPLOADS_ . uniqid() . '.png';
+//           $success = file_put_contents($file, $data);
+//           echo $file;
+//            print $success ? $file : 'Unable to save the file.';
+//}
+//
+//      ?>
     </div>
     <div class="margin">
       <p>
@@ -78,17 +79,17 @@ if (isset($_POST['img'])) {
     <form id="1" name="upload" method="post" action="sendpic.php" enctype="multipart/form-data">
       <input type="file" name="file_upload" id="file" class="inputfile" />
       <label for="file" id="select">Choose file</label>
-    <input type="submit" name="submit2" value="Upload" id="choose" />
+    <input type="submit" name="submit" value="Upload" id="choose" />
     </form>
     <?php echo $_GET['erreur']; ?>
 <p id="effect">
   Choose an effect for your photo:
 </p>
     <form method='POST' action="" />
-          <input class="radio" type="radio" name="dog" id="dog" onclick="filter()" /><label for ="dog"><img src="./images/chien.png"></label>
-          <input class="radio" type="radio" name="dog" id="heart" onclick="filter()"/><label for ="heart"><img src="./images/COEUR.png"></label>
-          <input class="radio" type="radio" name="dog" id="snake" onclick="filter()"/><label for ="snake"><img src="./images/serpent.png"></label>
-          <input class="radio" type="radio" name="dog" id="cadre" onclick="filter()"/><label for ="cadre"><img src="./images/cadre.png"></label>
+          <input class="radio" type="radio" name="dog" id="dog" onclick="ffilter()" /><label for ="dog"><img src="./images/chien.png"></label>
+          <input class="radio" type="radio" name="dog" id="heart" onclick="ffilter()"/><label for ="heart"><img src="./images/COEUR.png"></label>
+          <input class="radio" type="radio" name="dog" id="snake" onclick="ffilter()"/><label for ="snake"><img src="./images/serpent.png"></label>
+          <input class="radio" type="radio" name="dog" id="cadre" onclick="ffilter()"/><label for ="cadre"><img src="./images/cadre.png"></label>
           </form>
 
     <script type="text/javascript" src="./profil.js"></script>
