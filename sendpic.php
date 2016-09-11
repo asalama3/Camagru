@@ -2,7 +2,7 @@
 session_start();
 try
 {
-  $bdd = new PDO('mysql:localhost=8889;dbname=Camagru', 'root', 'root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+  $bdd = new PDO('mysql:localhost=8889;dbname=camagru', 'root', 'root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 }
 catch (Exception $e)
 {
@@ -41,16 +41,14 @@ catch (Exception $e)
                 if(move_uploaded_file($file_tmp, $file_path.$file_new_name))
                 {
                   try {
-                    $insertimage = $bdd->prepare("INSERT INTO images(user_id, name, lien_image) VALUES(?, ?, ?)");
+                    $insertimage = $bdd->prepare("INSERT INTO images(user_id, lien_image, name) VALUES(?, ?, ?)");
                     $insertimage->execute(array($_SESSION['id'], 'salut', $file_path . $file_new_name));
                       }
                   catch (PDOException $e)
                   {
                     die('Erreur: ' . $e->getMessage());
                   }
-
-
-                    $message= "File uploaded !";
+                    // $message= "File uploaded !";
                 }
                 else
                   $message= "File could not be uploaded";
@@ -71,11 +69,13 @@ catch (Exception $e)
           $message = "No file to upload";
         }
         empty($_FILES);
+        // header('Location: '.$_SERVER["HTTP_HOST"].'/Camagru/profil.php'.'?erreur='.$message);
 
-        header('Location: '.$_SERVER["HTTP_HOST"].'/Camagru/profil.php'.'?erreur='.$message);
-
-
-//        $url = 'http://localhost:8888/Camagru/profil.php';
-//          echo '<script>window.location = "'.$url.'?erreur='.$message.'";</script>';
+       if (!empty($message))
+       {
+          echo "<script type='text/javascript'>alert('$message');</script>";
+        }
+       $url = 'http://localhost:8888/Camagru/profil.php';
+         echo '<script>window.location = "'.$url.'";</script>';
 
   ?>

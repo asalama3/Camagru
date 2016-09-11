@@ -18,6 +18,7 @@ $unencodedData = base64_decode($json);
 
 $dest = imagecreatefromstring($unencodedData);
 
+// $file = imagecreate(100, 100);
 $file = "./images/".$_POST['filter'].".png";
 $src = imagecreatefrompng($file);
 

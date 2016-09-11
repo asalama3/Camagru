@@ -88,15 +88,16 @@
               xhr.send(im +"&filter=" + filter);
 
           }
-    // send to php my photo //
-
-       // if (document.getElementById('dog').checked){
-       //     xhr.open("POST", 'save.php?filter=dog', true);
-       //     document.getElementById('heart').checked = false;
-       //     document.get
-       // }
       }
-
+      //enlever le get id dans url, faire une fonction onload sur chaque img
+      //pour avoir le style applique apres le traitement de l'image.
+      // faire un compte admin
+      // avoir la gallerie
+      // avoir un filtre sur mes uploads
+      // faire en sorte que mes filtres soient de la meme taille tous.
+      // faire la gallery pour faire les likes et comments SELECT *;
+      // auto log in : compte admin pour se connecter sur le compte d'un user sans le password;
+      // 
       var radio = document.getElementsByClassName('radio');
 
         function ffilter(event) {

@@ -50,6 +50,7 @@ if (isset($_GET['id']) AND $_GET['id'] > 0)
       while($user_image = $allimages->fetch())
       {
         echo "<img src=\"" . $user_image['name'] . "\" />";
+        // ajouter style css a l'image final //
       }
 
 
@@ -87,8 +88,8 @@ if (isset($_GET['id']) AND $_GET['id'] > 0)
 </p>
     <form method='POST' action="" />
           <input class="radio" type="radio" name="dog" id="dog" onclick="ffilter()" /><label for ="dog"><img src="./images/chien.png"></label>
-          <input class="radio" type="radio" name="dog" id="heart" onclick="ffilter()"/><label for ="heart"><img src="./images/COEUR.png"></label>
-          <input class="radio" type="radio" name="dog" id="snake" onclick="ffilter()"/><label for ="snake"><img src="./images/serpent.png"></label>
+          <input class="radio" type="radio" name="dog" id="heart" onclick="ffilter()"/><label for ="heart"><img src="./images/heart.png"></label>
+          <input class="radio" type="radio" name="dog" id="snake" onclick="ffilter()"/><label for ="snake"><img src="./images/snake.png"></label>
           <input class="radio" type="radio" name="dog" id="cadre" onclick="ffilter()"/><label for ="cadre"><img src="./images/cadre.png"></label>
           </form>
 
