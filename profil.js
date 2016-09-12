@@ -89,15 +89,7 @@
 
           }
       }
-      //enlever le get id dans url, faire une fonction onload sur chaque img
-      //pour avoir le style applique apres le traitement de l'image.
-      // faire un compte admin
-      // avoir la gallerie
-      // avoir un filtre sur mes uploads
-      // faire en sorte que mes filtres soient de la meme taille tous.
-      // faire la gallery pour faire les likes et comments SELECT *;
-      // auto log in : compte admin pour se connecter sur le compte d'un user sans le password;
-      // 
+
       var radio = document.getElementsByClassName('radio');
 
         function ffilter(event) {
@@ -215,8 +207,27 @@
       alert("Sorry, you can't capture video from your webcam in this web browser. Try the latest desktop version of Firefox, Chrome or Opera.");
     }
 
-
-    // window.location = "profil.php?element="+element;
+     // window.location = "profil.php?element="+element;
 
 
   })();
+
+function submitForm(oFormElement)
+{
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function(){
+        var element = document.createElement("div");
+        element.innerHTML = this.responseText;
+        document.getElementById("message").appendChild(element);
+    }
+    xhr.open (oFormElement.method, oFormElement.action, true);
+    xhr.send (new FormData (oFormElement));
+    return false;
+}
+
+function closeHelpDiv(){
+    document.getElementById("helpdiv").style.display=" none";
+}
+
+// close the div in 5 secs
+window.setTimeout(closeHelpDiv, 5000 );

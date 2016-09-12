@@ -11,6 +11,11 @@ catch (Exception $e)
 // ini_set('display_errors', 1);git st
 // error_reporting(E_ALL);
 
+//$message = file_get_contents("php://input");
+
+
+
+
       if(!empty($_FILES['file_upload']['name']))
       {
         $message = $_SESSION['message'];
@@ -48,7 +53,7 @@ catch (Exception $e)
                   {
                     die('Erreur: ' . $e->getMessage());
                   }
-                    // $message= "File uploaded !";
+                     $message= "File uploaded !";
                 }
                 else
                   $message= "File could not be uploaded";
@@ -68,14 +73,17 @@ catch (Exception $e)
         else {
           $message = "No file to upload";
         }
-        empty($_FILES);
+
+       echo $message;
+
+//        empty($_FILES);
         // header('Location: '.$_SERVER["HTTP_HOST"].'/Camagru/profil.php'.'?erreur='.$message);
 
-       if (!empty($message))
-       {
-          echo "<script type='text/javascript'>alert('$message');</script>";
-        }
-       $url = 'http://localhost:8888/Camagru/profil.php';
-         echo '<script>window.location = "'.$url.'";</script>';
+//       if (!empty($message))
+//       {
+//          echo "<script type='text/javascript'>alert('$message');</script>";
+//        }
+//       $url = '/Camagru/profil.php';
+//         echo '<script>window.location = "'.$url.'";</script>';
 
   ?>

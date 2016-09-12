@@ -12,9 +12,9 @@ catch (Exception $e)
 // ini_set('display_errors', 1);
 // error_reporting(E_ALL);
 
-if (isset($_GET['id']) AND $_GET['id'] > 0)
+if (isset($_SESSION['id']) AND $_SESSION['id'] > 0)
 {
-  $getid = intval($_GET['id']);
+  $getid = intval($_SESSION['id']);
   $requser = $bdd->prepare('SELECT * FROM users WHERE id=?');
   $requser->execute(array($getid));
   $userinfo = $requser->fetch();
@@ -77,12 +77,12 @@ if (isset($_GET['id']) AND $_GET['id'] > 0)
         <button id="startButton">Start webcam</button>
         <button id="photoButton" name="submit">Take photo</button>
     </div>
-    <form id="1" name="upload" method="post" action="sendpic.php" enctype="multipart/form-data">
+    <form id="1" method="POST" action="sendpic.php" name="upload" enctype="multipart/form-data"  onsubmit="return submitForm(this);">
       <input type="file" name="file_upload" id="file" class="inputfile" />
       <label for="file" id="select">Choose file</label>
-    <input type="submit" name="submit" value="Upload" id="choose" />
+    <input type="submit" name="submit" value="Upload" id="choose"/>
     </form>
-    <?php echo $_GET['erreur']; ?>
+    <div id="helpdiv" id="message" ></div>
 <p id="effect">
   Choose an effect for your photo:
 </p>
