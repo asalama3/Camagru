@@ -82,7 +82,7 @@ if (isset($_SESSION['id']) AND $_SESSION['id'] > 0)
       <label for="file" id="select">Choose file</label>
     <input type="submit" name="submit" value="Upload" id="choose"/>
     </form>
-    <div id="helpdiv" id="message" ></div>
+    <div id="message" ></div>
 <p id="effect">
   Choose an effect for your photo:
 </p>

@@ -1,15 +1,15 @@
 (function() {
     // A button for each filter will be created dynamically
-    // var filters = [ {
-    //   name: "Reset",
-    //   filter: ""
-    // }, {
-    //   name: "Blur",
-    //   filter: "blur(3px)"
-    // }, {
-    //   name: "BnW",
-    //   filter: "grayscale(100%)"
-    // }];
+    var filters = [ {
+      name: "Reset",
+      filter: ""
+    }, {
+      name: "Blur",
+      filter: "blur(3px)"
+    }, {
+      name: "BnW",
+      filter: "grayscale(100%)"
+    }];
 
     var video = document.getElementById('video');
     var canvas = document.getElementById('canvas');
@@ -214,20 +214,23 @@
 
 function submitForm(oFormElement)
 {
+
     var xhr = new XMLHttpRequest();
     xhr.onload = function(){
         var element = document.createElement("div");
         element.innerHTML = this.responseText;
         document.getElementById("message").appendChild(element);
+        // if (!!document.getElementById("message").innerHTML)
+        //   return ;
+        window.setTimeout(func, 3000);
     }
+
     xhr.open (oFormElement.method, oFormElement.action, true);
     xhr.send (new FormData (oFormElement));
     return false;
 }
 
-function closeHelpDiv(){
-    document.getElementById("helpdiv").style.display=" none";
+function func(){
+  console.log("func");
+    document.getElementById("message").innerHTML="";
 }
-
-// close the div in 5 secs
-window.setTimeout(closeHelpDiv, 5000 );
