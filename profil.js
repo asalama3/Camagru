@@ -1,3 +1,4 @@
+var filter = null;
 (function() {
     // A button for each filter will be created dynamically
     var filters = [ {
@@ -14,7 +15,6 @@
     var video = document.getElementById('video');
     var canvas = document.getElementById('canvas');
     var canvasContext = canvas.getContext('2d');
-    var filter = null;
 
 
     navigator.getUserMedia = (navigator.getUserMedia ||
@@ -102,18 +102,6 @@
             radio[i].onclick = ffilter;
          }
 
-
-
-         // display_photo();
-
-         // function display_photo(){
-         //     var ajax = new XMLHttpRequest();
-         //     ajax.onreadystatechange = function(){
-         //         if (ajax.readyState === 4 && ajax.status === 200) {
-         //             document.getElementById("stack").innerHTML = ajax.responseText;
-         //         }
-         //
-         //     };
 
 
 
@@ -218,16 +206,33 @@ function submitForm(oFormElement)
     xhr.onload = function(){
         var element = document.getElementById("message");
         var resp = this.responseText;
-        if (element.innerHTML != resp) {
+        console.log(resp);
+        if (resp.match(/^data/).length === 1)
+        {
+            console.log("salut");
+            var img = document.createElement("img");
+            img.src = this.responseText;
+            document.getElementById("stack").appendChild(img); // a refaire
+            element.innerHTML = "SUCCESS!!!";
+        }
+        else if (element.innerHTML != resp) {
+            console.log("bonjour");
+            element.innerHTML = "SUCCESS!!!";
             element.innerHTML = resp;
-            window.setTimeout(func, 3000);
+            // window.setTimeout(func, 3000);
         }
     }
     xhr.open (oFormElement.method, oFormElement.action, true);
-    xhr.send (new FormData (oFormElement));
+    var fform = new FormData (oFormElement);
+    console.log(filter);
+    fform.append("filter", filter);
+    console.log(fform);
+    xhr.send (fform);
     oFormElement.reset();
     return false;
 }
+
+// comment ajouter a formdata mon filtre selectionne
 
 function func(){
   console.log("func");

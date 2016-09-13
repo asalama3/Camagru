@@ -77,7 +77,7 @@ if (isset($_SESSION['id']) AND $_SESSION['id'] > 0)
         <button id="startButton">Start webcam</button>
         <button id="photoButton" name="submit">Take photo</button>
     </div>
-    <form id="1" method="POST" action="sendpic.php" name="upload" enctype="multipart/form-data"  onchange="display_name(this)" onsubmit="return submitForm(this);">
+    <form id="1" method="POST" action="sendpic.php" name="upload" enctype="multipart/form-data" onchange="display_name(this)" onsubmit="return submitForm(this);">
       <input type="file" name="file_upload" id="file" class="inputfile"/>
       <label for="file" id="select">Choose file</label>
     <input type="submit" name="submit" value="Upload" id="choose"/>

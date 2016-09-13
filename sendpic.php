@@ -8,75 +8,162 @@ catch (Exception $e)
 {
   die('Erreur: ' . $e->getMessage());
 }
-// ini_set('display_errors', 1);git st
-// error_reporting(E_ALL);
+ ini_set('display_errors', 1);
+ error_reporting(E_ALL);
 
-//$message = file_get_contents("php://input");
+//$test = file_get_contents("php://input");
+
+//echo $test;
+
+$uploadOk = 1;
+
+$upload_file = $_FILES['file_upload']['tmp_name'];
+
+$imageFileType = pathinfo($_FILES['file_upload']['name'],PATHINFO_EXTENSION);
+
+if ($imageFileType == "jpeg")
+{
+  $dest = imagecreatefromjpeg($upload_file);
+}
+else if ($imageFileType == "png")
+{
+  $dest = imagecreatefrompng($upload_file);
+}
+else if ($imageFileType == "jpg")
+{
+  $dest = imagecreatefromjpeg($upload_file);
+}
+else if ($imageFileType == "gif")
+{
+  $dest = imagecreatefromgif($upload_file);
+}
+else
+{
+  $message = "Sorry, your file is in the wrong format";
+  $uploadOk = 0;
+//  echo $message;
+//  return;
+}
+
+if ($_FILES["file_upload"]["size"] > 500000)
+{
+  $message = "Sorry, your file is too large.";
+  $uploadOk = 0;
+//  echo $message;
+
+}
+
+if ($uploadOk == 0)
+{
+  $message = "This file could not be uploaded.";
+}
+if (empty($_POST['filter']))
+{
+  $message = "No filter selected";
+}
+
+if (!empty($message)) {
+  echo $message;
+  return;
+}
+
+
+list($width, $height) = getimagesize($upload_file);
+
+
+$image = imagecreate(320, 240);
+imagecopyresized($image, $dest, 0, 0, 0, 0, 320, 240, $width, $height);
 
 
 
 
-      if(!empty($_FILES['file_upload']['name']))
-      {
-        $message = $_SESSION['message'];
-        $file_tmp = $_FILES['file_upload']['tmp_name'];
-        $file_name = $_FILES['file_upload']['name'];
+$file = "./images/".$_POST['filter'].".png";
+$src = imagecreatefrompng($file);
 
-        list($file_width, $file_height, $file_type, $file_attr)=getimagesize($file_tmp);
+imagecopy($image, $src, 140, 30, 0, 0, 150, 150);
 
-        $file_max_size = 5000000;
-        $file_max_height = 24480;
-        $file_max_width = 32640;
+// grace a echo on envoie une reponse a l'ajaax, ma photo finale
+// ob sert a convertir mon image en string pour ensuite la reconvertir en base64 pour l'envoyer a ajax et la save
+// dans database.
 
-        $file_path = './Pictures/';
+ob_start();
+imagepng($image);
+$contents =  ob_get_contents();
+ob_end_clean();
+echo 'data:image/png;base64,' . base64_encode($contents);
 
-        $file_ext = substr($file_name, strrpos($file_name, '.')+1);
+$req = $bdd->prepare("INSERT INTO images(name, lien_image, user_id) VALUES(?, ?, ?)");
+$req->execute(array('data:image/png;base64,' . base64_encode($contents), "salut", $_SESSION['id']));
 
-        $file_date = date("Ymdhis");
-        $file_new_name = $file_date.".".$file_ext;
+return ;
 
-        if(!empty($file_tmp) && is_uploaded_file($file_tmp))
-        {
-          if(filesize($file_tmp) < $file_max_size)
-          {
-            if($file_ext == "gif" || $file_ext == "jpeg" || $file_ext == "png" || $file_ext == "jpg")
-            {
-              if(($file_width <= $file_max_width) && ($file_height <= $file_max_height))
-              {
-                if(move_uploaded_file($file_tmp, $file_path.$file_new_name))
-                {
-                  try {
-                    $insertimage = $bdd->prepare("INSERT INTO images(user_id, lien_image, name) VALUES(?, ?, ?)");
-                    $insertimage->execute(array($_SESSION['id'], 'salut', $file_path . $file_new_name));
-                      }
-                  catch (PDOException $e)
-                  {
-                    die('Erreur: ' . $e->getMessage());
-                  }
-                     $message= "File uploaded !";
-                }
-                else
-                  $message= "File could not be uploaded";
-              }
-              else
-                $message= "File too big";
-            }
-            else
-              $message= "Wrong file format";
-          }
-          else
-            $message = "File too heavy";
-        }
-        else
-          $message = "No file to upload";
-        }
-        else {
-          $message = "No file to upload";
-        }
 
-       echo $message;
 
-        empty($_FILES);
+
+
+
+//
+//      if(!empty($_FILES['file_upload']['name']))
+//      {
+//        $message = $_SESSION['message'];
+//        $file_tmp = $_FILES['file_upload']['tmp_name'];
+//        $file_name = $_FILES['file_upload']['name'];
+//
+//        list($file_width, $file_height, $file_type, $file_attr)=getimagesize($file_tmp);
+//
+//        $file_max_size = 5000000;
+//        $file_max_height = 24480;
+//        $file_max_width = 32640;
+//
+//        $file_path = './Pictures/';
+//
+//        $file_ext = substr($file_name, strrpos($file_name, '.')+1);
+//
+//        $file_date = date("Ymdhis");
+//        $file_new_name = $file_date.".".$file_ext;
+//
+//        if(!empty($file_tmp) && is_uploaded_file($file_tmp))
+//        {
+//          if(filesize($file_tmp) < $file_max_size)
+//          {
+//            if($file_ext == "gif" || $file_ext == "jpeg" || $file_ext == "png" || $file_ext == "jpg")
+//            {
+//              if(($file_width <= $file_max_width) && ($file_height <= $file_max_height))
+//              {
+//                if(move_uploaded_file($file_tmp, $file_path.$file_new_name))
+//                {
+//                  try {
+//                    $insertimage = $bdd->prepare("INSERT INTO images(user_id, lien_image, name) VALUES(?, ?, ?)");
+//                    $insertimage->execute(array($_SESSION['id'], 'salut', $file_path . $file_new_name));
+//                      }
+//                  catch (PDOException $e)
+//                  {
+//                    die('Erreur: ' . $e->getMessage());
+//                  }
+//                     $message= "File uploaded !";
+//                }
+//                else
+//                  $message= "File could not be uploaded";
+//              }
+//              else
+//                $message= "File too big";
+//            }
+//            else
+//              $message= "Wrong file format";
+//          }
+//          else
+//            $message = "File too heavy";
+//        }
+//        else
+//          $message = "No file to upload";
+//        }
+//        else {
+//          $message = "No file to upload";
+//        }
+//
+//       echo $message;
+//
+//        empty($_FILES);
         // header('Location: '.$_SERVER["HTTP_HOST"].'/Camagru/profil.php'.'?erreur='.$message);
 
 //       if (!empty($message))
