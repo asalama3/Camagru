@@ -76,7 +76,7 @@ catch (Exception $e)
 
        echo $message;
 
-//        empty($_FILES);
+        empty($_FILES);
         // header('Location: '.$_SERVER["HTTP_HOST"].'/Camagru/profil.php'.'?erreur='.$message);
 
 //       if (!empty($message))

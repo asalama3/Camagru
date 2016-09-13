@@ -214,23 +214,27 @@
 
 function submitForm(oFormElement)
 {
-
     var xhr = new XMLHttpRequest();
     xhr.onload = function(){
-        var element = document.createElement("div");
-        element.innerHTML = this.responseText;
-        document.getElementById("message").appendChild(element);
-        // if (!!document.getElementById("message").innerHTML)
-        //   return ;
-        window.setTimeout(func, 3000);
+        var element = document.getElementById("message");
+        var resp = this.responseText;
+        if (element.innerHTML != resp) {
+            element.innerHTML = resp;
+            window.setTimeout(func, 3000);
+        }
     }
-
     xhr.open (oFormElement.method, oFormElement.action, true);
     xhr.send (new FormData (oFormElement));
+    oFormElement.reset();
     return false;
 }
 
 function func(){
   console.log("func");
     document.getElementById("message").innerHTML="";
+    document.getElementById("select").innerHTML = "Choose file";
+}
+
+function display_name() {
+    document.getElementById("select").innerHTML = document.getElementById('file').value.replace(/.*\\/g, "");
 }
