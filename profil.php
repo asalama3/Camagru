@@ -90,7 +90,12 @@ if (isset($_SESSION['id']) AND $_SESSION['id'] > 0)
           <input class="radio" type="radio" name="dog" id="dog" onclick="ffilter()" /><label for ="dog"><img src="./images/dog.png"></label>
           <input class="radio" type="radio" name="dog" id="heart" onclick="ffilter()"/><label for ="heart"><img src="./images/heart.png"></label>
           <input class="radio" type="radio" name="dog" id="snake" onclick="ffilter()"/><label for ="snake"><img src="./images/snake.png"></label>
-          <input class="radio" type="radio" name="dog" id="cadre" onclick="ffilter()"/><label for ="cadre"><img src="./images/cadre.png"></label>
+          <input class="radio" type="radio" name="dog" id="meme" onclick="ffilter()"/><label for ="meme"><img src="./images/meme.png"></label>
+          <input class="radio" type="radio" name="dog" id="moustache" onclick="ffilter()"/><label for ="moustache"><img src="./images/moustache.png"></label>
+          <input class="radio" type="radio" name="dog" id="panda" onclick="ffilter()"/><label for ="panda"><img src="./images/panda.png"></label>
+          <input class="radio" type="radio" name="dog" id="masksmall" onclick="ffilter()"/><label for ="masksmall"><img src="./images/masksmall.png"></label>
+          <input class="radio" type="radio" name="dog" id="ironman" onclick="ffilter()"/><label for ="ironman"><img src="./images/ironman.png"></label>
+
           </form>
 
     <script type="text/javascript" src="./profil.js"></script>

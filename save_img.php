@@ -18,14 +18,13 @@ $unencodedData = base64_decode($json);
 
 $dest = imagecreatefromstring($unencodedData);
 
-// $file = imagecreate(100, 100);
 $file = "./images/".$_POST['filter'].".png";
 $src = imagecreatefrompng($file);
-//$src = resize_imagepng($ff, 200, 200);
-//imagepng($src, $src);
-// $image_info = getimagesize($ff);
 
-imagecopy($dest, $src, 140, 30, 0, 0, 150, 150);
+$width = imagesx($src);
+$height = imagesy($src);
+
+imagecopy($dest, $src, 140, 30, 0, 0, $width, $height);
 
 // grace a echo on envoie une reponse a l'ajaax, ma photo finale
 // ob sert a convertir mon image en string pour ensuite la reconvertir en base64 pour l'envoyer a ajax et la save

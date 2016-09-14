@@ -96,11 +96,24 @@ var filter = null;
             console.log("test");
             filter = event.target.id;
             console.log("filter is : " + filter);
+
+            var test = document.createElement("img");
+            test.src = event.target.src; // get src of filter
+            test.style.position = 'absolute';
+            test.style.top = document.getElementById("video").height * 0.2;
+            test.style.left = document.getElementById("video").width * 0.5;
+            test.opacity = 0;
+            test.zIndex = 999;
+            document.getElementById("video").appendChild(test);
+
         }
 
         for (var i = 0; i < radio.length; i++) {
             radio[i].onclick = ffilter;
-         }
+        }
+        // display filter on camera
+
+
 
 
 
@@ -243,3 +256,6 @@ function func(){
 function display_name() {
     document.getElementById("select").innerHTML = document.getElementById('file').value.replace(/.*\\/g, "");
 }
+
+
+

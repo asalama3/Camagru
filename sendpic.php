@@ -55,7 +55,7 @@ if ($_FILES["file_upload"]["size"] > 500000)
 
 if ($uploadOk == 0)
 {
-  $message = "This file could not be uploaded.";
+  echo $message;
 }
 if (empty($_POST['filter']))
 {
@@ -71,9 +71,15 @@ if (!empty($message)) {
 list($width, $height) = getimagesize($upload_file);
 
 
-$image = imagecreate(320, 240);
-imagecopyresized($image, $dest, 0, 0, 0, 0, 320, 240, $width, $height);
+//$image = imagecreate(420, 340);
 
+$image = imagecreatetruecolor(320, 240);
+$trans_colour = imagecolorallocatealpha($image, 0, 0, 0, 127);
+imagefill($image, 0, 0, $trans_colour);
+
+
+
+imagecopyresampled($image, $dest, 0, 0, 0, 0, 320, 240, $width, $height);
 
 
 
@@ -86,8 +92,9 @@ imagecopy($image, $src, 140, 30, 0, 0, 150, 150);
 // ob sert a convertir mon image en string pour ensuite la reconvertir en base64 pour l'envoyer a ajax et la save
 // dans database.
 
+
 ob_start();
-imagepng($image);
+imagejpeg($image);
 $contents =  ob_get_contents();
 ob_end_clean();
 echo 'data:image/png;base64,' . base64_encode($contents);
