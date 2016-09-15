@@ -98,13 +98,15 @@ var filter = null;
             console.log("filter is : " + filter);
 
             var test = document.createElement("img");
-            test.src = event.target.src; // get src of filter
+            test.src = filter;
+            // test.id = 'ffff' + filter;
+            test.style.width = '130px';
+            test.style.height = '130px';
             test.style.position = 'absolute';
-            test.style.top = document.getElementById("video").height * 0.2;
-            test.style.left = document.getElementById("video").width * 0.5;
-            test.opacity = 0;
-            test.zIndex = 999;
-            document.getElementById("video").appendChild(test);
+            test.style.top = 0;
+            test.style.left = 0;
+            test.addEventListener('dragstart',dragStart,false);
+            document.getElementById("video-box").appendChild(test);
 
         }
 
@@ -112,6 +114,9 @@ var filter = null;
             radio[i].onclick = ffilter;
         }
         // display filter on camera
+        // attention au cursor
+        // effacer l;ancier filtre sil y en a un
+        // si un filtre est selectionner le removechild avant de reclicker.
 
 
 
