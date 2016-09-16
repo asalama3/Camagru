@@ -83,7 +83,7 @@ imagecopyresampled($image, $dest, 0, 0, 0, 0, 320, 240, $width, $height);
 
 
 
-$file = "./images/".$_POST['filter'].".png";
+$file = $_POST['filter'];
 $src = imagecreatefrompng($file);
 
 imagecopy($image, $src, 140, 30, 0, 0, 150, 150);

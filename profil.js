@@ -1,4 +1,7 @@
+var filter_nbr = 0;
 var filter = null;
+var oldfilter = null;
+
 (function() {
     // A button for each filter will be created dynamically
     var filters = [ {
@@ -11,7 +14,6 @@ var filter = null;
       name: "BnW",
       filter: "grayscale(100%)"
     }];
-
     var video = document.getElementById('video');
     var canvas = document.getElementById('canvas');
     var canvasContext = canvas.getContext('2d');
@@ -71,7 +73,6 @@ var filter = null;
               element.className = "photo";
               element.addEventListener('dragstart', dragStart, false);
 
-
               // recuperer mes data dans this.responseText - mon img recuprer du php grace a echo l'ajx a recu la reponse//
               // la connexion avec le php s'est bien passe //
                var xhr = new XMLHttpRequest();
@@ -79,7 +80,6 @@ var filter = null;
                   if (this.readyState == 4 && this.status == 200) {
                       element.src = this.responseText;
                       document.getElementById("stack").appendChild(element);
-                    //   filter = null;
                  }
 
               };
@@ -93,22 +93,34 @@ var filter = null;
       var radio = document.getElementsByClassName('radio');
 
         function ffilter(event) {
-            console.log("test");
+            if (filter_nbr == 1) {
+                var test = document.getElementById('ffff' + filter);
+                document.getElementById("video-box").removeChild(test);
+            }
             filter = event.target.id;
             console.log("filter is : " + filter);
 
-            var test = document.createElement("img");
-            test.src = filter;
-            // test.id = 'ffff' + filter;
-            test.style.width = '130px';
-            test.style.height = '130px';
-            test.style.position = 'absolute';
-            test.style.top = 0;
-            test.style.left = 0;
-            test.addEventListener('dragstart',dragStart,false);
-            document.getElementById("video-box").appendChild(test);
+            if (filter != oldfilter) {
 
+                var test = document.createElement("img");
+                test.src = filter;
+                test.id = 'ffff' + filter;
+                test.style.width = '130px';
+                test.style.height = '130px';
+                test.style.position = 'absolute';
+                test.style.top = 0;
+                test.style.left = 0;
+                // test.draggable = true;
+                test.addEventListener('dragstart', dragStart, false);
+                document.getElementById("video-box").appendChild(test);
+                filter_nbr = 1;
+                oldfilter = filter;
+            }
+            else {
+                oldfilter = null;
+            }
         }
+
 
         for (var i = 0; i < radio.length; i++) {
             radio[i].onclick = ffilter;
@@ -117,7 +129,7 @@ var filter = null;
         // attention au cursor
         // effacer l;ancier filtre sil y en a un
         // si un filtre est selectionner le removechild avant de reclicker.
-
+        // clientx clienty filter mouseup 0-100 inside div;
 
 
 
@@ -130,7 +142,7 @@ var filter = null;
         draggedElement = e.target;
         x = e.clientX - draggedElement.offsetLeft;
         y = e.clientY - draggedElement.offsetTop;
-        e.dataTransfer.setDragImage(draggedElement, x-340, y);
+        e.dataTransfer.setDragImage(draggedElement, x, y);
       }
 //function drop, dragenter, dragover jouent sur les filtres//
       function drop(e) {
@@ -224,7 +236,7 @@ function submitForm(oFormElement)
     xhr.onload = function(){
         var element = document.getElementById("message");
         var resp = this.responseText;
-        console.log(resp);
+        // console.log(resp);
         if (resp.match(/^data/).length === 1)
         {
             console.log("salut");

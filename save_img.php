@@ -18,7 +18,7 @@ $unencodedData = base64_decode($json);
 
 $dest = imagecreatefromstring($unencodedData);
 
-$file = "./images/".$_POST['filter'].".png";
+$file = $_POST['filter'];
 $src = imagecreatefrompng($file);
 
 $width = imagesx($src);
@@ -34,6 +34,7 @@ ob_start();
 imagepng($dest);
 $contents =  ob_get_contents();
 ob_end_clean();
+//echo $dest;
 echo 'data:image/png;base64,' . base64_encode($contents);
 
 $req = $bdd->prepare("INSERT INTO images(name, lien_image, user_id) VALUES(?, ?, ?)");

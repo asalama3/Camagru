@@ -39,7 +39,7 @@ if (isset($_SESSION['id']) AND $_SESSION['id'] > 0)
       ?>
     </header>
     <h2>MY ALBUM</h2>
-    <div id="video-box" style="position: relative">
+    <div id="video-box" style="position: relative; overflow: hidden; width: 320px; height: 240px;">
         <video id="video" width="320" height="240"></video>
     </div>
     <canvas id="canvas" width="320" height="240" style="display: none;"></canvas>
@@ -91,14 +91,11 @@ if (isset($_SESSION['id']) AND $_SESSION['id'] > 0)
           <input class="radio" type="radio" name="dog" id="./images/dog.png" onclick="ffilter()" /><label for ="dog"><img src="./images/dog.png"></label>
           <input class="radio" type="radio" name="dog" id="./images/heart.png" onclick="ffilter()"/><label for ="heart"><img src="./images/heart.png"></label>
           <input class="radio" type="radio" name="dog" id="./images/snake.png" onclick="ffilter()"/><label for ="snake"><img src="./images/snake.png"></label>
-          <input class="radio" type="radio" name="dog" id="./images/meme.png" onclick="ffilter()"/><label for ="meme"><img src="./images/meme.png"></label>
           <input class="radio" type="radio" name="dog" id="./images/moustache.png" onclick="ffilter()"/><label for ="moustache"><img src="./images/moustache.png"></label>
           <input class="radio" type="radio" name="dog" id="./images/panda.png" onclick="ffilter()"/><label for ="panda"><img src="./images/panda.png"></label>
           <input class="radio" type="radio" name="dog" id="./images/masksmall.png" onclick="ffilter()"/><label for ="masksmall"><img src="./images/masksmall.png"></label>
           <input class="radio" type="radio" name="dog" id="./images/ironman.png" onclick="ffilter()"/><label for ="ironman"><img src="./images/ironman.png"></label>
-
           </form>
-
     <script type="text/javascript" src="./profil.js"></script>
 
   </body>
