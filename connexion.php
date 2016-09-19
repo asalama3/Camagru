@@ -80,7 +80,7 @@ if (isset($_POST['formconnect'])) {
         <p>Forgot Password? <a href="./forgotyourpasswd.php">Click here to reset your password!</a></p>
       </div>
       <div class="member">
-        <p> Not a member yet ? <a href="./index.php">Sign up !</a></p>
+        <p> Not a member yet ? <a href="signup.php">Sign up !</a></p>
       </div>
   </section>
     </div>
