@@ -4,15 +4,15 @@ var oldfilter = null;
 
 (function() {
     // A button for each filter will be created dynamically
-    var filters = [ {
-      name: "Reset",
-      filter: ""
-    }, {
+    var filters = [  {
       name: "Blur",
       filter: "blur(3px)"
     }, {
-      name: "BnW",
+      name: "Black & White",
       filter: "grayscale(100%)"
+    }, {
+        name: "Reset",
+        filter: ""
     }];
     var video = document.getElementById('video');
     var canvas = document.getElementById('canvas');
@@ -78,6 +78,7 @@ var oldfilter = null;
                var xhr = new XMLHttpRequest();
               xhr.onreadystatechange = function() {
                   if (this.readyState == 4 && this.status == 200) {
+                      console.log(this.responseText);
                       element.src = this.responseText;
                       document.getElementById("stack").appendChild(element);
                  }
@@ -90,12 +91,14 @@ var oldfilter = null;
           }
       }
 
-      var radio = document.getElementsByClassName('radio');
+      // var radio = document.getElementsByClassName('radio');
 
         function ffilter(event) {
             if (filter_nbr == 1) {
                 var test = document.getElementById('ffff' + filter);
                 document.getElementById("video-box").removeChild(test);
+                filter = null;
+                filter_nbr = 0;
             }
             filter = event.target.id;
             console.log("filter is : " + filter);
@@ -121,10 +124,13 @@ var oldfilter = null;
             }
         }
 
-
-        for (var i = 0; i < radio.length; i++) {
-            radio[i].onclick = ffilter;
+         var label = document.getElementsByTagName('LI');
+        for (var i = 0; i < label.length; i++) {
+            label[i].onclick = ffilter;
         }
+
+
+
         // display filter on camera
         // attention au cursor
         // effacer l;ancier filtre sil y en a un
@@ -147,9 +153,9 @@ var oldfilter = null;
 //function drop, dragenter, dragover jouent sur les filtres//
       function drop(e) {
         z++;
-        draggedElement.style.left = (e.clientX - x - 30) + "px";
-        draggedElement.style.top = (e.clientY - y - 30) + "px";
-        draggedElement.style.zIndex = z;
+        draggedElement.style.left = (e.clientX - x) + "px";
+        draggedElement.style.top = (e.clientY - y) + "px";
+        // draggedElement.style.zIndex = z;
         if (e.stopPropagation) {
           e.stopPropagation();
         }
@@ -262,7 +268,6 @@ function submitForm(oFormElement)
     return false;
 }
 
-// comment ajouter a formdata mon filtre selectionne
 
 function func(){
   console.log("func");

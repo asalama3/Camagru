@@ -1,6 +1,6 @@
 <?php
 session_start();
-print_r($_SESSION);
+//print_r($_SESSION);
 try
 {
   $bdd = new PDO('mysql:localhost=8889;dbname=camagru', 'root', 'root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
@@ -38,51 +38,62 @@ if (isset($_SESSION['id']) AND $_SESSION['id'] > 0)
       }
       ?>
     </header>
-    <h2>MY ALBUM</h2>
-    <div id="video-box" style="position: relative; overflow: hidden; width: 400px; height: 320px; margin: 0;">
-        <video id="video" width="400" height="320"></video>
-    </div>
-    <canvas id="canvas" width="400" height="320" style="display: none;"></canvas>
-    <div id="stack" class="playground" style="background-color: darkgray;">
-      <?php
-        $allimages = $bdd->prepare("SELECT * FROM images WHERE user_id= ?");
-        $allimages->execute(array($_SESSION['id']));
-      $user_image = $allimages->fetch();
-      while($user_image = $allimages->fetch())
-      {
-      echo "<img class=\"monstyle\" src=\"" . $user_image['name'] . "\" />";
-      }
-?>
-
-
-    </div>
-<!--    <div class="margin">-->
-
-        <p id="filterButtons"></p>
-
+    <div class="left-col">
         <button id="startButton">Start webcam</button>
-        <button id="photoButton" name="submit">Take photo</button>
-<!--    </div>-->
-    <form id="r" method="POST" action="sendpic.php" name="upload" enctype="multipart/form-data" onchange="display_name(this)" onsubmit="return submitForm(this);">
-      <input type="file" name="file_upload" id="file" class="inputfile"/>
-      <label for="file" id="select">Choose file</label>
-    <input type="submit" name="submit" value="Upload" id="choose"/>
-    </form>
-    <div id="message" ></div>
-    <br>
-<span id="effect">
-  Choose an effect for your photo:
-</span>
-    <form method='POST' action="" />
-          <input class="radio" type="radio" name="dog" id="./images/dog.png" onclick="ffilter()" /><label for ="dog"><img src="./images/dog.png" class="filt"></label>
-          <input class="radio" type="radio" name="dog" id="./images/heart.png" onclick="ffilter()"/><label for ="heart"><img src="./images/heart.png" class="filt"></label>
-          <input class="radio" type="radio" name="dog" id="./images/snake.png" onclick="ffilter()"/><label for ="snake"><img src="./images/snake.png" class="filt"></label>
-          <input class="radio" type="radio" name="dog" id="./images/moustache.png" onclick="ffilter()"/><label for ="moustache"><img src="./images/moustache.png" class="filt"></label>
-          <input class="radio" type="radio" name="dog" id="./images/panda.png" onclick="ffilter()"/><label for ="panda"><img src="./images/panda.png" class="filt"></label>
-          <input class="radio" type="radio" name="dog" id="./images/masksmall.png" onclick="ffilter()"/><label for ="masksmall"><img src="./images/masksmall.png" class="filt"></label>
-          <input class="radio" type="radio" name="dog" id="./images/ironman.png" onclick="ffilter()"/><label for ="ironman"><img src="./images/ironman.png" class="filt"></label>
-          </form>
-    <script type="text/javascript" src="./profil.js"></script>
+        <div class="camera">
+            <div id="video-box" style="overflow: hidden; position: relative;">
+                <video id="video" style="width: 100%"></video>
+            </div>
+            <canvas id="canvas" width="400" height="320" style="display: none;"></canvas>
+        </div>
+        <div class="filters">
+            <ul>
+                <?php $filters = array('dog', 'heart', 'snake', 'moustache', 'panda', 'masksmall', 'ironman');?>
+                <?php foreach ($filters as $filter) :?>
+                    <li>
+                        <label  for="./images/<?=$filter?>.png" ><img src="./images/<?=$filter?>.png" id="./images/<?=$filter?>.png" ></label>
+                        <!--                    <input class="radio" type="radio" name="dog" id="./images/--><?//=$filter?><!--.png"  />-->
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+        </form>
+            <div id="filterButtons">
+                <p>Add a special effect?</p>
+            </div>
+            <div class="button_cam">
+            <button id="photoButton" name="submit">Take photo</button>
+    </div>
+        <div class="up">
+            <form id="r" method="POST" action="sendpic.php" name="upload" enctype="multipart/form-data" onchange="display_name(this)" onsubmit="return submitForm(this);">
+          <input type="file" name="file_upload" id="file" class="inputfile"/>
+          <label for="file" id="select">Choose file</label>
+        <input type="submit" name="submit" value="Upload" id="choose"/>
+        </form>
+        </div>
+        <div id="message" ></div>
 
+
+
+        <form method='POST' action="" />
+
+    </div>
+    <div class="right-col">
+        <h2><p>MY ALBUM</p></h2>
+        <div id="stack" class="playground">
+            <?php
+            $allimages = $bdd->prepare("SELECT * FROM images WHERE user_id= ?");
+            $allimages->execute(array($_SESSION['id']));
+            $user_image = $allimages->fetch();
+            while($user_image = $allimages->fetch())
+            {
+                echo "<img src=\"" . $user_image['name'] . "\" />";
+            }
+            ?>
+
+        </div>
+    </div>
+  <div class="clear" style="clear: both;"></div>
   </body>
+  <script type="text/javascript" src="./profil.js"></script>
 </html>

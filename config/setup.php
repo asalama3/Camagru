@@ -45,8 +45,9 @@ try {
                       user_id INT (11) NULL,
                       lien_image VARCHAR(1000) NOT NULL,
                       created_at DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
-                      name MEDIUM TEXT NOT NULL,
-                      PRIMARY KEY (id_image))";
+                      PRIMARY KEY (id_image),
+                      name MEDIUMTEXT NOT NULL)";
+
 
     $bdd->exec($images);
 

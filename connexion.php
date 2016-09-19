@@ -88,8 +88,3 @@ if (isset($_POST['formconnect'])) {
     </footer>
   </body>
 </html>
-
-
-
-//echo '<a href="'.$file_path.$file_new_name.'"><img src="'.$file_path.$file_new_name.'"'.$style.'></a></br />';
-///$style = "style='height:500px ; width: 500px'"; ?>

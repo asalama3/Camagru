@@ -17,6 +17,7 @@ $imgperpage = 16;
 $imgtotal = $bdd->prepare('SELECT * from images');
 $imgtotal->execute(array());
 $imgtotal = $imgtotal->rowCount();
+
 $totalpages = ceil($imgtotal/$imgperpage);
 
 if (isset($_GET['page']) AND !empty($_GET['page']) AND ctype_digit($_GET['page']) AND $_GET['page'] > 0 AND $_GET['page'] <= $totalpages)
@@ -38,7 +39,7 @@ $start = ($currentpage-1)*$imgperpage;
     </head>
     <body>
 <?php
-$allimages = $bdd->prepare('SELECT * FROM images ORDER BY date LIMIT '.$start.','.$imgperpage);
+$allimages = $bdd->prepare('SELECT * FROM images ORDER BY id_image DESC LIMIT '.$start.','.$imgperpage);
 $allimages->execute(array());
 $images = $allimages->fetch();
 while($images = $allimages->fetch()) {
