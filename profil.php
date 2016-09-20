@@ -39,7 +39,6 @@ if (isset($_SESSION['id']) AND $_SESSION['id'] > 0)
       ?>
     </header>
     <div class="left-col">
-        <button id="startButton">Start webcam</button>
         <div class="camera">
             <div id="video-box" style="overflow: hidden; position: relative;">
                 <video id="video" style="width: 100%"></video>

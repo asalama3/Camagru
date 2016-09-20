@@ -49,7 +49,6 @@ if (isset($_GET['username']) && isset($_GET['key']) && !empty($_GET['username'])
 <html>
   <head>
     <link rel="stylesheet" href="confirmation.css" />
-    </style>
     <meta charset="utf-8">
     <title>Confirmation de compte</title>
   </head>

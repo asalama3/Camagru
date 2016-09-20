@@ -8,6 +8,8 @@ catch (Exception $e)
 {
   die('Erreur: ' . $e->getMessage());
 }
+ ini_set('display_errors', 1);
+ error_reporting(E_ALL);
 
 if (isset($_GET['section']))
 {
@@ -51,28 +53,29 @@ if (isset($_POST['recup_submit'], $_POST['recup_mail']))
           $recup_insert = $bdd->prepare('INSERT INTO forgotpasswd(email, code) VALUES (?,?)');
           $recup_insert->execute(array($recup_mail, $recup_code));
         }
+
         $subject = 'Récupération de Mot de Passe';
         $header= 'MIME-Version: 1.0' . "\r\n";
         $header.='From:"andreasalama2@gmail.com"<andreasalama2@gmail.com>'. "\r\n";
         $header.='Content-Type:text/html; charset="utf-8"'. "\r\n";
         $header.='Content-Transfer-Encoding: 8bit';
-        $message='
+        $message="
         <html>
         <head>
           <title>Récuperation de mot de passe </title>
-          <meta charset="utf-8" />
+          <meta charset=\"utf-8\" />
         </head>
             <body>
-              <div align="center">
-                Bonjour '.$pseudo.',
-                Voici votre code de récupération: <b>'.$recup_code.'</b><br />
-                Cliquez <a href="http://localhost:8888/Camagru/forgotyourpasswd.php?section=code" >ici</a> pour réinitialiser votre mot de passe.
+              <div align=\"center\">
+                Bonjour $pseudo,
+                Voici votre code de récupération: <b>$recup_code</b><br />
+                Cliquez <a href=\"".$_SERVER['REQUEST_SCHEME']."://".$_SERVER['HTTP_HOST']."/Camagru/forgotyourpasswd.php?section=code\" >ici</a> pour réinitialiser votre mot de passe.
             </div>
           </body>
         </html>
-        ';
+        ";
         mail($recup_mail, $subject, $message, $header);
-        header("Location:http://localhost:8888/Camagru/forgotyourpasswd.php?section=code");
+        header("Location:".$_SERVER['REQUEST_SCHEME']."://".$_SERVER['HTTP_HOST']."/Camagru/forgotyourpasswd.php?section=code");
       }
       else
       {
@@ -101,7 +104,7 @@ if (isset($_POST['check_submit'], $_POST['check_code']))
     if ($check_req == 1){
       $up_req = $bdd->prepare('UPDATE forgotpasswd SET confirm = 1 WHERE email = ?');
       $up_req->execute(array($_SESSION['recup_mail']));
-      header("Location: http://localhost:8888/Camagru/forgotyourpasswd.php?section=changepasswd");
+      header("Location: ".$_SERVER['REQUEST_SCHEME']."://".$_SERVER['HTTP_HOST']."/Camagru/forgotyourpasswd.php?section=changepasswd");
     }
     else {
       $erreur = "Code invalide";
@@ -133,7 +136,7 @@ if (isset($_POST['change_submit']))
           $insert_passwd->execute(array($passwd, $_SESSION['recup_mail']));
           $del_req = $bdd->prepare('DELETE FROM forgotpasswd WHERE email = ?');
           $del_req->execute(array($_SESSION['recup_mail']));
-          header("Location: http://localhost:8888/Camagru/connexion.php");
+          header("Location: ".$_SERVER['REQUEST_SCHEME']."://".$_SERVER['HTTP_HOST']."/Camagru/connexion.php");
         }
         else {
           $erreur = "Vos mots de passes ne correspondent pas";
@@ -188,7 +191,7 @@ if (isset($_POST['change_submit']))
        }
        else
        {
-         echo "<br />";
+         echo "";
        }
         ?>
      </div>

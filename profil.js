@@ -78,10 +78,12 @@ var oldfilter = null;
                var xhr = new XMLHttpRequest();
               xhr.onreadystatechange = function() {
                   if (this.readyState == 4 && this.status == 200) {
-                      console.log(this.responseText);
+                      // console.log(this.responseText);
                       element.src = this.responseText;
-                      document.getElementById("stack").appendChild(element);
-                 }
+
+                      var list = document.getElementById("stack");
+                      list.insertBefore(element, list.childNodes[0]);
+                  }
 
               };
               xhr.open("POST", "save_img.php", true);
@@ -172,7 +174,7 @@ var oldfilter = null;
         e.preventDefault();
       }
 
-      document.getElementById("startButton").addEventListener('click', start);
+      window.onload = start;
       document.getElementById("photoButton").addEventListener('click', takePhoto);
 
       var container = document.body;
@@ -225,7 +227,6 @@ var oldfilter = null;
       }
 //end filtres//
     } else {
-      document.getElementById("startButton").disabled = true;
       document.getElementById("photoButton").disabled = true;
 
       alert("Sorry, you can't capture video from your webcam in this web browser. Try the latest desktop version of Firefox, Chrome or Opera.");

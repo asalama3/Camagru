@@ -52,7 +52,7 @@ if(isset($_POST['inscription']))
           </html>
           ';
 
-          mail($mail, $subject, $message, $header);
+         mail($mail, $subject, $message, $header);
 
           $erreur = "Votre compte a bien été crée ! </br>
           Veuillez confirmer votre compte grace au lien envoye sur votre mail: .$mail.";
