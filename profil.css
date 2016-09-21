@@ -8,13 +8,45 @@ a a:visited a/:hover a:active{
 }
 
 header{
-  background: white;
-  background-size: cover;
+  display: block;
+  color: white;
+  overflow: hidden;
+  background-color: #333;
   width: 100%;
-  display: inline-block;
-  text-align: right;
-  height: 60px;
-  color:  #91bbbe;
+  height: 50px;
+}
+
+header h1{
+  color: white;
+  font-size: 20px;
+float: left;
+  margin-left: 5px;
+  font-family: helvetica, arial, sans-serif;
+  font-weight: normal;
+
+}
+
+header ul{
+  list-style: none;
+}
+
+header li a {
+  display: block;
+  color: white;
+  padding-right: 10px;
+  text-decoration: none;
+  font-family: helvetica, arial, sans-serif;
+  font-size: 20px;
+}
+
+header li {
+  display: inline;
+  float: right;
+
+}
+
+header li a:hover {
+  background-color: #111;
 }
 
 #filterButtons {
@@ -24,30 +56,27 @@ header{
   /*flex-wrap: wrap;*/
 }
 
-
-
-h1{
-  padding-right: 40px;
-  font-size: 14px;
-  display: inline-block;
+#text{
   font-family: helvetica, arial, sans-serif;
-  padding-top: 15px;
+  color: rgb(30, 45, 91);
   font-weight: bold;
+
 }
 
-a img {
-  width: 20px;
-  height: 20px;
-  float: right;
-  display: inline-block;
-  padding-top: 20px;
-  padding-right: 710px;
-}
+/*header a img {*/
+  /*width: 20px;*/
+  /*height: 20px;*/
+  /*!*float: right;*!*/
+  /*display: inline-block;*/
+  /*!*padding-top: 20px;*!*/
+  /*!*padding-right: 710px;*!*/
+/*}*/
 
 body{
   margin: 0;
   padding: 0;
-  background: url(./images/background.png) no-repeat center center fixed;
+  /*background: url(./images/background_test.png) no-repeat center center fixed;*/
+  background-color: rgb(242, 242, 242);
   background-size: cover;
   position: absolute;
   width: 100%;
@@ -67,11 +96,16 @@ width: 100%;
 
 
 button {
-  font-size: 15px;
+  font-size: 12px;
   margin: 5px;
-  border: 1px solid;
-  border-radius: 2px;
-  box-sizing: content-box;
+  display: inline-block;
+  color: white;
+  border: none;
+  background-color: rgb(30, 45, 91);
+  cursor: pointer;
+  /*border: 1px solid;*/
+  border-radius: 3px;
+  /*box-sizing: content-box;*/
   /*color: #4b4f56;*/
 
 }
@@ -83,6 +117,7 @@ button.active {
 }
 
 #reset{
+  color: black;
   background: white;
 }
 
@@ -173,6 +208,7 @@ button.active {
 .left-col {
   float: left;
   width: 27%;
+  margin-top: 90px;
   /*background: red;*/
 }
 
@@ -218,8 +254,9 @@ button.active {
 .right-col > h2{
   margin: 0 auto;
   width: 98%;
-  color: #000;
+  /*color: #000;*/
   text-align: center;
+  color: rgb(30, 45, 91);
   /*background-color: darkgray;*/
   /*margin-left: 500px;*/
   /*margin-right: 20px;*/
@@ -243,4 +280,24 @@ button.active {
   padding: 12px;
   background-color: white;
   /*margin-bottom: 10px;*/
+}
+
+
+
+.left-col .up{
+  /*display: inline-block;*/
+  width: 100%;
+}
+
+.left-col .up button{
+  float:left;
+  width: 30%;
+  display: inline;
+}
+
+.left-col.up form{
+  float: left;
+  width: 70%;
+  display: inline;
+
 }

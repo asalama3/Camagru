@@ -15,12 +15,13 @@ li {
 /*}*/
 
 li a {
-    display: block;
     color: white;
     text-align: center;
-    padding: 14px 16px;
+    padding: 10px;
     text-decoration: none;
-    font-size: 40px;
+    font-size: 20px;
+    font-family: helvetica, arial, sans-serif;
+
 }
 
 li a:hover {
@@ -29,8 +30,8 @@ li a:hover {
 
 h1{
 float: left;
-    font-size: 40px;
-
+    font-size: 30px;
+    margin: 10px;
 
 }
 
@@ -39,4 +40,5 @@ header{
     color: white;
     overflow: hidden;
     background-color: #333;
+    height: 50px;
 }

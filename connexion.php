@@ -52,6 +52,16 @@ if (isset($_POST['formconnect'])) {
     <title> Camagru</title>
   </head>
   <body>
+  <header>
+
+    <h1>CAMAGRU</h1>
+    <ul>
+      <li><a href="signup.php">Sign Up</a></li>
+<!--      <li><a href="connexion.php">Sign in</a></li>-->
+    </ul>
+
+  </header>
+
     <div id="picture">
       <section id="formpage">
         <img src="./images/polaroid_cam3.png"  />
@@ -67,6 +77,11 @@ if (isset($_POST['formconnect'])) {
                 <input type="password" name="mdpconnect" placeholder="Password" id="password" />
               </td>
             </tr>
+            <tr>
+              <td>
+                <a href="./forgotyourpasswd.php" id="pass">Forgot Password?</a>
+              </td>
+            </tr>
         </table>
         <input type="submit" name="formconnect" value="Sign in" id="button"  />
       </form>
@@ -76,12 +91,12 @@ if (isset($_POST['formconnect'])) {
         echo '<font color="red">' .$erreur. "</font>";
       }
       ?>
-      <div class="forgotpasswd">
-        <p>Forgot Password? <a href="./forgotyourpasswd.php">Click here to reset your password!</a></p>
-      </div>
-      <div class="member">
-        <p> Not a member yet ? <a href="signup.php">Sign up !</a></p>
-      </div>
+<!--      <div class="forgotpasswd">-->
+<!--        <p>Forgot Password? <a href="./forgotyourpasswd.php">Click here to reset your password!</a></p>-->
+<!--      </div>-->
+<!--      <div class="member">-->
+<!--        <p> Not a member yet ? <a href="signup.php">Sign up !</a></p>-->
+<!--      </div>-->
   </section>
     </div>
     <footer>

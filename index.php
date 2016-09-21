@@ -39,16 +39,16 @@ $start = ($currentpage-1)*$imgperpage;
     </head>
     <body>
 <?php
-echo "<pre>";
-print_r($_SERVER);
+//echo "<pre>";
+//print_r($_SERVER);
 $allimages = $bdd->prepare('SELECT * FROM images ORDER BY id_image DESC LIMIT '.$start.','.$imgperpage);
 $allimages->execute(array());
 $images = $allimages->fetch();
 while($images = $allimages->fetch()) {
-    echo "<img class=\"monstylebis\"  src=\"" . $images['name'] . "\" />";
+    echo "<img class=\"stylephoto\"  src=\"" . $images['name'] . "\" />";
 }
 ?>
-<br><br>
+
 <?php
 for($i=1;$i<=$totalpages;$i++) {
     if ($i == $currentpage) {

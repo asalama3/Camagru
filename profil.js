@@ -63,14 +63,14 @@ var oldfilter = null;
               canvasContext.drawImage(video, 0, 0, 400, 320);
               var element = document.createElement("img");
               var im = canvas.toDataURL('image/png');
-              var angle = getRandomNumberWithMax(30) - 15;
-              element.style.transform="rotate(" + angle + "deg)";
-              element.style.top = getRandomNumberWithMax(50) + "px";
-              element.style.left = getRandomNumberWithMax(50) + "px";
-              element.style.zIndex = z;
+              // var angle = getRandomNumberWithMax(30) - 15;
+              // element.style.transform="rotate(" + angle + "deg)";
+              // element.style.top = getRandomNumberWithMax(50) + "px";
+              // element.style.left = getRandomNumberWithMax(50) + "px";
+              // element.style.zIndex = z;
               element.style.filter = video.style.filter;
               element.style.webkitFilter = video.style.webkitFilter;
-              element.className = "photo";
+              // element.className = "photo";
               element.addEventListener('dragstart', dragStart, false);
 
               // recuperer mes data dans this.responseText - mon img recuprer du php grace a echo l'ajx a recu la reponse//
@@ -81,10 +81,19 @@ var oldfilter = null;
                       // console.log(this.responseText);
                       element.src = this.responseText;
 
-                      var list = document.getElementById("stack");
-                      list.insertBefore(element, list.childNodes[0]);
-                  }
+                      var newdiv = document.createElement("DIV");
+                      var del = document.createElement("BUTTON");
+                      del.innerHTML = 'Delete Picture';
 
+                      // var t = document.createTextNode("Delete Picture");
+                      // var but = del.appendChild(t);
+                      newdiv.appendChild(del);
+                      newdiv.appendChild(element);
+
+                      var currentdiv = document.getElementById("stack");
+
+                      currentdiv.insertBefore(newdiv, currentdiv.childNodes[0]);
+                  }
               };
               xhr.open("POST", "save_img.php", true);
               xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");

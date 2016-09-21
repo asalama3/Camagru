@@ -162,6 +162,9 @@ if (isset($_POST['change_submit']))
      <meta charset="utf-8">
      <title>Forgot your Password</title>
    </head>
+   <header>
+     <h1>CAMAGRU</h1>
+   </header>
    <body>
      <h2 align ="center">Récupération de Votre Mot de Passe</h2>
      <div align="center">
@@ -169,19 +172,19 @@ if (isset($_POST['change_submit']))
        <h4>Un code de vérification vous a été envoyé par mail:</h4>
        <form class="forgot_passwd" action="" method="post">
          <input type="text" name="check_code" placeholder="Code de vérification" class="change"></br></br>
-         <input type="submit" name="check_submit" value="Valider" class="button">
+         <input type="submit" name="check_submit" value="Submit" class="button">
        </form>
        <?php } elseif ($section == "changepasswd") { ?>
          <h4>Nouveau Mot de Passe :</h4>
          <form class="forgot_passwd" action="" method="post">
            <input type="password" name="change_passwd" placeholder="Nouveau Mot De Passe" class="change"></br>
            <input type="password" name="change_passwdc" placeholder="Confirmation du Nouveau Mot de Passe" class="change"></br></br>
-           <input type="submit" name="change_submit" value="Valider" class="button">
+           <input type="submit" name="change_submit" value="Submit" class="button">
          </form>
        <?php } else {?>
        <form class="forgot_passwd" action="" method="post">
          <input type="email" name="recup_mail" placeholder="Email" class="change"></br></br>
-         <input type="submit" name="recup_submit" value="Valider" class="button">
+         <input type="submit" name="recup_submit" value="Submit" class="button">
        </form>
        <?php } ?>
        <?php
