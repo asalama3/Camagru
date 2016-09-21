@@ -25,13 +25,13 @@ if (isset($_SESSION['id']) AND $_SESSION['id'] > 0)
     <meta charset="utf-8">
     <link rel="stylesheet" href="profil.css" />
     <title> Camagru</title>
+      <script type="text/javascript" src="./delete_image.js"></script>
   </head>
   <body>
     <header>
       <h1>Welcome <?php echo $userinfo['username']; ?></h1>
       <?php
       if (isset($_SESSION['id']) AND $userinfo['id'] == $_SESSION['id'])
-
       ?>
         <ul>
             <li><a href="deconnexion.php">Sign Out</a></li>
@@ -76,23 +76,19 @@ if (isset($_SESSION['id']) AND $_SESSION['id'] > 0)
                     Add a special effect?</span>
             </div>
 
-
-
-
-
     </div>
     <div class="right-col">
         <h2><p>Album...</p></h2>
         <div id="stack" class="playground">
-<!--            --><?php
-//            $allimages = $bdd->prepare("SELECT * FROM images WHERE user_id= ?");
-//            $allimages->execute(array($_SESSION['id']));
-//            $user_image = $allimages->fetch();
-//            while($user_image = $allimages->fetch())
-//            {
-//                echo "<img src=\"" . $user_image['name'] . "\" />";
-//            }
-//            ?>
+            <?php
+            $allimages = $bdd->prepare("SELECT * FROM images WHERE user_id= ?");
+            $allimages->execute(array($_SESSION['id']));
+            $user_image = $allimages->fetch();
+            while($user_image = $allimages->fetch())
+            {
+                echo "<img src=\"" . $user_image['name'] . "\" onload='XXX(this, " . $user_image['id_image'] . ");' />";
+            }
+            ?>
 
         </div>
     </div>

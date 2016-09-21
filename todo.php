@@ -23,4 +23,9 @@
 //
 
 
+
+
+
+// how to delete image from album.
+// -
 ?>

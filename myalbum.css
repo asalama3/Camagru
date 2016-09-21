@@ -1,0 +1,54 @@
+html, body{
+    margin: 0;
+    padding: 0;
+}
+
+a a:visited a:hover a:active{
+                  color : none;
+}
+
+header{
+    display: block;
+    color: white;
+    overflow: hidden;
+    background-color: #333;
+    width: 100%;
+    height: 50px;
+}
+
+header h1{
+    color: white;
+    font-size: 20px;
+    float: left;
+    margin-left: 5px;
+    font-family: helvetica, arial, sans-serif;
+    font-weight: normal;
+
+}
+
+header ul{
+    list-style: none;
+}
+
+header li a {
+    display: block;
+    color: white;
+    padding-right: 10px;
+    text-decoration: none;
+    font-family: helvetica, arial, sans-serif;
+    font-size: 20px;
+}
+
+header li {
+    display: inline;
+    float: right;
+
+}
+
+header li a:hover {
+    background-color: #111;
+}
+
+.pictures{
+    width: 100%;
+}

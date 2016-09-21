@@ -39,5 +39,7 @@ echo 'data:image/png;base64,' . base64_encode($contents);
 
 $req = $bdd->prepare("INSERT INTO images(name, lien_image, user_id) VALUES(?, ?, ?)");
 $req->execute(array('data:image/png;base64,' . base64_encode($contents), "salut", $_SESSION['id']));
-
+$req = $bdd->prepare("SELECT id_image FROM images WHERE user_id=? ORDER BY created_at DESC LIMIT 1");
+$req->execute(array($_SESSION['id']));
+print_r("&" . $req->fetch()['id_image']);
  ?>

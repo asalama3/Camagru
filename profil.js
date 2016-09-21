@@ -2,6 +2,11 @@ var filter_nbr = 0;
 var filter = null;
 var oldfilter = null;
 
+
+
+
+
+
 (function() {
     // A button for each filter will be created dynamically
     var filters = [  {
@@ -79,20 +84,9 @@ var oldfilter = null;
               xhr.onreadystatechange = function() {
                   if (this.readyState == 4 && this.status == 200) {
                       // console.log(this.responseText);
-                      element.src = this.responseText;
-
-                      var newdiv = document.createElement("DIV");
-                      var del = document.createElement("BUTTON");
-                      del.innerHTML = 'Delete Picture';
-
-                      // var t = document.createTextNode("Delete Picture");
-                      // var but = del.appendChild(t);
-                      newdiv.appendChild(del);
-                      newdiv.appendChild(element);
-
-                      var currentdiv = document.getElementById("stack");
-
-                      currentdiv.insertBefore(newdiv, currentdiv.childNodes[0]);
+                      tmp = this.responseText;
+                      element.src = tmp.split("&")[0];
+                      XXX(element, tmp.split("&")[1]);
                   }
               };
               xhr.open("POST", "save_img.php", true);
@@ -244,6 +238,7 @@ var oldfilter = null;
      // window.location = "profil.php?element="+element;
 
 
+    //function to get all images in stack and XXX's them
   })();
 
 function submitForm(oFormElement)
@@ -288,6 +283,4 @@ function func(){
 function display_name() {
     document.getElementById("select").innerHTML = document.getElementById('file').value.replace(/.*\\/g, "");
 }
-
-
 
