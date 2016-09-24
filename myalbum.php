@@ -25,13 +25,13 @@ catch (Exception $e)
     if (isset($_SESSION['id']) AND $userinfo['id'] == $_SESSION['id'])
     ?>
     <ul>
-        <li><a href="deconnexion.php">Sign Out</a></li>
+        <li><a href="signout.php">Sign Out</a></li>
         <li><a href="profil.php">Mon Profil</a></li>
     </ul>
 </header>
 <div class="pictures">
     <h2><p>Album...</p></h2>
-    <div id="stackbis" class="playground">
+    <div id="stack" class="playground">
         <?php
         $allimages = $bdd->prepare("SELECT * FROM images WHERE user_id= ?");
         $allimages->execute(array($_SESSION['id']));
@@ -43,5 +43,8 @@ catch (Exception $e)
         ?>
     </div>
 </div>
+
+<?php  include ('footer.php'); ?>
+
 </body>
 </html>

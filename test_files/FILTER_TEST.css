@@ -64,7 +64,7 @@ span {
   left: 10%;
   padding:1rem;
   transform:translateY(-50%);
-  background-image: url('./images/cadre.png');
+  background-image: url('../images/cadre.png');
   background-repeat: no-repeat;
   display:none;
   z-index:9999;

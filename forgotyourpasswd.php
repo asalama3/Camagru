@@ -136,7 +136,7 @@ if (isset($_POST['change_submit']))
           $insert_passwd->execute(array($passwd, $_SESSION['recup_mail']));
           $del_req = $bdd->prepare('DELETE FROM forgotpasswd WHERE email = ?');
           $del_req->execute(array($_SESSION['recup_mail']));
-          header("Location: ".$_SERVER['REQUEST_SCHEME']."://".$_SERVER['HTTP_HOST']."/Camagru/connexion.php");
+          header("Location: ".$_SERVER['REQUEST_SCHEME']."://".$_SERVER['HTTP_HOST']."/Camagru/signin.php");
         }
         else {
           $erreur = "Vos mots de passes ne correspondent pas";

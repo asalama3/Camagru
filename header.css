@@ -1,18 +1,16 @@
-ul {
-    list-style-type: none;
-
+header{
+    display: block;
+    color: white;
+    overflow: hidden;
+    background-color: #333;
+    height: 50px;
 }
 
 li {
     display: inline;
+    list-style-type: none;
     float: right;
-
 }
-
-/*a {*/
-    /*display: block;*/
-    /*padding: 8px;*/
-/*}*/
 
 li a {
     color: white;
@@ -32,13 +30,5 @@ h1{
 float: left;
     font-size: 30px;
     margin: 10px;
-
 }
 
-header{
-    display: block;
-    color: white;
-    overflow: hidden;
-    background-color: #333;
-    height: 50px;
-}

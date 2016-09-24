@@ -26,7 +26,7 @@ if (isset($_GET['username']) && isset($_GET['key']) && !empty($_GET['username'])
       $updateuser->execute(array($pseudo, $key)); ?>
       <div class = "confirm">
        Votre compte a bien été confirmé !
-      <a href="connexion.php">Login</a>
+      <a href="signin.php">Login</a>
       </div>
       <?php
     }
@@ -34,7 +34,7 @@ if (isset($_GET['username']) && isset($_GET['key']) && !empty($_GET['username'])
     {?>
       <div class = "confirm">
        Votre compte a déjà été confirmé !
-      <a href="connexion.php">Login</a>
+      <a href="signin.php">Login</a>
     </div>
       <?php
     }

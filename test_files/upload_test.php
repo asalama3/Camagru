@@ -28,7 +28,7 @@
         $fichier_h_max = 24480;
         $fichier_l_max = 32640;
 
-        $fichier_dossier = '../Pictures/';
+        $fichier_dossier = '../pictures/';
 
         $fichier_ext = substr($fichier_nom,strrpos( $fichier_nom, '.')+1);
 

@@ -12,6 +12,9 @@ catch (Exception $e)
 // ini_set('display_errors', 1);
 // error_reporting(E_ALL);
 
+
+
+
 if (isset($_SESSION['id']) AND $_SESSION['id'] > 0)
 {
   $getid = intval($_SESSION['id']);
@@ -29,12 +32,16 @@ if (isset($_SESSION['id']) AND $_SESSION['id'] > 0)
   </head>
   <body>
     <header>
-      <h1>Welcome <?php echo $userinfo['username']; ?></h1>
-      <?php
-      if (isset($_SESSION['id']) AND $userinfo['id'] == $_SESSION['id'])
-      ?>
+        <?php
+        if (isset($_SESSION['id']) && $_SESSION['id'] == true) {
+            echo "<h1> Welcome, " . $_SESSION['username'] . "! </h1>";
+        } else {
+            echo "<a onload='alertlog();'>del </a>";
+            exit;
+        }
+        ?>
         <ul>
-            <li><a href="deconnexion.php">Sign Out</a></li>
+            <li><a href="signout.php">Sign Out</a></li>
             <li><a href="myalbum.php">My Album</a></li>
         </ul>
     </header>
@@ -93,6 +100,8 @@ if (isset($_SESSION['id']) AND $_SESSION['id'] > 0)
         </div>
     </div>
   <div class="clear" style="clear: both;"></div>
+    <?php  include ('footer.php'); ?>
+
   </body>
   <script type="text/javascript" src="./profil.js"></script>
 </html>

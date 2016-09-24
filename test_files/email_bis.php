@@ -13,7 +13,7 @@ if($mail->send()) {
     // POST/REDIRECT/GET pattern to prevent form resubmissions
     // when a user refreshes the page.
 
-    header('Location: connexion.php', true, 303);
+    header('Location: signin.php', true, 303);
     exit;
 }
 else {

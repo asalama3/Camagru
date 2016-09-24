@@ -44,11 +44,12 @@ if (isset($_POST['formconnect'])) {
     $erreur = "Tous les champs doivent etre completes !";
   }
 }
+
 ?>
 <html>
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="connexion.css" />
+    <link rel="stylesheet" href="signin.css" />
     <title> Camagru</title>
   </head>
   <body>
@@ -99,7 +100,6 @@ if (isset($_POST['formconnect'])) {
 <!--      </div>-->
   </section>
     </div>
-    <footer>
-    </footer>
+<?php  include ('footer.php'); ?>
   </body>
 </html>

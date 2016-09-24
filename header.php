@@ -11,7 +11,7 @@
     <h1>CAMAGRU</h1>
     <ul>
         <li><a href="signup.php">Sign Up</a></li>
-        <li><a href="connexion.php">Sign in</a></li>
+        <li><a href="signin.php">Sign in</a></li>
     </ul>
 </header>
 </html>

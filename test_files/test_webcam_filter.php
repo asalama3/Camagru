@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="./test_webcam_filter.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="test_webcam_filter.css" media="screen" title="no title" charset="utf-8">
     <title></title>
   </head>
   <body>
@@ -21,7 +21,7 @@
     <button id="photoButton">Take photo</button>
 
 </div>
-<script type="text/javascript" src="./test_webcam_filter.js"></script>
+<script type="text/javascript" src="test_webcam_filter.js"></script>
 
 
 </script>

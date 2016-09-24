@@ -81,8 +81,14 @@ if(isset($_POST['inscription']))
     <title>Camagru</title>
   </head>
   <body>
+  <header>
+    <h1>CAMAGRU</h1>
+    <ul>
+      <li><a href="signin.php">Sign in</a></li>
+    </ul>
+  </header>
       <div id="register">
-        <section id="formpage">
+        <div id="formpage">
       <h1>Sign Up !</h1>
       <form method='POST' action="">
         <table align="center">
@@ -102,7 +108,7 @@ if(isset($_POST['inscription']))
             </td>
           </tr>
         </table>
-        <input type="submit" name="inscription" value="Je m'inscris !" id="submit" />
+        <input type="submit" name="inscription" value="Sign up !" id="submit" />
       </form>
       <?php
       if (isset($erreur))
@@ -110,7 +116,9 @@ if(isset($_POST['inscription']))
         echo '<font color="red">' .$erreur. "</font>";
       }
       ?>
-    </section>
     </div>
+    </div>
+  <?php  include ('footer.php'); ?>
+
   </body>
 </html>

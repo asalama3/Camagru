@@ -38,9 +38,11 @@ $start = ($currentpage-1)*$imgperpage;
         <title>Camagru</title>
     </head>
     <body>
+<div class="">
 <?php
 //echo "<pre>";
 //print_r($_SERVER);
+
 $allimages = $bdd->prepare('SELECT * FROM images ORDER BY id_image DESC LIMIT '.$start.','.$imgperpage);
 $allimages->execute(array());
 $images = $allimages->fetch();
@@ -48,7 +50,8 @@ while($images = $allimages->fetch()) {
     echo "<img class=\"stylephoto\"  src=\"" . $images['name'] . "\" />";
 }
 ?>
-
+</div>
+<div class="">
 <?php
 for($i=1;$i<=$totalpages;$i++) {
     if ($i == $currentpage) {
@@ -58,5 +61,8 @@ for($i=1;$i<=$totalpages;$i++) {
     }
 }
 ?>
+    </div>
+<?php  include ('footer.php'); ?>
+
     </body>
 </html>

@@ -26,3 +26,10 @@ function XXX(element, id){
     var currentdiv = document.getElementById("stack");
     currentdiv.insertBefore(newdiv, currentdiv.childNodes[0]);
 }
+
+window.onload=function alertlog(){
+    window.alert("Please log in first to see this page");
+    location="signin.php";
+
+    return(false);
+}

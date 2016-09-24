@@ -122,7 +122,7 @@ return ;
 //        $file_max_height = 24480;
 //        $file_max_width = 32640;
 //
-//        $file_path = './Pictures/';
+//        $file_path = './pictures/';
 //
 //        $file_ext = substr($file_name, strrpos($file_name, '.')+1);
 //

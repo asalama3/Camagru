@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="./FILTER_TEST.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="FILTER_TEST.css" media="screen" title="no title" charset="utf-8">
     <title>Image from Webcam</title>
     <!-- <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script> -->
     <script type="text/javascript">
@@ -52,12 +52,12 @@
       </div>
        <input type="checkbox" name="dog" id="dog" onclick='addoverlaydog()'/><label for ="dog"><img src="./images/chien.png"></label>
        <input type="checkbox" name="heart" /><label for ="heart"><img src="./images/COEUR.png"></label>
-       <input type="checkbox" name="cadre" /><label for ="cadre"><img src="./images/cadre.png"></label>
+       <input type="checkbox" name="cadre" /><label for ="cadre"><img src="../images/cadre.png"></label>
     </div>
     <canvas id="canvas" width="320" height="240" style="display: none;"></canvas>
     <p class="button" id="photo">Take Photo</p>
     <div id="container"></div>
-    <script type="text/javascript" src="./FILTER_TEST.js"></script>
+    <script type="text/javascript" src="FILTER_TEST.js"></script>
 </body>
 </html>
 
