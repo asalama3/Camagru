@@ -85,14 +85,20 @@ var oldfilter = null;
                   if (this.readyState == 4 && this.status == 200) {
                       // console.log(this.responseText);
                       tmp = this.responseText;
+
                       element.src = tmp.split("&")[0];
                       XXX(element, tmp.split("&")[1]);
                   }
+
               };
               xhr.open("POST", "save_img.php", true);
               xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
               xhr.send(im +"&filter=" + filter);
 
+          }
+          else
+          {
+              alert('Please select a filter');
           }
       }
 
@@ -241,37 +247,68 @@ var oldfilter = null;
     //function to get all images in stack and XXX's them
   })();
 
-function submitForm(oFormElement)
-{
+function submitForm(oFormElement) {
     var xhr = new XMLHttpRequest();
-    xhr.onload = function(){
-        var element = document.getElementById("message");
+    xhr.onload = function () {
+        var element = document.getElementById("message"); // display message on html
         var resp = this.responseText;
-        // console.log(resp);
-        if (resp.match(/^data/).length === 1)
-        {
-            console.log("salut");
-            var img = document.createElement("img");
-            img.src = this.responseText;
-            document.getElementById("stack").appendChild(img); // a refaire
-            element.innerHTML = "SUCCESS!!!";
+        console.log(resp);
+        if ((resp == 'No file selected') || (resp == 'Wrong file format') || (resp == 'Wrong file format') || (resp == 'Too large file')) {
+            alert(resp);
+            document.getElementById("select").innerHTML = "Choose file";
+            return;
         }
-        else if (element.innerHTML != resp) {
-            console.log("bonjour");
-            element.innerHTML = "SUCCESS!!!";
-            element.innerHTML = resp;
-            // window.setTimeout(func, 3000);
+        else {
+            if (filter) {
+                // if (resp.match(/^data/).length === 1) {
+                console.log("salut");
+                var img = document.createElement("img");
+                img.src = this.responseText;
+
+                // img.src = tmp;
+                // XXX(img, id);
+
+                var newdiv = document.createElement("DIV");
+                var del = document.createElement("BUTTON");
+                del.innerHTML = 'Delete Picture';
+                // del.id = id;
+                del.onclick = delete_image;
+
+                newdiv.appendChild(del);
+                newdiv.appendChild(img);
+                var currentdiv = document.getElementById("stack");
+                currentdiv.insertBefore(newdiv, currentdiv.childNodes[0]);
+
+                // document.getElementById("stack").appendChild(img);
+
+                element.innerHTML = "SUCCESS!!!";
+                window.setTimeout(func, 3000);
+
+                // }
+                // else if (element.innerHTML != resp) {
+                //     console.log("bonjour");
+                //     element.innerHTML = "SUCCESS!!!";
+                //     element.innerHTML = resp;
+                //     window.setTimeout(func, 3000);
+                // }
+            }
+            else {
+                alert('Please select a filter');
+                document.getElementById("select").innerHTML = "Choose file";
+                return;
+            }
         }
     }
-    xhr.open (oFormElement.method, oFormElement.action, true);
-    var fform = new FormData (oFormElement);
-    console.log(filter);
-    fform.append("filter", filter);
-    console.log(fform);
-    xhr.send (fform);
-    oFormElement.reset();
-    return false;
-}
+
+        xhr.open(oFormElement.method, oFormElement.action, true);
+        var fform = new FormData(oFormElement);
+        // console.log(filter);
+        fform.append("filter", filter);
+        // console.log(fform);
+        xhr.send(fform);
+        oFormElement.reset();
+        return false;
+    }
 
 
 function func(){

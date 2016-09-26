@@ -84,11 +84,11 @@ body{
 }
 
 
-.button_cam{
-width: 100%;
-  text-align: center;
+/*.button_cam{*/
+/*width: 100%;*/
+  /*text-align: center;*/
 
-}
+/*}*/
 
 .up{
 width: 100%;
@@ -242,6 +242,21 @@ button.active {
   width: 80px;
   height: auto;
 }
+
+
+
+.left-col #phot{
+  width: 50%;
+  float: left;
+  text-align: center;
+
+           }
+
+.left-col #loading{
+width: 50%;
+  float: left;
+  text-align: center;
+           }
 
 .right-col {
   float: left;

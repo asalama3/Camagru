@@ -12,8 +12,10 @@ catch (Exception $e)
 // ini_set('display_errors', 1);
 // error_reporting(E_ALL);
 
-
-
+if (!isset($_SESSION['id']))
+{
+    header('Location: signin.php');
+}
 
 if (isset($_SESSION['id']) AND $_SESSION['id'] > 0)
 {
@@ -32,17 +34,12 @@ if (isset($_SESSION['id']) AND $_SESSION['id'] > 0)
   </head>
   <body>
     <header>
-        <?php
-        if (isset($_SESSION['id']) && $_SESSION['id'] == true) {
-            echo "<h1> Welcome, " . $_SESSION['username'] . "! </h1>";
-        } else {
-            echo "<a onload='alertlog();'>del </a>";
-            exit;
-        }
-        ?>
+        <?php echo "<h1> Welcome to Camagru, " . $_SESSION['username'] . "! </h1>"; ?>
         <ul>
             <li><a href="signout.php">Sign Out</a></li>
             <li><a href="myalbum.php">My Album</a></li>
+            <li><a href="index.php">Gallery</a></li>
+
         </ul>
     </header>
     <div class="left-col">
@@ -53,12 +50,15 @@ if (isset($_SESSION['id']) AND $_SESSION['id'] > 0)
             <canvas id="canvas" width="400" height="320" style="display: none;"></canvas>
         </div>
         <div class="up">
+            <div id="loading">
             <form id="r" method="POST" action="sendpic.php" name="upload" enctype="multipart/form-data" onchange="display_name(this)" onsubmit="return submitForm(this);">
                 <input type="file" name="file_upload" id="file" class="inputfile"/>
                 <label for="file" id="select">Choose file</label>
                 <input type="submit" name="submit" value="Upload" id="choose"/>
             </form>
-            <button id="photoButton" name="submit">Take photo</button>
+                </div>
+            <div id="phot">
+            <button id="photoButton" name="submit">Take photo</button></div>
 
         </div>
         <div id="message" ></div>
@@ -80,7 +80,7 @@ if (isset($_SESSION['id']) AND $_SESSION['id'] > 0)
         </form>
             <div id="filterButtons">
                 <span id="text">
-                    Add a special effect?</span>
+                    Wish to add a special effect?</span>
             </div>
 
     </div>

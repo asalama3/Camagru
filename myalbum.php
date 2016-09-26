@@ -8,25 +8,22 @@ catch (Exception $e)
 {
     die('Erreur: ' . $e->getMessage());
 }
-
 ?>
+
 <html>
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="./myalbum.css" />
     <title> Camagru</title>
     <script type="text/javascript" src="./delete_image.js"></script>
-
 </head>
 <body>
 <header>
-    <h1>ALBUM</h1>
-    <?php
-    if (isset($_SESSION['id']) AND $userinfo['id'] == $_SESSION['id'])
-    ?>
+    <h1>CAMAGRU</h1>
     <ul>
         <li><a href="signout.php">Sign Out</a></li>
-        <li><a href="profil.php">Mon Profil</a></li>
+        <li><a href="profil.php">My Profile</a></li>
+        <li><a href="profil.php">Gallery</a></li>
     </ul>
 </header>
 <div class="pictures">

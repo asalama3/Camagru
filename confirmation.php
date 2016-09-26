@@ -23,25 +23,17 @@ if (isset($_GET['username']) && isset($_GET['key']) && !empty($_GET['username'])
     if ($user['confirm'] == 0)
     {
       $updateuser = $bdd->prepare("UPDATE users SET confirm = 1 WHERE username= ? AND confirmkey = ?");
-      $updateuser->execute(array($pseudo, $key)); ?>
-      <div class = "confirm">
-       Votre compte a bien été confirmé !
-      <a href="signin.php">Login</a>
-      </div>
-      <?php
+      $updateuser->execute(array($pseudo, $key));
+      $message = 'Your account is now created!';
     }
     else
-    {?>
-      <div class = "confirm">
-       Votre compte a déjà été confirmé !
-      <a href="signin.php">Login</a>
-    </div>
-      <?php
+    {
+      $message = "Your account has already been created!";
     }
   }
   else
   {
-    echo "L'utilisateur n'existe pas!";
+    echo "User doesn't exist!";
   }
 }
  ?>
@@ -53,6 +45,13 @@ if (isset($_GET['username']) && isset($_GET['key']) && !empty($_GET['username'])
     <title>Confirmation de compte</title>
   </head>
   <body>
-
+  <header>
+    <h1>CAMAGRU</h1>
+  </header>
+<div class="confirm">
+ <p> <?php echo $message; ?> </p>
+  <a href="signin.php">Login</a>
+  </div>
+  <?php  include ('footer.php'); ?>
   </body>
 </html>

@@ -27,9 +27,9 @@ function XXX(element, id){
     currentdiv.insertBefore(newdiv, currentdiv.childNodes[0]);
 }
 
-window.onload=function alertlog(){
-    window.alert("Please log in first to see this page");
-    location="signin.php";
-
-    return(false);
-}
+// window.onload=function alertlog(){
+//     window.alert("Please log in first to see this page");
+//     location="signin.php";
+//
+//     return(false);
+// }

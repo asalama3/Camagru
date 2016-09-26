@@ -57,12 +57,14 @@ header li a:hover {
     width: 100%;
 }
 
-footer{
 
+.footer{
     width: 100%;
-    height: 50px;
-    bottom: 0;
+    height: 20px;
     background-color: #333;
     color: white;
-    position: fixed;
+    position: absolute;
+    text-align: center;
+    padding: 15px;
+
 }

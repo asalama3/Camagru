@@ -166,19 +166,19 @@ if (isset($_POST['change_submit']))
      <h1>CAMAGRU</h1>
    </header>
    <body>
-     <h2 align ="center">Récupération de Votre Mot de Passe</h2>
+     <h2 align ="center">Reset Password</h2>
      <div align="center">
      <?php if ($section == 'code'){ ?>
-       <h4>Un code de vérification vous a été envoyé par mail:</h4>
+       <h4>A code was sent to your email:</h4>
        <form class="forgot_passwd" action="" method="post">
-         <input type="text" name="check_code" placeholder="Code de vérification" class="change"></br></br>
+         <input type="text" name="check_code" placeholder="Code" class="change"></br></br>
          <input type="submit" name="check_submit" value="Submit" class="button">
        </form>
        <?php } elseif ($section == "changepasswd") { ?>
-         <h4>Nouveau Mot de Passe :</h4>
+         <h4>New Password :</h4>
          <form class="forgot_passwd" action="" method="post">
-           <input type="password" name="change_passwd" placeholder="Nouveau Mot De Passe" class="change"></br>
-           <input type="password" name="change_passwdc" placeholder="Confirmation du Nouveau Mot de Passe" class="change"></br></br>
+           <input type="password" name="change_passwd" placeholder="New Password" class="change"></br>
+           <input type="password" name="change_passwdc" placeholder="Confirm your new password" class="change"></br></br>
            <input type="submit" name="change_submit" value="Submit" class="button">
          </form>
        <?php } else {?>
@@ -198,5 +198,7 @@ if (isset($_POST['change_submit']))
        }
         ?>
      </div>
+     <?php  include ('footer.php'); ?>
+
    </body>
  </html>

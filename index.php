@@ -13,7 +13,7 @@ set_error_handler("var_dump");
 
 include ('header.php');
 
-$imgperpage = 16;
+$imgperpage = 10;
 $imgtotal = $bdd->prepare('SELECT * from images');
 $imgtotal->execute(array());
 $imgtotal = $imgtotal->rowCount();
@@ -38,7 +38,7 @@ $start = ($currentpage-1)*$imgperpage;
         <title>Camagru</title>
     </head>
     <body>
-<div class="">
+<div class="allimages">
 <?php
 //echo "<pre>";
 //print_r($_SERVER);
@@ -47,11 +47,13 @@ $allimages = $bdd->prepare('SELECT * FROM images ORDER BY id_image DESC LIMIT '.
 $allimages->execute(array());
 $images = $allimages->fetch();
 while($images = $allimages->fetch()) {
-    echo "<img class=\"stylephoto\"  src=\"" . $images['name'] . "\" />";
+    echo "<div class=\"imageposition\"><img class=\"stylephoto\"  src=\"" . $images['name'] . "\" onload='like_image(this, git);' /></div>";
 }
 ?>
+    <div class="clear" style="clear: both;"></div>
+
 </div>
-<div class="">
+<div class="pagination">
 <?php
 for($i=1;$i<=$totalpages;$i++) {
     if ($i == $currentpage) {
@@ -61,7 +63,7 @@ for($i=1;$i<=$totalpages;$i++) {
     }
 }
 ?>
-    </div>
+</div>
 <?php  include ('footer.php'); ?>
 
     </body>

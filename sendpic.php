@@ -8,55 +8,40 @@ catch (Exception $e)
 {
   die('Erreur: ' . $e->getMessage());
 }
- ini_set('display_errors', 1);
- error_reporting(E_ALL);
+// ini_set('display_errors', 1);
+// error_reporting(E_ALL);
 
 //$test = file_get_contents("php://input");
 
-//echo $test;
-
-$uploadOk = 1;
 
 $upload_file = $_FILES['file_upload']['tmp_name'];
 
 $imageFileType = pathinfo($_FILES['file_upload']['name'],PATHINFO_EXTENSION);
+if (empty($imageFileType))
+{
+  $message = "No file selected";
+}
+else {
+  if ($imageFileType == "jpeg") {
+    $dest = imagecreatefromjpeg($upload_file);
+  } else if ($imageFileType == "png") {
+    $dest = imagecreatefrompng($upload_file);
+  } else if ($imageFileType == "jpg") {
+    $dest = imagecreatefromjpeg($upload_file);
+  } else if ($imageFileType == "gif") {
+    $dest = imagecreatefromgif($upload_file);
+  } else {
+    $message = "Wrong file format";
+  }
+}
 
-if ($imageFileType == "jpeg")
-{
-  $dest = imagecreatefromjpeg($upload_file);
-}
-else if ($imageFileType == "png")
-{
-  $dest = imagecreatefrompng($upload_file);
-}
-else if ($imageFileType == "jpg")
-{
-  $dest = imagecreatefromjpeg($upload_file);
-}
-else if ($imageFileType == "gif")
-{
-  $dest = imagecreatefromgif($upload_file);
-}
-else
-{
-  $message = "Sorry, your file is in the wrong format";
-  $uploadOk = 0;
-//  echo $message;
-//  return;
-}
 
 if ($_FILES["file_upload"]["size"] > 500000)
 {
-  $message = "Sorry, your file is too large.";
-  $uploadOk = 0;
-//  echo $message;
-
+  $message = "Too large file";
 }
 
-if ($uploadOk == 0)
-{
-  echo $message;
-}
+//print_r($_POST['filter']);
 if (empty($_POST['filter']))
 {
   $message = "No filter selected";
@@ -66,21 +51,17 @@ if (!empty($message)) {
   echo $message;
   return;
 }
-
-
+else{
 list($width, $height) = getimagesize($upload_file);
-
 
 //$image = imagecreate(420, 340);
 
-$image = imagecreatetruecolor(320, 240);
+$image = imagecreatetruecolor(400, 320);
 $trans_colour = imagecolorallocatealpha($image, 0, 0, 0, 127);
 imagefill($image, 0, 0, $trans_colour);
 
 
-
-imagecopyresampled($image, $dest, 0, 0, 0, 0, 320, 240, $width, $height);
-
+imagecopyresampled($image, $dest, 0, 0, 0, 0, 400, 320, $width, $height);
 
 
 $file = $_POST['filter'];
@@ -99,10 +80,14 @@ $contents =  ob_get_contents();
 ob_end_clean();
 echo 'data:image/png;base64,' . base64_encode($contents);
 
-$req = $bdd->prepare("INSERT INTO images(name, lien_image, user_id) VALUES(?, ?, ?)");
-$req->execute(array('data:image/png;base64,' . base64_encode($contents), "salut", $_SESSION['id']));
+    $req = $bdd->prepare("INSERT INTO images(name, lien_image, user_id) VALUES(?, ?, ?)");
+    $req->execute(array('data:image/png;base64,' . base64_encode($contents), "salut", $_SESSION['id']));
 
-return ;
+    $req = $bdd->prepare("SELECT id_image FROM images WHERE user_id=? ORDER BY created_at DESC LIMIT 1");
+    $req->execute(array($_SESSION['id']));
+    print_r($req->fetch()['id_image']);
+    return;
+}
 
 
 

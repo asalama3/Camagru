@@ -6,22 +6,50 @@ html{
 body{
   margin: 0;
   padding: 0;
-  background: url(./images/background.png) no-repeat center center fixed;
-  position: absolute;
+  background: rgb(242, 242, 242);
+  /*position: absolute;*/
   background-size: cover;
   width: 100%;
   height: 100%;
 }
 
-.confirm{
-  text-align: center;
-  padding-top: 380px;
-  font-size: 60px;
-  font-family:'Freight Sans Bold', helvetica, arial, sans-serif !important;
+header{
+  display: block;
+  color: white;
+  overflow: hidden;
+  background-color: #333;
+  height: 50px;
+}
 
+header h1{
+  float: left;
+  font-size: 30px;
+  margin: 10px;
+}
+
+.confirm{
+  width: 100%;
+  /*position: relative;*/
+  text-align: center;
+  font-size: 30px;
+  font-family: helvetica, arial, sans-serif;
+  color: rgb(30, 45, 91);
+  padding-top: 200px;
 }
 
 a{
   text-decoration: none;
-  color: blue;
+  color: rgb(30, 45, 91);
+}
+
+
+.footer{
+  width: 100%;
+  height: 20px;
+  background-color: #333;
+  color: white;
+  position: absolute;
+  text-align: center;
+  padding: 15px;
+  bottom: 0;
 }
