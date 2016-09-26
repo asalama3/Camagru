@@ -37,6 +37,7 @@ if (isset($_SESSION['id']) AND $_SESSION['id'] > 0)
         <?php echo "<h1> Welcome to Camagru, " . $_SESSION['username'] . "! </h1>"; ?>
         <ul>
             <li><a href="signout.php">Sign Out</a></li>
+            <li><a href="delete_account.php">Delete Account</a></li>
             <li><a href="myalbum.php">My Album</a></li>
             <li><a href="index.php">Gallery</a></li>
 

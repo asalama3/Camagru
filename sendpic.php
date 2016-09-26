@@ -16,10 +16,12 @@ catch (Exception $e)
 
 $upload_file = $_FILES['file_upload']['tmp_name'];
 
+
 $imageFileType = pathinfo($_FILES['file_upload']['name'],PATHINFO_EXTENSION);
 if (empty($imageFileType))
 {
-  $message = "No file selected";
+    echo "No file selected";
+    exit();
 }
 else {
   if ($imageFileType == "jpeg") {
@@ -31,27 +33,25 @@ else {
   } else if ($imageFileType == "gif") {
     $dest = imagecreatefromgif($upload_file);
   } else {
-    $message = "Wrong file format";
+      echo "Wrong file format";
+      exit();
   }
 }
 
 
 if ($_FILES["file_upload"]["size"] > 500000)
 {
-  $message = "Too large file";
+  echo "Too large file";
+    exit();
 }
 
-//print_r($_POST['filter']);
-if (empty($_POST['filter']))
+
+if ($_POST['filter'] == "null")
 {
-  $message = "No filter selected";
+    echo "No filter selected";
+    exit();
 }
 
-if (!empty($message)) {
-  echo $message;
-  return;
-}
-else{
 list($width, $height) = getimagesize($upload_file);
 
 //$image = imagecreate(420, 340);
@@ -63,12 +63,17 @@ imagefill($image, 0, 0, $trans_colour);
 
 imagecopyresampled($image, $dest, 0, 0, 0, 0, 400, 320, $width, $height);
 
-
 $file = $_POST['filter'];
-$src = imagecreatefrompng($file);
+$file = preg_replace("/.*\//", "", $file);
 
-imagecopy($image, $src, 140, 30, 0, 0, 150, 150);
-
+if ($file) {
+    $src = imagecreatefrompng("./images/" . $file);
+    imagecopy($image, $src, 140, 30, 0, 0, 150, 150);
+}
+else{
+    echo "Bad filter";
+    exit();
+}
 // grace a echo on envoie une reponse a l'ajaax, ma photo finale
 // ob sert a convertir mon image en string pour ensuite la reconvertir en base64 pour l'envoyer a ajax et la save
 // dans database.
@@ -85,9 +90,8 @@ echo 'data:image/png;base64,' . base64_encode($contents);
 
     $req = $bdd->prepare("SELECT id_image FROM images WHERE user_id=? ORDER BY created_at DESC LIMIT 1");
     $req->execute(array($_SESSION['id']));
-    print_r($req->fetch()['id_image']);
+    print_r('&' . $req->fetch()['id_image']);
     return;
-}
 
 
 

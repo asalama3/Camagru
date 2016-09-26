@@ -19,13 +19,22 @@ $unencodedData = base64_decode($json);
 $dest = imagecreatefromstring($unencodedData);
 
 $file = $_POST['filter'];
-$src = imagecreatefrompng($file);
+$file = preg_replace("/.*\//", "", $file); // remplacer tout ce quil y a jusqua le / par rien pur garder le nom du file
 
-$width = imagesx($src);
-$height = imagesy($src);
+// TEST IF $file exists
 
-imagecopy($dest, $src, 140, 30, 0, 0, $width, $height);
+if ($file) {
+    $src = imagecreatefrompng("./images/" . $file);
 
+    $width = imagesx($src);
+    $height = imagesy($src);
+
+    imagecopy($dest, $src, 140, 30, 0, 0, $width, $height);
+}
+else{
+    echo "Bad filter";
+    exit;
+}
 // grace a echo on envoie une reponse a l'ajaax, ma photo finale
 // ob sert a convertir mon image en string pour ensuite la reconvertir en base64 pour l'envoyer a ajax et la save
 // dans database.

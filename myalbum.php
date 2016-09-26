@@ -8,6 +8,11 @@ catch (Exception $e)
 {
     die('Erreur: ' . $e->getMessage());
 }
+
+if (!isset($_SESSION['id']))
+{
+header('Location: signin.php');
+}
 ?>
 
 <html>

@@ -54,23 +54,23 @@ if(isset($_POST['inscription']))
 
          mail($mail, $subject, $message, $header);
 
-          $erreur = "Votre compte a bien été crée ! </br>
-          Veuillez confirmer votre compte grace au lien envoye sur votre mail: .$mail.";
+          $erreur = "Your account is now created! </br>
+          Please confirm your account by clicking on the link sent to your email: .$mail.";
         }
         else
         {
-          $erreur = "Adresse mail déjà utilisée !";
+          $erreur = "Email address already used!";
         }
       }
     }
     else
     {
-      $erreur = "Votre pseudo ne doit pas dépasser 255 caractères !";
+      $erreur = "Your username can't be more than 255 characters !";
     }
   }
   else
   {
-    $erreur = "Tous les champs doivent être complétés !";
+    $erreur = "Incomplete field! !";
   }
 }
 ?>

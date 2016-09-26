@@ -24,7 +24,6 @@
 //
 
 
-// look at uploads, id...
 
 
 ?>

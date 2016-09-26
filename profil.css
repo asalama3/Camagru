@@ -224,7 +224,7 @@ button.active {
   height: 150px;
   /*background: green;*/
   display: inline-block;
-  overflow-x: scroll;
+  overflow-x: auto;
   margin-left: 5px;
 }
 

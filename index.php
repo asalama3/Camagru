@@ -35,10 +35,11 @@ $start = ($currentpage-1)*$imgperpage;
     <head>
         <meta charset="utf-8">
         <link rel="stylesheet" href="style.css" />
+        <script type="text/javascript" src="./likes.js"></script>
         <title>Camagru</title>
     </head>
     <body>
-<div class="allimages">
+<div id="play" class="allimages">
 <?php
 //echo "<pre>";
 //print_r($_SERVER);
@@ -46,8 +47,11 @@ $start = ($currentpage-1)*$imgperpage;
 $allimages = $bdd->prepare('SELECT * FROM images ORDER BY id_image DESC LIMIT '.$start.','.$imgperpage);
 $allimages->execute(array());
 $images = $allimages->fetch();
-while($images = $allimages->fetch()) {
-    echo "<div class=\"imageposition\"><img class=\"stylephoto\"  src=\"" . $images['name'] . "\" onload='like_image(this, git);' /></div>";
+while($images = $allimages->fetch())
+{
+    echo "<div class=\"imageposition\">" ;
+    echo "<img class=\"stylephoto\"  src=\"" . $images['name'] . "\" onload='like_image(this, " . $images['id_image'] . ");' >" ;
+    echo "</div>";
 }
 ?>
     <div class="clear" style="clear: both;"></div>

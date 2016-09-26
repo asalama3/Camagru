@@ -59,9 +59,9 @@ var oldfilter = null;
         error);
       }
 
-      function getRandomNumberWithMax (max) {
-        return Math.floor(Math.random() * max);
-      }
+      // function getRandomNumberWithMax (max) {
+      //   return Math.floor(Math.random() * max);
+      // }
 
       function takePhoto() {
           if (filter) {
@@ -78,14 +78,14 @@ var oldfilter = null;
               // element.className = "photo";
               element.addEventListener('dragstart', dragStart, false);
 
-              // recuperer mes data dans this.responseText - mon img recuprer du php grace a echo l'ajx a recu la reponse//
-              // la connexion avec le php s'est bien passe //
                var xhr = new XMLHttpRequest();
               xhr.onreadystatechange = function() {
                   if (this.readyState == 4 && this.status == 200) {
-                      // console.log(this.responseText);
                       tmp = this.responseText;
-
+                      if (tmp == 'Bad filter'){
+                          alert(resp);
+                          return;
+                      }
                       element.src = tmp.split("&")[0];
                       XXX(element, tmp.split("&")[1]);
                   }
@@ -101,8 +101,6 @@ var oldfilter = null;
               alert('Please select a filter');
           }
       }
-
-      // var radio = document.getElementsByClassName('radio');
 
         function ffilter(event) {
             if (filter_nbr == 1) {
@@ -253,44 +251,23 @@ function submitForm(oFormElement) {
         var element = document.getElementById("message"); // display message on html
         var resp = this.responseText;
         console.log(resp);
-        if ((resp == 'No file selected') || (resp == 'Wrong file format') || (resp == 'Wrong file format') || (resp == 'Too large file')) {
+         // console.dir(resp.split("&"));
+        if ((resp == 'No file selected') || (resp == 'No filter selected') || (resp == 'Wrong file format') || (resp == 'Too large file') || (resp == 'Bad filter')) {
             alert(resp);
             document.getElementById("select").innerHTML = "Choose file";
             return;
         }
         else {
             if (filter) {
-                // if (resp.match(/^data/).length === 1) {
                 console.log("salut");
                 var img = document.createElement("img");
-                img.src = this.responseText;
+                img.src = resp.split("&")[0];
 
                 // img.src = tmp;
-                // XXX(img, id);
-
-                var newdiv = document.createElement("DIV");
-                var del = document.createElement("BUTTON");
-                del.innerHTML = 'Delete Picture';
-                // del.id = id;
-                del.onclick = delete_image;
-
-                newdiv.appendChild(del);
-                newdiv.appendChild(img);
-                var currentdiv = document.getElementById("stack");
-                currentdiv.insertBefore(newdiv, currentdiv.childNodes[0]);
-
-                // document.getElementById("stack").appendChild(img);
+                XXX(img, resp.split("&")[1]);
 
                 element.innerHTML = "SUCCESS!!!";
                 window.setTimeout(func, 3000);
-
-                // }
-                // else if (element.innerHTML != resp) {
-                //     console.log("bonjour");
-                //     element.innerHTML = "SUCCESS!!!";
-                //     element.innerHTML = resp;
-                //     window.setTimeout(func, 3000);
-                // }
             }
             else {
                 alert('Please select a filter');
@@ -301,10 +278,9 @@ function submitForm(oFormElement) {
     }
 
         xhr.open(oFormElement.method, oFormElement.action, true);
-        var fform = new FormData(oFormElement);
+       var fform = new FormData(oFormElement);
         // console.log(filter);
         fform.append("filter", filter);
-        // console.log(fform);
         xhr.send(fform);
         oFormElement.reset();
         return false;
