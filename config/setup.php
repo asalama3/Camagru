@@ -12,7 +12,7 @@ catch (Exception $e)
 
 try {
     $database = 'camagru';
-    $req = "CREATE SCHEMA IF NOT EXISTS $database DEFAULT CHARACTER SET utf8";
+    $req = "CREATE DATABASE IF NOT EXISTS $database DEFAULT CHARACTER SET utf8";
     $bdd->exec($req);
     }
 catch (PDOException $e)
@@ -76,5 +76,6 @@ catch (PDOException $e)
 
 
 
-echo 'ok';
+//echo 'ok';
+//header("Location : ../index.php");
 ?>

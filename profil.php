@@ -43,6 +43,7 @@ if (isset($_SESSION['id']) AND $_SESSION['id'] > 0)
 
         </ul>
     </header>
+    <div id="all">
     <div class="left-col">
         <div class="camera">
             <div id="video-box" style="overflow: hidden; position: relative;">
@@ -78,7 +79,7 @@ if (isset($_SESSION['id']) AND $_SESSION['id'] > 0)
                 <?php endforeach; ?>
             </ul>
         </div>
-        </form>
+        </form>git
             <div id="filterButtons">
                 <span id="text">
                     Wish to add a special effect?</span>
@@ -101,6 +102,7 @@ if (isset($_SESSION['id']) AND $_SESSION['id'] > 0)
         </div>
     </div>
   <div class="clear" style="clear: both;"></div>
+    </div>
     <?php  include ('footer.php'); ?>
 
   </body>

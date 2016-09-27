@@ -1,6 +1,7 @@
-html{
+html, body{
   margin: 0;
   padding: 0;
+  height: 100%;
 }
 
 a a:visited a/:hover a:active{
@@ -322,7 +323,15 @@ width: 50%;
   height: 20px;
   background-color: #333;
   color: white;
-  position: absolute;
+  position: relative;
   text-align: center;
-  padding: 15px;
+  padding: 12 0px;
+  bottom: 0px;
+  clear:both;
+}
+
+#all{
+  position: relative;
+  /*bottom : 50px;*/
+  min-height: 100%;
 }

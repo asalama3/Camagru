@@ -63,8 +63,9 @@ header li a:hover {
     height: 20px;
     background-color: #333;
     color: white;
-    position: absolute;
+    position: relative;
     text-align: center;
-    padding: 15px;
+    /*padding: 15px;*/
+    bottom : 0px;
 
 }

@@ -1,4 +1,6 @@
 <?php
+//include_once('Location: ./config/setup.php');
+
 try
 {
     $bdd = new PDO('mysql:localhost=8889;dbname=Camagru', 'root', 'root');
@@ -55,19 +57,19 @@ while($images = $allimages->fetch())
 }
 ?>
     <div class="clear" style="clear: both;"></div>
+    <div class="pagination">
+        <?php
+        for($i=1;$i<=$totalpages;$i++) {
+            if ($i == $currentpage) {
+                echo $i . ' ';
+            } else {
+                echo '<a href="index.php?page=' . $i . '">' . $i . '</a> ';
+            }
+        }
+        ?>
+    </div>
+</div>
 
-</div>
-<div class="pagination">
-<?php
-for($i=1;$i<=$totalpages;$i++) {
-    if ($i == $currentpage) {
-        echo $i . ' ';
-    } else {
-        echo '<a href="index.php?page=' . $i . '">' . $i . '</a> ';
-    }
-}
-?>
-</div>
 <?php  include ('footer.php'); ?>
 
     </body>
