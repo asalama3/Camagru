@@ -42,7 +42,7 @@ catch (PDOException $e)
 try {
     $images = "CREATE TABLE IF NOT EXISTS camagru.images (
                       id_image INT NOT NULL AUTO_INCREMENT,
-                      user_id INT (11) NULL,
+                      user_id INT (11) NOT NULL,
                       lien_image VARCHAR(1000) NOT NULL,
                       created_at DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
                       PRIMARY KEY (id_image),
@@ -72,10 +72,18 @@ catch (PDOException $e)
     die('Erreur: ' . $e->getMessage());
 }
 
+try {
+    $like = "CREATE TABLE IF NOT EXISTS camagru.likes (
+                      user_id INT(11) NOT NULL,
+                      id_image INT(11) NOT NULL";
+
+    $bdd->exec($like);
+}
+catch (PDOException $e)
+{
+    die('Erreur: ' . $e->getMessage());
+}
 
 
-
-
-//echo 'ok';
-//header("Location : ../index.php");
+echo 'ok';
 ?>

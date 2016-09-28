@@ -4,18 +4,23 @@ function like() {
 
     if (this.innerHTML == 'like') {
         this.innerHTML == 'Unlike';
-    }
-    else
-        this.innerHTML == 'like';
-    this.style.backgroundColor = "#7FFF00"
+        this.style.backgroundColor = "green";
 
+    }
+    else {
+        this.innerHTML == 'like';
+        this.style.backgroundColor = "red";
+        console.log(this.id);
+        document.getElementById(this.id).disabled = '';
+
+    }
     xhr.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-        // tmp = this.responseText;
+        console.log(this.responseText);
 
         }
         else{
-            // error
+            console.log('errorrrr');
         }
     };
     xhr.open("POST", "likes.php", true);

@@ -70,7 +70,7 @@ if (isset($_SESSION['id']) AND $_SESSION['id'] > 0)
 
         <div class="filters">
             <ul>
-                <?php $filters = array('dog', 'heart', 'snake', 'moustache', 'panda', 'masksmall', 'ironman', 'doge', 'menora', 'kippah', 'magen');?>
+                <?php $filters = array('dog', 'heart', 'snake', 'moustache', 'panda', 'masksmall', 'ironman', 'apple' );?>
                 <?php foreach ($filters as $filter) :?>
                     <li>
                         <label  for="./images/<?=$filter?>.png" ><img src="./images/<?=$filter?>.png" id="./images/<?=$filter?>.png" ></label>
@@ -79,7 +79,7 @@ if (isset($_SESSION['id']) AND $_SESSION['id'] > 0)
                 <?php endforeach; ?>
             </ul>
         </div>
-        </form>git
+        </form>
             <div id="filterButtons">
                 <span id="text">
                     Wish to add a special effect?</span>
