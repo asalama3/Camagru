@@ -75,7 +75,7 @@ catch (PDOException $e)
 try {
     $like = "CREATE TABLE IF NOT EXISTS camagru.likes (
                       user_id INT(11) NOT NULL,
-                      id_image INT(11) NOT NULL";
+                      id_image INT(11) NOT NULL)";
 
     $bdd->exec($like);
 }
