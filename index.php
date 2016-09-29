@@ -52,7 +52,7 @@ $images = $allimages->fetch();
 while($images = $allimages->fetch())
 {
     echo "<div class=\"imageposition\">" ;
-    echo "<img class=\"stylephoto\"  src=\"" . $images['name'] . "\" onload='like_image(this, " . $images['id_image'] . ");' >" ;
+    echo "<img class=\"stylephoto\"  src=\"" . $images['name'] . "\" onload='likes_image(this, " . $images['id_image'] . ");' >" ;
     echo "</div>";
 }
 ?>
