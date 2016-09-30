@@ -32,11 +32,10 @@ $count_likes->execute(array(intval($_POST['id'])));
 //echo $result['count_nbr'];
 
 if($result = $count_likes->fetch()) {
-    if ($result['count_nbr'] >= 1) {
+    if ($result['count_nbr'] > 0)
         echo $result['count_nbr'];
-    } else {
-        echo "Be the first person to like this picture";
-    }
+    else
+        echo "";
 }
 ?>
 

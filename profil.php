@@ -70,7 +70,7 @@ if (isset($_SESSION['id']) AND $_SESSION['id'] > 0)
 
         <div class="filters">
             <ul>
-                <?php $filters = array('dog', 'heart', 'snake', 'moustache', 'panda', 'masksmall', 'ironman', 'apple' );?>
+                <?php $filters = array('dog', 'heart', 'Banana', 'yoshi', 'panda', 'masksmall', 'ironman', 'apple', 'Donkey_Kong' );?>
                 <?php foreach ($filters as $filter) :?>
                     <li>
                         <label  for="./images/<?=$filter?>.png" ><img src="./images/<?=$filter?>.png" id="./images/<?=$filter?>.png" ></label>

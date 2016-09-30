@@ -1,6 +1,5 @@
 <?php
-//include_once('Location: ./config/setup.php');
-
+session_start();
 try
 {
     $bdd = new PDO('mysql:localhost=8889;dbname=Camagru', 'root', 'root');
@@ -46,13 +45,20 @@ $start = ($currentpage-1)*$imgperpage;
 //echo "<pre>";
 //print_r($_SERVER);
 
+
 $allimages = $bdd->prepare('SELECT * FROM images ORDER BY id_image DESC LIMIT '.$start.','.$imgperpage);
 $allimages->execute(array());
 $images = $allimages->fetch();
+
+$check_likes = $bdd->prepare("SELECT COUNT(*) AS 'count_nbr' FROM likes WHERE id_image=? AND user_id=?");
+$check_likes->execute(array($images['id_image'], $_SESSION['id']));
+$ret = $check_likes->fetch();
+
 while($images = $allimages->fetch())
 {
     echo "<div class=\"imageposition\">" ;
-    echo "<img class=\"stylephoto\"  src=\"" . $images['name'] . "\" onload='likes_image(this, " . $images['id_image'] . ");' >" ;
+    echo "<img class=\"stylephoto\"  src=\"" . $images['name'] . "\" onload='likes_image(this, " . $images['id_image'] ." , " . $ret['count_nbr'] . ");' >" ;
+//    echo "";
     echo "</div>";
 }
 ?>
