@@ -10,6 +10,7 @@
 <header>
     <h1>CAMAGRU</h1>
     <ul>
+        <li><a href="signout.php">Sign Out</a></li>
         <li><a href="signup.php">Sign Up</a></li>
         <li><a href="signin.php">Sign in</a></li>
         <li><a href="profil.php">My Profile</a></li>
@@ -18,4 +19,3 @@
     </ul>
 </header>
 </html>
-

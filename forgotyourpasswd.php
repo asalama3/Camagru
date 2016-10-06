@@ -2,7 +2,7 @@
 session_start();
 try
 {
-  $bdd = new PDO('mysql:localhost=8889;dbname=Camagru', 'root', 'root');
+  $bdd = new PDO('mysql:localhost=8889;dbname=camagru', 'root', 'root');
 }
 catch (Exception $e)
 {

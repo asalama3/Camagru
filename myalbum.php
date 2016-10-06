@@ -28,7 +28,7 @@ header('Location: signin.php');
     <ul>
         <li><a href="signout.php">Sign Out</a></li>
         <li><a href="profil.php">My Profile</a></li>
-        <li><a href="profil.php">Gallery</a></li>
+        <li><a href="index.php">Gallery</a></li>
     </ul>
 </header>
 <div class="pictures">

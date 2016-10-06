@@ -296,4 +296,3 @@ function func(){
 function display_name() {
     document.getElementById("select").innerHTML = document.getElementById('file').value.replace(/.*\\/g, "");
 }
-

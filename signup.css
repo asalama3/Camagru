@@ -109,7 +109,7 @@ header h1{
   height: 20px;
   background-color: #333;
   color: white;
-  position: absolute;
+  position: relative;
   text-align: center;
   padding: 15px;
 }

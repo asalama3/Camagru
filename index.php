@@ -2,7 +2,7 @@
 session_start();
 try
 {
-    $bdd = new PDO('mysql:localhost=8889;dbname=Camagru', 'root', 'root');
+    $bdd = new PDO('mysql:localhost=8889;dbname=camagru', 'root', 'root');
 }
 catch (Exception $e)
 {
@@ -11,6 +11,9 @@ catch (Exception $e)
 error_reporting(-1);
 ini_set('display_errors', 'On');
 set_error_handler("var_dump");
+
+
+
 
 include ('header.php');
 
@@ -45,21 +48,35 @@ $start = ($currentpage-1)*$imgperpage;
 //echo "<pre>";
 //print_r($_SERVER);
 
-
+if (isset($_SESSION['id']))
+{
 $allimages = $bdd->prepare('SELECT * FROM images ORDER BY id_image DESC LIMIT '.$start.','.$imgperpage);
-$allimages->execute(array());
+$allimages->execute(array($_SESSION['id']));
 $images = $allimages->fetch();
 
-$check_likes = $bdd->prepare("SELECT COUNT(*) AS 'count_nbr' FROM likes WHERE id_image=? AND user_id=?");
-$check_likes->execute(array($images['id_image'], $_SESSION['id']));
-$ret = $check_likes->fetch();
-
-while($images = $allimages->fetch())
+while( $images = $allimages->fetch() )
 {
+
+    $alllikes = $bdd->prepare('SELECT * FROM likes where id_image=? and user_id=?' );
+    $alllikes->execute( array($images['id_image'], $_SESSION['id'] ) );
+
+    if ( $liked = $alllikes->fetch() ) {
+      $ret = $liked['id_image'] != null ? 'true' : 'false';
+    } else {
+      $ret = "false";
+    }
+
+    $count = $bdd->prepare("SELECT COUNT(*) AS 'num' FROM likes WHERE id_image=?");
+    $count->execute(array($images['id_image']));
+    if($result = $count->fetch())
+    {
+      $ct = $result['num'];
+    }
+
     echo "<div class=\"imageposition\">" ;
-    echo "<img class=\"stylephoto\"  src=\"" . $images['name'] . "\" onload='likes_image(this, " . $images['id_image'] ." , " . $ret['count_nbr'] . ");' >" ;
-//    echo "";
+    echo "<img class=\"stylephoto\"  src=\"" . $images['name'] . "\" onload='likes_image(this, ". $ret .", ". $ct .", " . $images['id_image'] .");' >" ;
     echo "</div>";
+}
 }
 ?>
     <div class="clear" style="clear: both;"></div>
