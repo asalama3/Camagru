@@ -1,0 +1,168 @@
+html, body{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-color: rgb(242, 242, 242);
+    background-size: cover;
+    position: relative;
+    width: 100%;
+    min-height: 100%;
+    height: 100%;
+}
+
+
+.container{
+  width: 70%;
+  text-align: center;
+  min-width: 500px;
+  display: block;
+  margin: 0 auto;
+}
+
+.style{
+  width: 100%;
+  box-shadow: 3px 3px 3px #888888;
+  padding: 12px;
+  background-color: white;
+  margin-top: 20px;
+}
+
+.comments{
+  width: 100%;
+  margin-top: 10px;
+  /*padding-left: 12px;*/
+  /*padding-right: 12px;*/
+  font-size: 20px;
+  color: rgb;
+
+
+}
+.comment_image{
+  width: 100%;
+  margin-top: 20px;
+  /*padding-left: 12px;*/
+  /*padding-right: 12px;*/
+  color: #1E2D5B;
+  font-size: 20px;
+}
+
+#comment{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 20px;
+
+}
+#submit_comment{
+  font-size: 18px;
+  margin: 5px;
+  color: white;
+  border: none;
+  background-color: rgb(30, 45, 91);
+  cursor: pointer;
+  border: 1px solid;
+  border-radius: 3px;
+}
+.footer{
+  position: relative;
+ right: 0;
+ bottom: 0;
+ left: 0;
+    width: 100%;
+    height: 20px;
+    background-color: #333;
+    color: white;
+    text-align: center;
+}
+
+
+
+/*HEADER RESPONSIVE*/
+
+header{
+  margin: 0 auto;
+  /*display: block;*/
+  color: white;
+  /*overflow: hidden;*/
+  background-color: #333;
+  height: 50px;
+}
+
+header h1 a{
+  float: left;
+  font-size: 30px;
+  margin: 10px;
+  text-decoration: none;
+  color: white;
+  font-style: italic;
+
+}
+header h1 a a:visited a:hover a:active{
+    color : none;
+  }
+}
+header nav {
+
+	/*margin: 50px 0;*/
+	/*background-color: #E64A19;*/
+}
+
+header nav ul {
+	padding: 0;
+  margin: 0;
+	list-style: none;
+	/*position: relative;*/
+	}
+
+header nav ul li {
+	display:inline-block;
+	background-color: #333;
+  float: right;
+  width: 150px;
+  color: white;
+	}
+
+.menu{
+  text-align: right;
+}
+
+header nav a {
+	display:block;
+	padding:0 10px;
+	color:#FFF;
+	font-size:25px;
+	line-height: 50px;
+	text-decoration:none;
+  font-family: helvetica, arial, sans-serif;
+
+}
+
+header nav a:hover {
+	background-color: #000000;
+}
+
+/* Hide Dropdowns by Default */
+nav ul ul {
+	display: none;
+	position: absolute;
+	top: 50px; /* the height of the main nav */
+}
+
+/* Display Dropdowns on Hover */
+nav ul li:hover > ul {
+	display:inherit;
+}
+
+/* Fisrt Tier Dropdown */
+nav ul ul li {
+	/*width:200px;*/
+	float:none;
+	display:list-item;
+
+	/*position: relative;*/
+}
+
+/* Change this in order to change the Dropdown symbol */
+/*li > a:after { content:  ' +'; }*/
+li > a:only-child:after { content: ''; }
