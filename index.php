@@ -73,7 +73,7 @@ while( $images = $allimages->fetch() )
       $ct = $result['num'];
     }
 
-    echo "<div class=\"imageposition\">" ;
+    echo "<div class=\"imageposition\" id=\"" . $images['id_image'] . "\" >" ;
     echo "<img class=\"stylephoto\"  src=\"" . $images['name'] . "\" onload='likes_image(this, ". $ret .", ". $ct .", " . $images['id_image'] .");' >" ;
     echo "</div>";
 }

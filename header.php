@@ -15,7 +15,6 @@
         <li><a href="signin.php">Sign in</a></li>
         <li><a href="profil.php">My Profile</a></li>
         <li><a href="myalbum.php">My Album</a></li>
-
     </ul>
 </header>
 </html>

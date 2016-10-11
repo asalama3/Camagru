@@ -2,7 +2,7 @@
 session_start();
 try
 {
-    $bdd = new PDO('mysql:localhost=8889;dbname=camagru', 'root', 'root');
+    $bdd = new PDO('mysql:localhost=8889;dbname=camagru', 'root', 'root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 }
 catch (Exception $e)
 {
@@ -12,19 +12,81 @@ error_reporting(-1);
 ini_set('display_errors', 'On');
 set_error_handler("var_dump");
 
+// if (!isset($_SESSION['id']))
+// {
+//     alert('Please sign in before leaving a comment');
+//     header('Location: signin.php');
+// }
+// else{
+// }
 if (!isset($_SESSION['id']))
 {
-    alert('Please sign in before leaving a comment');
     header('Location: signin.php');
 }
-else{
-  
+ ?>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="comment.css" />
+    <title>Camagru</title>
+  </head>
+  <body>
+    <header>
+      <h1><a href="index.php">C A M A G R U</a></h1>
+      <nav>
+        <ul>
+            <li><a href="#" class="menu">&#8801</a>
+            <ul>
+              <li><a href="profil.php" class="menu">My Profile</a></li>
+              <li><a href="index.php" class="menu">Gallery</a></li>
+              <li><a href="signout.php" class="menu">Sign Out</a></li>
+
+            </li>
+          </ul>
+        </ul>
+      </nav>
+      <div class="clear" style="clear: both;"></div>
+    </header>
+    <div class="container">
+
+<?php
+if (isset($_SESSION['id']))
+{
+
+    $user = '<a style="font-weight: bold;">'.$_SESSION['username'].'</a>';
+    $id = intval($_GET['id_image']);
+    $image = $bdd->prepare('SELECT * FROM images WHERE id_image=?');
+    $image->execute(array($id));
+    $img = $image->fetch();
+
+    echo "<div class=\"comment_image\" id=\"" . $_GET['id_image'] . "\" >" ;
+    echo "<img class=\"style\" src=\"" . $img['name'] . "\">";
+
+    $allcomments = $bdd->prepare('SELECT * FROM comments WHERE id_image=?');
+    $allcomments->execute(array($_GET['id_image']));
+    // $display = $allcomments->fetch();
+
+    while ($display = $allcomments->fetch())
+    {
+      echo "<div class=\"comments\" />";
+      echo $user . ':'. $display['content'];
+      echo "</div>";
+    }
 }
 
 
+?>
+  <input type="text" placeholder="Write a comment..." id="comment" name="comment" />
+  <input type="submit" name="submit" value="Submit" id="submit_comment"/>
+</div>
 
-// request to get the right picture to comment
+  <?php
 
 
-
- ?>
+   ?>
+</div>
+    <?php  include ('footer.php'); ?>
+  </body>
+  <script type="text/javascript" src="./comments.js"></script>
+</html>
