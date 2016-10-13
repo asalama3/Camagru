@@ -36,14 +36,9 @@ if (!isset($_SESSION['id']))
       <h1><a href="index.php">C A M A G R U</a></h1>
       <nav>
         <ul>
-            <li><a href="#" class="menu">&#8801</a>
-            <ul>
               <li><a href="profil.php" class="menu">My Profile</a></li>
               <li><a href="index.php" class="menu">Gallery</a></li>
               <li><a href="signout.php" class="menu">Sign Out</a></li>
-
-            </li>
-          </ul>
         </ul>
       </nav>
       <div class="clear" style="clear: both;"></div>

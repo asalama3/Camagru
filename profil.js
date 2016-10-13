@@ -3,10 +3,6 @@ var filter = null;
 var oldfilter = null;
 
 
-
-
-
-
 (function() {
     // A button for each filter will be created dynamically
     var filters = [  {

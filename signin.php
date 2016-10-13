@@ -55,7 +55,7 @@ if (isset($_POST['formconnect'])) {
   <body>
   <header>
 
-    <h1>CAMAGRU</h1>
+    <h1>C A M A G R U</h1>
     <ul>
       <li><a href="signup.php">Sign Up</a></li>
 <!--      <li><a href="connexion.php">Sign in</a></li>-->

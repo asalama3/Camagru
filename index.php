@@ -14,7 +14,6 @@ set_error_handler("var_dump");
 
 
 
-
 include ('header.php');
 
 $imgperpage = 10;

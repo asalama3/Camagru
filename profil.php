@@ -35,14 +35,21 @@ if (isset($_SESSION['id']) AND $_SESSION['id'] > 0)
   <body>
     <header>
         <?php echo "<h1> Welcome to Camagru, " . $_SESSION['username'] . "! </h1>"; ?>
-        <ul>
-            <li><a href="signout.php">Sign Out</a></li>
-            <li><a href="delete_account.php">Delete Account</a></li>
+        <ul class="topnav" id="myTopnav">
+            <li><a href="" style="padding-top: 36px; pointer-events: none;
+           cursor: default; "></a></li>
+           <li><a href="delete_account.php">Delete Account</a></li>
+           <li><a href="signout.php">Sign Out</a></li>
+           <li><a href="index.php">Gallery</a></li>
             <li><a href="myalbum.php">My Album</a></li>
-            <li><a href="index.php">Gallery</a></li>
 
+            <li class="icon">
+              <a href="javascript:void(0);" onclick="menu()">&#9776;</a>
+            </li>
         </ul>
     </header>
+    <div class="clear" style="clear: both;"></div>
+
     <div id="all">
     <div class="left-col">
         <div class="camera">
@@ -107,4 +114,6 @@ if (isset($_SESSION['id']) AND $_SESSION['id'] > 0)
 
   </body>
   <script type="text/javascript" src="./profil.js"></script>
+  <script type="text/javascript" src="./header.js"></script>
+
 </html>
