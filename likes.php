@@ -1,30 +1,37 @@
 <?php
-try
-{
-    $bdd = new PDO('mysql:localhost=8889;dbname=Camagru', 'root', 'root');
+session_start();
+try {
+    $bdd = new PDO('mysql:localhost=8889;dbname=camagru', 'root', 'root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 }
+
 catch (Exception $e)
 {
     die('Erreur: ' . $e->getMessage());
 }
 
 if (isset($_SESSION['id']) AND $_SESSION['id'] > 0) {
-    $requser = $bdd->prepare("SELECT user_id, id_image FROM likes WHERE VALUES(?, ?)");
-    $requser->execute(array($_SESSION['id'], $_POST['id']));
-
+    $requser = $bdd->prepare("SELECT user_id, id_image FROM likes WHERE user_id=? AND id_image=?");
+    $requser->execute(array($_SESSION['id'], intval($_POST['id'])));
     if ($ret = $requser->fetch()) {
-        $add_like = $bdd->prepare("DELETE FROM likes(id_image, user_id) WHERE VALUES(?, ?)");
-        $add_like->execute(array($_POST['id'], $_SESSION['id']));
+        $del_like = $bdd->prepare("DELETE FROM likes WHERE user_id=? AND id_image=?");
+        $del_like->execute(array($_SESSION['id'], intval($_POST['id'])));
     } else {
-        $add_like = $bdd->prepare("INSERT INTO likes(id_image, user_id) WHERE VALUES(?, ?)");
-        $add_like->execute(array($_POST['id'], $_SESSION['id']));
+        $add_like = $bdd->prepare("INSERT INTO likes(user_id, id_image) VALUES(?, ?)");
+        $add_like->execute(array($_SESSION['id'], intval($_POST['id'])));
     }
-    echo "ok";
 }
-else
-    echo "error";
+//else{
+//    echo "error_php";
+//}
 
-// if button is liked, delete from likes
-// get all likes and condition if the number of likes is more than 1 show the total if not write "be the first person to like this pic
+$count_likes = $bdd->prepare("SELECT COUNT(*) AS 'count_nbr' FROM likes WHERE id_image=?");
+$count_likes->execute(array(intval($_POST['id'])));
+// echo $result['count_nbr'];
 
+if($result = $count_likes->fetch()) {
+    if (intval($result['count_nbr']) > 0)
+        echo intval($result['count_nbr']);
+    else
+        echo "";
+}
 ?>

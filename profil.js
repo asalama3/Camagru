@@ -3,10 +3,6 @@ var filter = null;
 var oldfilter = null;
 
 
-
-
-
-
 (function() {
     // A button for each filter will be created dynamically
     var filters = [  {
@@ -296,4 +292,3 @@ function func(){
 function display_name() {
     document.getElementById("select").innerHTML = document.getElementById('file').value.replace(/.*\\/g, "");
 }
-

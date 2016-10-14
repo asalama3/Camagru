@@ -1,15 +1,17 @@
 <?php
+session_start();
 try
 {
-    $bdd = new PDO('mysql:localhost=8889;dbname=Camagru', 'root', 'root');
+    $bdd = new PDO('mysql:localhost=8889;dbname=camagru', 'root', 'root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 }
 catch (Exception $e)
 {
     die('Erreur: ' . $e->getMessage());
 }
-error_reporting(-1);
-ini_set('display_errors', 'On');
-set_error_handler("var_dump");
+// error_reporting(-1);
+// ini_set('display_errors', 'On');
+// set_error_handler("var_dump");
+
 
 include ('header.php');
 
@@ -39,36 +41,64 @@ $start = ($currentpage-1)*$imgperpage;
         <title>Camagru</title>
     </head>
     <body>
-<div id="play" class="allimages">
+      <div id="play" class="allimages">
 <?php
 //echo "<pre>";
 //print_r($_SERVER);
 
-$allimages = $bdd->prepare('SELECT * FROM images ORDER BY id_image DESC LIMIT '.$start.','.$imgperpage);
-$allimages->execute(array());
-$images = $allimages->fetch();
-while($images = $allimages->fetch())
+if (isset($_SESSION['id']))
 {
-    echo "<div class=\"imageposition\">" ;
-    echo "<img class=\"stylephoto\"  src=\"" . $images['name'] . "\" onload='like_image(this, " . $images['id_image'] . ");' >" ;
+$allimages = $bdd->prepare('SELECT * FROM images ORDER BY id_image DESC LIMIT '.$start.','.$imgperpage);
+$allimages->execute(array($_SESSION['id']));
+$images = $allimages->fetch();
+
+while( $images = $allimages->fetch() )
+{
+
+    $alllikes = $bdd->prepare('SELECT * FROM likes where id_image=? and user_id=?' );
+    $alllikes->execute( array($images['id_image'], $_SESSION['id'] ) );
+
+    if ( $liked = $alllikes->fetch() ) {
+      $ret = $liked['id_image'] != null ? 'true' : 'false';
+    } else {
+      $ret = "false";
+    }
+
+    $count = $bdd->prepare("SELECT COUNT(*) AS 'num' FROM likes WHERE id_image=?");
+    $count->execute(array($images['id_image']));
+    if($result = $count->fetch())
+    {
+      $ct = intval($result['num']);
+    }
+
+    $nbr_comments = $bdd->prepare("SELECT COUNT(*) AS 'com' FROM comments WHERE id_image=?");
+    $nbr_comments->execute(array($images['id_image']));
+    if($result = $nbr_comments->fetch())
+    {
+      $nbr = intval($result['com']);
+    }
+
+    echo "<div class=\"imageposition\" id=\"" . $images['id_image'] . "\" >" ;
+    echo "<img class=\"stylephoto\"  src=\"" . $images['name'] . "\" onload='likes_image(this, ". $ret .", ". $ct .", " . $images['id_image'] .", " . $nbr . ");' >" ;
     echo "</div>";
+}
 }
 ?>
     <div class="clear" style="clear: both;"></div>
+    <div class="pagination">
+        <?php
+        for($i=1;$i<=$totalpages;$i++) {
+            if ($i == $currentpage) {
+                echo $i . ' ';
+            } else {
+                echo '<a href="index.php?page=' . $i . '">' . $i . '</a> ';
+            }
+        }
+        ?>
+    </div>
+  </div>
 
-</div>
-<div class="pagination">
-<?php
-for($i=1;$i<=$totalpages;$i++) {
-    if ($i == $currentpage) {
-        echo $i . ' ';
-    } else {
-        echo '<a href="index.php?page=' . $i . '">' . $i . '</a> ';
-    }
-}
-?>
-</div>
-<?php  include ('footer.php'); ?>
+    <?php  include ('footer.php'); ?>
 
-    </body>
+  </body>
 </html>

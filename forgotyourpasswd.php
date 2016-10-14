@@ -2,7 +2,7 @@
 session_start();
 try
 {
-  $bdd = new PDO('mysql:localhost=8889;dbname=Camagru', 'root', 'root');
+  $bdd = new PDO('mysql:localhost=8889;dbname=camagru', 'root', 'root');
 }
 catch (Exception $e)
 {
@@ -107,11 +107,11 @@ if (isset($_POST['check_submit'], $_POST['check_code']))
       header("Location: ".$_SERVER['REQUEST_SCHEME']."://".$_SERVER['HTTP_HOST']."/Camagru/forgotyourpasswd.php?section=changepasswd");
     }
     else {
-      $erreur = "Code invalide";
+      $erreur = "Invalid code";
     }
   }
   else {
-    $erreur = "Veuillez entrer votre code de confirmation";
+    $erreur = "Please enter your confirmation code";
   }
 }
 
@@ -139,19 +139,19 @@ if (isset($_POST['change_submit']))
           header("Location: ".$_SERVER['REQUEST_SCHEME']."://".$_SERVER['HTTP_HOST']."/Camagru/signin.php");
         }
         else {
-          $erreur = "Vos mots de passes ne correspondent pas";
+          $erreur = "Your passwords don't match";
         }
       }
       else {
-        $erreur = "Veuillez remplir tous les champs";
+        $erreur = "Please fill out all fields";
       }
     }
     else {
-      $erreur = "Veuillez valider votre mail grace au code de verification qui vous a ete envoye par mail";
+      $erreur = "Please validate your email with the verification code sent to you by email";
     }
   }
   else{
-    $erreur = "Veuillez remplir tous les champs";
+    $erreur = "Please fill out all fields";
   }
 }
  ?>
@@ -163,7 +163,7 @@ if (isset($_POST['change_submit']))
      <title>Forgot your Password</title>
    </head>
    <header>
-     <h1>CAMAGRU</h1>
+     <h1>C A M A G R U</h1>
    </header>
    <body>
      <h2 align ="center">Reset Password</h2>
@@ -199,6 +199,5 @@ if (isset($_POST['change_submit']))
         ?>
      </div>
      <?php  include ('footer.php'); ?>
-
-   </body>
- </html>
+  </body>
+</html>
