@@ -14,7 +14,7 @@ catch (Exception $e)
 
 if (!isset($_SESSION['id']))
 {
-    header('Location: signin.php');
+  header('Location: signin.php');
 }
 
 if (isset($_SESSION['id']) AND $_SESSION['id'] > 0)
@@ -36,16 +36,15 @@ if (isset($_SESSION['id']) AND $_SESSION['id'] > 0)
     <header>
         <?php echo "<h1> Welcome to Camagru, " . $_SESSION['username'] . "! </h1>"; ?>
         <ul class="topnav" id="myTopnav">
-            <li><a href="" style="padding-top: 36px; pointer-events: none;
+          <li><a href="" style="padding-top: 36px; pointer-events: none;
            cursor: default; "></a></li>
-           <li><a href="delete_account.php">Delete Account</a></li>
-           <li><a href="signout.php">Sign Out</a></li>
-           <li><a href="index.php">Gallery</a></li>
-            <li><a href="myalbum.php">My Album</a></li>
-
-            <li class="icon">
-              <a href="javascript:void(0);" onclick="menu()">&#9776;</a>
-            </li>
+          <li><a href="delete_account.php">Delete Account</a></li>
+          <li><a href="signout.php">Sign Out</a></li>
+          <li><a href="index.php">Gallery</a></li>
+          <li><a href="myalbum.php">My Album</a></li>
+          <li class="icon">
+            <a href="javascript:void(0);" onclick="menu()">&#9776;</a>
+          </li>
         </ul>
     </header>
     <div class="clear" style="clear: both;"></div>
@@ -60,15 +59,14 @@ if (isset($_SESSION['id']) AND $_SESSION['id'] > 0)
         </div>
         <div class="up">
             <div id="loading">
-            <form id="r" method="POST" action="sendpic.php" name="upload" enctype="multipart/form-data" onchange="display_name(this)" onsubmit="return submitForm(this);">
+              <form id="r" method="POST" action="sendpic.php" name="upload" enctype="multipart/form-data" onchange="display_name(this)" onsubmit="return submitForm(this);">
                 <input type="file" name="file_upload" id="file" class="inputfile"/>
                 <label for="file" id="select">Choose file</label>
                 <input type="submit" name="submit" value="Upload" id="choose"/>
-            </form>
-                </div>
+              </form>
+            </div>
             <div id="phot">
             <button id="photoButton" name="submit">Take photo</button></div>
-
         </div>
         <div id="message" ></div>
 <!--        <div class="button_cam">-->
@@ -86,16 +84,14 @@ if (isset($_SESSION['id']) AND $_SESSION['id'] > 0)
                 <?php endforeach; ?>
             </ul>
         </div>
-        </form>
-            <div id="filterButtons">
-                <span id="text">
-                    Wish to add a special effect?</span>
-            </div>
-
-    </div>
-    <div class="right-col">
+          <div id="filterButtons">
+            <span id="text">
+              Wish to add a special effect?</span>
+          </div>
+      </div>
+      <div class="right-col">
         <h2><p>Album...</p></h2>
-        <div id="stack" class="playground">
+          <div id="stack" class="playground">
             <?php
             $allimages = $bdd->prepare("SELECT * FROM images WHERE user_id= ?");
             $allimages->execute(array($_SESSION['id']));
@@ -105,15 +101,12 @@ if (isset($_SESSION['id']) AND $_SESSION['id'] > 0)
                 echo "<img src=\"" . $user_image['name'] . "\" onload='XXX(this, " . $user_image['id_image'] . ");' />";
             }
             ?>
-
         </div>
     </div>
-  <div class="clear" style="clear: both;"></div>
-    </div>
+    <div class="clear" style="clear: both;"></div>
+  </div>
     <?php  include ('footer.php'); ?>
-
-  </body>
+</body>
   <script type="text/javascript" src="./profil.js"></script>
   <script type="text/javascript" src="./header.js"></script>
-
 </html>

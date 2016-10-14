@@ -70,7 +70,7 @@ if(isset($_POST['inscription']))
   }
   else
   {
-    $erreur = "Incomplete field! !";
+    $erreur = "Incomplete field!";
   }
 }
 ?>
@@ -82,7 +82,7 @@ if(isset($_POST['inscription']))
   </head>
   <body>
   <header>
-    <h1>CAMAGRU</h1>
+    <h1>C A M A G R U</h1>
     <ul>
       <li><a href="signin.php">Sign in</a></li>
     </ul>

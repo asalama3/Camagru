@@ -38,13 +38,11 @@ else {
   }
 }
 
-
 if ($_FILES["file_upload"]["size"] > 500000)
 {
   echo "Too large file";
     exit();
 }
-
 
 if ($_POST['filter'] == "null")
 {
@@ -93,80 +91,4 @@ echo 'data:image/png;base64,' . base64_encode($contents);
     print_r('&' . $req->fetch()['id_image']);
     return;
 
-
-
-
-
-
-//
-//      if(!empty($_FILES['file_upload']['name']))
-//      {
-//        $message = $_SESSION['message'];
-//        $file_tmp = $_FILES['file_upload']['tmp_name'];
-//        $file_name = $_FILES['file_upload']['name'];
-//
-//        list($file_width, $file_height, $file_type, $file_attr)=getimagesize($file_tmp);
-//
-//        $file_max_size = 5000000;
-//        $file_max_height = 24480;
-//        $file_max_width = 32640;
-//
-//        $file_path = './pictures/';
-//
-//        $file_ext = substr($file_name, strrpos($file_name, '.')+1);
-//
-//        $file_date = date("Ymdhis");
-//        $file_new_name = $file_date.".".$file_ext;
-//
-//        if(!empty($file_tmp) && is_uploaded_file($file_tmp))
-//        {
-//          if(filesize($file_tmp) < $file_max_size)
-//          {
-//            if($file_ext == "gif" || $file_ext == "jpeg" || $file_ext == "png" || $file_ext == "jpg")
-//            {
-//              if(($file_width <= $file_max_width) && ($file_height <= $file_max_height))
-//              {
-//                if(move_uploaded_file($file_tmp, $file_path.$file_new_name))
-//                {
-//                  try {
-//                    $insertimage = $bdd->prepare("INSERT INTO images(user_id, lien_image, name) VALUES(?, ?, ?)");
-//                    $insertimage->execute(array($_SESSION['id'], 'salut', $file_path . $file_new_name));
-//                      }
-//                  catch (PDOException $e)
-//                  {
-//                    die('Erreur: ' . $e->getMessage());
-//                  }
-//                     $message= "File uploaded !";
-//                }
-//                else
-//                  $message= "File could not be uploaded";
-//              }
-//              else
-//                $message= "File too big";
-//            }
-//            else
-//              $message= "Wrong file format";
-//          }
-//          else
-//            $message = "File too heavy";
-//        }
-//        else
-//          $message = "No file to upload";
-//        }
-//        else {
-//          $message = "No file to upload";
-//        }
-//
-//       echo $message;
-//
-//        empty($_FILES);
-        // header('Location: '.$_SERVER["HTTP_HOST"].'/Camagru/profil.php'.'?erreur='.$message);
-
-//       if (!empty($message))
-//       {
-//          echo "<script type='text/javascript'>alert('$message');</script>";
-//        }
-//       $url = '/Camagru/profil.php';
-//         echo '<script>window.location = "'.$url.'";</script>';
-
-  ?>
+?>

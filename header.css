@@ -10,6 +10,7 @@ h1{
   font-size: 30px;
   margin: 10px;
   font-style: italic;
+  font-weight: normal;
 }
 
 ul.topnav {

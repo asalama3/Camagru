@@ -23,6 +23,5 @@
         </li>
     </ul>
 </header>
-<div class="clear" style="clear: both;"></div>
-
+  <div class="clear" style="clear: both;"></div>
 </html>

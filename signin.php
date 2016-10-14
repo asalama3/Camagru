@@ -10,7 +10,6 @@ catch (Exception $e)
 }
 
 
-
 if (isset($_POST['formconnect'])) {
   $mailconnect = htmlspecialchars($_POST['mailconnect']);
   $mdpconnect = $_POST['mdpconnect'];
@@ -20,8 +19,6 @@ if (isset($_POST['formconnect'])) {
   $test = $hash->fetch();
   $hsh = $test[0];
   if (password_verify($mdpconnect, $hsh)) {
-
-
     if (!empty($mailconnect) AND !empty($mdpconnect)) {
       $requser = $bdd->prepare("SELECT * FROM users WHERE email = ?");
       $requser->execute(array($mailconnect));
@@ -53,16 +50,12 @@ if (isset($_POST['formconnect'])) {
     <title> Camagru</title>
   </head>
   <body>
-  <header>
-
-    <h1>C A M A G R U</h1>
-    <ul>
-      <li><a href="signup.php">Sign Up</a></li>
-<!--      <li><a href="connexion.php">Sign in</a></li>-->
-    </ul>
-
-  </header>
-
+    <header>
+      <h1>C A M A G R U</h1>
+        <ul>
+          <li><a href="signup.php">Sign Up</a></li>
+        </ul>
+    </header>
     <div id="picture">
       <section id="formpage">
         <img src="./images/polaroid_cam3.png"  />
@@ -99,7 +92,7 @@ if (isset($_POST['formconnect'])) {
 <!--        <p> Not a member yet ? <a href="signup.php">Sign up !</a></p>-->
 <!--      </div>-->
   </section>
-    </div>
-<?php  include ('footer.php'); ?>
+  </div>
+    <?php  include ('footer.php'); ?>
   </body>
 </html>

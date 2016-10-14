@@ -26,11 +26,11 @@ if (isset($_SESSION['id']) AND $_SESSION['id'] > 0) {
 
 $count_likes = $bdd->prepare("SELECT COUNT(*) AS 'count_nbr' FROM likes WHERE id_image=?");
 $count_likes->execute(array(intval($_POST['id'])));
-echo $result['count_nbr'];
+// echo $result['count_nbr'];
 
 if($result = $count_likes->fetch()) {
-    if ($result['count_nbr'] > 0)
-        echo $result['count_nbr'];
+    if (intval($result['count_nbr']) > 0)
+        echo intval($result['count_nbr']);
     else
         echo "";
 }

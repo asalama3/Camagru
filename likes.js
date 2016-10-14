@@ -4,12 +4,9 @@ function like(count, but, id_image) {
     // var test = document.getElementById(id_image).children;
 
     if (but.style.color == ''){
-    // if (this.innerHTML == 'like') {
-    //     this.innerHTML = 'like';
         but.style.color = 'rgb(119, 139, 166)';
     }
     else{
-        // this.innerHTML = 'like';
         but.style.color = '';
       //  console.log(but.id);
         // document.getElementById(this.id).disabled = '';
@@ -65,12 +62,13 @@ function get_image_id_for( element ) {
   }
 }
 
-function likes_image(img, liked, nbr_likes, id){
+function likes_image(img, liked, nbr_likes, id, nbr_comments){
     var but = document.createElement("BUTTON");
     var img_like = document.createElement("img");
     var count = document.createElement("span");
     var comment = document.createElement("BUTTON");
     var img_comment = document.createElement("img");
+    var nbr_com = document.createElement("span");
 
     if (liked)
     {
@@ -86,12 +84,18 @@ function likes_image(img, liked, nbr_likes, id){
     else{
       count.innerHTML = "";
     }
+    if (nbr_comments)
+    {
+      nbr_com.innerHTML = nbr_comments;
+    }
+    else{
+      nbr_com.innerHTML = "";
+    }
 
     img_like.src = "./images/like.png";
     img_like.width = "15";
     img_like.height = "15";
 
-    // but.id = id;
     but.innerHTML = 'Like';
     but.onmouseover = over_like;
     but.onmouseout = out_like;
@@ -129,11 +133,5 @@ function likes_image(img, liked, nbr_likes, id){
     img.parentElement.insertBefore(count, img);
     img.parentElement.insertBefore(img_comment, img);
     img.parentElement.insertBefore(comment, img);
+    img.parentElement.insertBefore(nbr_com, img);
 }
-
-
-
-
-// add count total of all likes without asking the sessionid and add it to another count (sql request) to the function likes_image
-// make button colored if the count_nbr is greater than 1 means its liked already by the user (sessionid)
-// on click make sure the counttotal is adding up correctly

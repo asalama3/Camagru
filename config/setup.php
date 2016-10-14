@@ -23,9 +23,9 @@ try {
     $user = "CREATE TABLE IF NOT EXISTS camagru.users (
                       id INT NOT NULL AUTO_INCREMENT,
                       username VARCHAR(45) NULL,
-                      email VARCHAR(255) NULL,    
+                      email VARCHAR(255) NULL,
                       password VARCHAR(255) NULL,
-                      confirmkey VARCHAR(255) NULL, 
+                      confirmkey VARCHAR(255) NULL,
                       confirm INT (1) NULL,
                       PRIMARY KEY (id),
                       UNIQUE INDEX username_UNIQUE (username ASC),
@@ -78,6 +78,22 @@ try {
                       id_image INT(11) NOT NULL)";
 
     $bdd->exec($like);
+}
+catch (PDOException $e)
+{
+    die('Erreur: ' . $e->getMessage());
+}
+
+try {
+    $comments = "CREATE TABLE IF NOT EXISTS camagru.comments (
+      user_id INT(11) NOT NULL,
+      id_image INT(11) NOT NULL,
+      content MEDIUMTEXT NOT NULL,
+      id INT NOT NULL AUTO_INCREMENT,
+      PRIMARY KEY (id))";
+
+    $bdd->exec($comments);
+
 }
 catch (PDOException $e)
 {

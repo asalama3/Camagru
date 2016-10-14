@@ -2,16 +2,15 @@
 session_start();
 try
 {
-    $bdd = new PDO('mysql:localhost=8889;dbname=camagru', 'root', 'root');
+    $bdd = new PDO('mysql:localhost=8889;dbname=camagru', 'root', 'root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 }
 catch (Exception $e)
 {
     die('Erreur: ' . $e->getMessage());
 }
-error_reporting(-1);
-ini_set('display_errors', 'On');
-set_error_handler("var_dump");
-
+// error_reporting(-1);
+// ini_set('display_errors', 'On');
+// set_error_handler("var_dump");
 
 
 include ('header.php');
@@ -42,7 +41,7 @@ $start = ($currentpage-1)*$imgperpage;
         <title>Camagru</title>
     </head>
     <body>
-<div id="play" class="allimages">
+      <div id="play" class="allimages">
 <?php
 //echo "<pre>";
 //print_r($_SERVER);
@@ -69,11 +68,18 @@ while( $images = $allimages->fetch() )
     $count->execute(array($images['id_image']));
     if($result = $count->fetch())
     {
-      $ct = $result['num'];
+      $ct = intval($result['num']);
+    }
+
+    $nbr_comments = $bdd->prepare("SELECT COUNT(*) AS 'com' FROM comments WHERE id_image=?");
+    $nbr_comments->execute(array($images['id_image']));
+    if($result = $nbr_comments->fetch())
+    {
+      $nbr = intval($result['com']);
     }
 
     echo "<div class=\"imageposition\" id=\"" . $images['id_image'] . "\" >" ;
-    echo "<img class=\"stylephoto\"  src=\"" . $images['name'] . "\" onload='likes_image(this, ". $ret .", ". $ct .", " . $images['id_image'] .");' >" ;
+    echo "<img class=\"stylephoto\"  src=\"" . $images['name'] . "\" onload='likes_image(this, ". $ret .", ". $ct .", " . $images['id_image'] .", " . $nbr . ");' >" ;
     echo "</div>";
 }
 }
@@ -90,9 +96,9 @@ while( $images = $allimages->fetch() )
         }
         ?>
     </div>
-</div>
+  </div>
 
-<?php  include ('footer.php'); ?>
+    <?php  include ('footer.php'); ?>
 
-    </body>
+  </body>
 </html>

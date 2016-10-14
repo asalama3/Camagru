@@ -1,7 +1,7 @@
 <?php
 try
 {
-  $bdd = new PDO('mysql:localhost=8889;dbname=Camagru', 'root', 'root');
+  $bdd = new PDO('mysql:localhost=8889;dbname=Camagru', 'root', 'root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 }
 catch (Exception $e)
 {
@@ -45,13 +45,13 @@ if (isset($_GET['username']) && isset($_GET['key']) && !empty($_GET['username'])
     <title>Confirmation de compte</title>
   </head>
   <body>
-  <header>
-    <h1>CAMAGRU</h1>
-  </header>
-<div class="confirm">
- <p> <?php echo $message; ?> </p>
-  <a href="signin.php">Login</a>
-  </div>
-  <?php  include ('footer.php'); ?>
+    <header>
+      <h1>C A M A G R U</h1>
+    </header>
+    <div class="confirm">
+      <p> <?php echo $message; ?> </p>
+      <a href="signin.php">Login</a>
+    </div>
+      <?php  include ('footer.php'); ?>
   </body>
 </html>

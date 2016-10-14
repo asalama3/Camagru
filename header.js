@@ -6,6 +6,5 @@ function menu() {
     } else {
         x.className = "topnav";
         x.style.overflow="visible";
-
     }
 }

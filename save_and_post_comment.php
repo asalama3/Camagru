@@ -7,7 +7,6 @@ catch (Exception $e)
 {
     die('Erreur: ' . $e->getMessage());
 }
-// echo($_POST['id']);
 
 if (isset($_SESSION['id']) AND $_SESSION['id'] > 0 )
 {
@@ -15,6 +14,6 @@ if (isset($_SESSION['id']) AND $_SESSION['id'] > 0 )
   $add_comment->execute(array($_SESSION['id'], intval($_POST['id']), htmlspecialchars($_POST['comment']) ));
 }
 
-echo($_POST['comment']);
+echo(htmlspecialchars($_POST['comment']));
 
  ?>
