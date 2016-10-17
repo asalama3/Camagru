@@ -18,6 +18,10 @@ if (isset($_POST['formconnect'])) {
   $hash->execute(array($mailconnect));
   $test = $hash->fetch();
   $hsh = $test[0];
+  if (empty($mailconnect) || empty($mdpconnect))
+  {
+    $erreur = "Incomplete Fields";
+  }
   if (password_verify($mdpconnect, $hsh)) {
     if (!empty($mailconnect) AND !empty($mdpconnect)) {
       $requser = $bdd->prepare("SELECT * FROM users WHERE email = ?");
@@ -33,12 +37,12 @@ if (isset($_POST['formconnect'])) {
     }
       else
         {
-          $erreur = "Mauvais email ou mot de passe";
+          $erreur = "Incomplete Fields";
         }
     }
   else
   {
-    $erreur = "Tous les champs doivent etre completes !";
+    $erreur = "Invalid email or password";
   }
 }
 
@@ -56,10 +60,9 @@ if (isset($_POST['formconnect'])) {
           <li><a href="signup.php">Sign Up</a></li>
         </ul>
     </header>
-    <div id="picture">
-      <section id="formpage">
-        <img src="./images/polaroid_cam3.png"  />
+    <div id="container">
         <form method='POST' action="">
+          <img src="./images/polaroid_cam3.png"  />
           <table align="center">
             <tr>
               <td>
@@ -76,22 +79,23 @@ if (isset($_POST['formconnect'])) {
                 <a href="./forgotyourpasswd.php" id="pass">Forgot Password?</a>
               </td>
             </tr>
+
         </table>
+
         <input type="submit" name="formconnect" value="Sign in" id="button"  />
+
+        <?php
+
+        if (isset($erreur))
+        {
+          // echo '<font color="red">' .$erreur. "</font>";
+          echo "<p style='color:red;'>" .$erreur. "</p>";
+
+
+        }
+        ?>
       </form>
-      <?php
-      if (isset($erreur))
-      {
-        echo '<font color="red">' .$erreur. "</font>";
-      }
-      ?>
-<!--      <div class="forgotpasswd">-->
-<!--        <p>Forgot Password? <a href="./forgotyourpasswd.php">Click here to reset your password!</a></p>-->
-<!--      </div>-->
-<!--      <div class="member">-->
-<!--        <p> Not a member yet ? <a href="signup.php">Sign up !</a></p>-->
-<!--      </div>-->
-  </section>
+
   </div>
     <?php  include ('footer.php'); ?>
   </body>

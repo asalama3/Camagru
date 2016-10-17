@@ -37,7 +37,7 @@ ul.topnav li a:hover {background-color: #555;}
 
 ul.topnav li.icon {display: none;}
 
-@media screen and (max-width:680px) {
+@media screen and (max-width:730px) {
   ul.topnav li {display: none;}
   ul.topnav li.icon {
     float: right;
@@ -45,7 +45,7 @@ ul.topnav li.icon {display: none;}
   }
 }
 
-@media screen and (max-width:680px) {
+@media screen and (max-width:730px) {
   ul.topnav.responsive {
     position: relative;
     z-index: 999;

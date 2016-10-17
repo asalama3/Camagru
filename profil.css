@@ -15,7 +15,7 @@ body{
   background-size: cover;
   position: absolute;
   width: 100%;
-  height: auto;
+  min-height: 100%;
 }
 
 header{
@@ -58,7 +58,7 @@ ul.topnav li a:hover {background-color: #555;}
 
 ul.topnav li.icon {display: none;}
 
-@media screen and (max-width:780px) {
+@media screen and (max-width:860px) {
   ul.topnav li {display: none;}
   ul.topnav li.icon {
     float: right;
@@ -68,7 +68,7 @@ ul.topnav li.icon {display: none;}
   }
 }
 
-@media screen and (max-width:680px) {
+@media screen and (max-width:860px) {
   ul.topnav.responsive {
     position: relative;
     z-index: 999;
@@ -314,7 +314,7 @@ width: 50%;
 }
 
 .footer{
-    position: relative;
+    position: absolute;
     width: 100%;
     height: 20px;
     background-color: #333;

@@ -89,8 +89,9 @@ if(isset($_POST['inscription']))
   </header>
       <div id="register">
         <div id="formpage">
-      <h1>Sign Up !</h1>
+      <!-- <h1>Sign Up !</h1> -->
       <form method='POST' action="">
+        <img src="./images/sign_up.png"  />  
         <table align="center">
           <tr>
             <td>

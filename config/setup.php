@@ -88,7 +88,7 @@ try {
     $comments = "CREATE TABLE IF NOT EXISTS camagru.comments (
       user_id INT(11) NOT NULL,
       id_image INT(11) NOT NULL,
-      content MEDIUMTEXT NOT NULL,
+      content TEXT NOT NULL,
       id INT NOT NULL AUTO_INCREMENT,
       PRIMARY KEY (id))";
 

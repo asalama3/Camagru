@@ -78,9 +78,12 @@ while( $images = $allimages->fetch() )
       $nbr = intval($result['com']);
     }
 
+    echo "<div class=\"test\">" ;
     echo "<div class=\"imageposition\" id=\"" . $images['id_image'] . "\" >" ;
     echo "<img class=\"stylephoto\"  src=\"" . $images['name'] . "\" onload='likes_image(this, ". $ret .", ". $ct .", " . $images['id_image'] .", " . $nbr . ");' >" ;
     echo "</div>";
+    echo "</div>";
+
 }
 }
 ?>
@@ -101,4 +104,6 @@ while( $images = $allimages->fetch() )
     <?php  include ('footer.php'); ?>
 
   </body>
+  <script type="text/javascript" src="./style_like.js"></script>
+
 </html>

@@ -21,6 +21,10 @@ function XXX(element, id){
     del.id = id;
     del.onclick = delete_image;
 
+
+    // newdiv.style.width="30";
+
+
     newdiv.appendChild(del);
     newdiv.appendChild(element);
     var currentdiv = document.getElementById("stack");

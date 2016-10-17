@@ -61,7 +61,7 @@ var oldfilter = null;
 
       function takePhoto() {
           if (filter) {
-              canvasContext.drawImage(video, 0, 0, 400, 320);
+              canvasContext.drawImage(video, 0, 0, 380, 300);
               var element = document.createElement("img");
               var im = canvas.toDataURL('image/png');
               // var angle = getRandomNumberWithMax(30) - 15;

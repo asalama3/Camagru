@@ -19,7 +19,7 @@
         <li><a href="profil.php">My Profile</a></li>
         <li><a href="myalbum.php">My Album</a></li>
         <li class="icon">
-          <a href="javascript:void(0);" onclick="menu()">&#9776;</a>
+          <a href="javascript:void(0);" onclick="menu()" style="height: 20px;">&#9776;</a>
         </li>
     </ul>
 </header>

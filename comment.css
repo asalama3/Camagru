@@ -13,11 +13,12 @@ body{
 }
 
 .container{
-  width: 70%;
+  width: 100%;
   text-align: center;
   min-width: 500px;
   display: block;
   margin: 0 auto;
+  position: absolute;
 }
 
 .style{
@@ -36,10 +37,15 @@ body{
 }
 
 .comment_image{
-  width: 100%;
+  width: 50%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
   margin-top: 20px;
   color: #1E2D5B;
   font-size: 20px;
+  min-width: 500px;
+  text-align: center;
 }
 
 #comment{
@@ -60,7 +66,7 @@ body{
 }
 
 .footer{
-  position: relative;
+  position: absolute;
   right: 0;
   bottom: 0;
   left: 0;
@@ -70,6 +76,8 @@ body{
   color: white;
   text-align: center;
   bottom: 0;
+  display: block;
+  min-width: 500px;
 }
 
 /*HEADER RESPONSIVE*/

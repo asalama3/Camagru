@@ -20,5 +20,10 @@
 // Lorsque une image reçoit un nouveau commentaire, l’auteur de cette image doit
 //  en être informé par mail.
 // je ne rejette pas l'utulisateur je le redirige vers la page sign in...
-// delete image: error post //
+// delete image: error post // message d'erreur pop up peur importe pb dans la delete
+// enlever your album is empty if not empty
+// change max width dans header dans chaque file
+// footer ac un body en min height: 100%
+// dans signin : ex de display center
+
 ?>

@@ -38,12 +38,6 @@ function comment_img(comment, id_image){
   window.location.assign("comment.php?id_image=" + id_image);
 }
 
-function add_design(but, id_image){
-  // console.log(id_image);
-  but.id = "test_" + id_image;
-  document.getElementById(but.id).classList.add("mystyle");
-}
-
 // function get_image_id_for2(element) {
 //   while(element.class !== 'imageposition') {
 //     element = element.parent;
@@ -100,7 +94,7 @@ function likes_image(img, liked, nbr_likes, id, nbr_comments){
     but.onmouseover = over_like;
     but.onmouseout = out_like;
 
-    document.addEventListener("DOMContentLoaded", function() {
+    window.addEventListener("DOMContentLoaded", function() {
       add_design(but, get_image_id_for(but));
     });
 
@@ -128,10 +122,10 @@ function likes_image(img, liked, nbr_likes, id, nbr_comments){
     });
 
 
-    img.parentElement.insertBefore(img_like, img);
-    img.parentElement.insertBefore(but, img);
-    img.parentElement.insertBefore(count, img);
-    img.parentElement.insertBefore(img_comment, img);
-    img.parentElement.insertBefore(comment, img);
-    img.parentElement.insertBefore(nbr_com, img);
+    img.parentElement.appendChild(img_like, img);
+    img.parentElement.appendChild(but, img);
+    img.parentElement.appendChild(count, img);
+    img.parentElement.appendChild(img_comment, img);
+    img.parentElement.appendChild(comment, img);
+    img.parentElement.appendChild(nbr_com, img);
 }
