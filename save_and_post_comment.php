@@ -16,4 +16,5 @@ if (isset($_SESSION['id']) AND $_SESSION['id'] > 0 )
 
 echo(htmlspecialchars($_POST['comment']));
 
+
  ?>

@@ -22,7 +22,7 @@ function XXX(element, id){
     del.onclick = delete_image;
 
 
-    newdiv.style.width="30%";
+    newdiv.style.width="20%";
     // newdiv.style.backgroundColor="red";
     newdiv.style.display="inline-block";
     newdiv.style.margin="1%";

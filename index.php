@@ -88,7 +88,6 @@ while( $images = $allimages->fetch() )
     echo "<img class=\"stylephoto\"  src=\"" . $images['name'] . "\" onload='likes_image(this, ". $ret .", ". $ct .", " . $images['id_image'] .", " . $nbr . ");' >" ;
     echo "</div>";
     echo "</div>";
-
 }
 }
 ?>

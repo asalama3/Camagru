@@ -41,7 +41,7 @@ if (isset($_SESSION['id']) AND $_SESSION['id'] > 0)
           <li><a href="delete_account.php">Delete Account</a></li>
           <li><a href="signout.php">Sign Out</a></li>
           <li><a href="index.php">Gallery</a></li>
-          <li><a href="myalbum.php">My Album</a></li>
+          <!-- <li><a href="myalbum.php">My Album</a></li> -->
           <li class="icon">
             <a href="javascript:void(0);" onclick="menu()" style="height: 20px;">&#9776;</a>
           </li>
@@ -76,11 +76,13 @@ if (isset($_SESSION['id']) AND $_SESSION['id'] > 0)
             </ul>
         </div>
       </div>
+      <div id="color_filter">
           <div id="filterButtons">
             <span id="text">
               Wish to add a special effect?</span>
           </div>
-        <h2><p>Snaps...</p></h2>
+        </div>
+        <h2><p>S N A P S...</p></h2>
           <div id="stack" class="playground">
             <?php
             $allimages = $bdd->prepare("SELECT * FROM images WHERE user_id= ?");

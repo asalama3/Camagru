@@ -38,7 +38,7 @@ if (!isset($_SESSION['id']))
           <li><a href="" style="padding-top: 36px; pointer-events: none;
          cursor: default; "></a></li>
           <li><a href="signout.php" class="menu">Sign Out</a></li>
-          <li><a href="profil.php" class="menu">My Profile</a></li>
+          <li><a href="profil.php" class="menu">Shooting</a></li>
           <li><a href="index.php" class="menu">Gallery</a></li>
           <li class="icon">
               <a href="javascript:void(0);" onclick="menu()">&#9776;</a>
@@ -72,10 +72,10 @@ if (isset($_SESSION['id']))
   }
 }
 ?>
-      <input type="text" placeholder="Write a comment..." id="comment" name="comment" />
-      <input type="submit" name="submit" value="Submit" id="submit_comment"/>
-    </div>
+    <input type="text" placeholder="Write a comment..." id="comment" name="comment" />
+    <input type="submit" name="submit" value="Submit" id="submit_comment"/>
   </div>
+</div>
     <?php  include ('footer.php'); ?>
   </body>
     <script type="text/javascript" src="./comments.js"></script>

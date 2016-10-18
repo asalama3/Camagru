@@ -61,7 +61,7 @@ var oldfilter = null;
 
       function takePhoto() {
           if (filter) {
-              canvasContext.drawImage(video, 0, 0, 380, 300);
+              canvasContext.drawImage(video, 0, 0, 400, 320);
               var element = document.createElement("img");
               var im = canvas.toDataURL('image/png');
               // var angle = getRandomNumberWithMax(30) - 15;
@@ -69,6 +69,9 @@ var oldfilter = null;
               // element.style.top = getRandomNumberWithMax(50) + "px";
               // element.style.left = getRandomNumberWithMax(50) + "px";
               // element.style.zIndex = z;
+              element.style.boxshadow = "2px 2px 2px #888888";
+              element.style.padding = "10px";
+              element.style.backgroundColor = "white";
               element.style.filter = video.style.filter;
               element.style.webkitFilter = video.style.webkitFilter;
               // element.className = "photo";

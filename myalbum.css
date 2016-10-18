@@ -1,8 +1,11 @@
 html, body{
     margin: 0;
     padding: 0;
-    width: 100%;
-    height: auto;
+}
+
+body{
+  width: 100%;
+  min-height: 100%;
 }
 
 a a:visited a:hover a:active{
@@ -28,11 +31,12 @@ ul.topnav {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    /*overflow: hidden;*/
     background-color: #333;
 }
 
-ul.topnav li {float: right;}
+ul.topnav li {
+  float: right;
+}
 
 ul.topnav li a {
     display: inline-block;

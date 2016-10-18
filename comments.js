@@ -24,6 +24,7 @@ function LeaveComment( id_image ){
       document.getElementById("comment").value = "";
       comment.innerHTML = this.responseText;
       console.log(comment);
+
       // add user name with session id and ":"//
       test.parentElement.insertBefore(comment, test);
     }

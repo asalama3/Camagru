@@ -22,6 +22,7 @@ header{
     color: white;
     background-color: #333;
     height: 52px;
+    position: relative;
 }
 
 h1{
@@ -32,6 +33,12 @@ h1{
   font-weight: normal;
 }
 
+
+h2{
+  text-align: center;
+  font-style: italic;
+
+}
 ul.topnav {
     list-style-type: none;
     margin: 0;
@@ -86,10 +93,9 @@ ul.topnav li.icon {display: none;}
   }
 }
 
-
-
 #all{
   min-height: 100%;
+  margin: 5px;
 }
 
 .camera{
@@ -102,7 +108,7 @@ ul.topnav li.icon {display: none;}
 #video-box{
   overflow: hidden;
   position: relative;
-  width: 50%;
+  width: 30%;
   height: 100%;
   margin: 0 auto;
 }
@@ -142,7 +148,7 @@ button.active {
 }
 
 #select:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 #choose{
@@ -172,7 +178,7 @@ button.active {
 
 .filters{
 
-  width: 50%;
+  width: 30%;
   display: inline-block;
   overflow-x: auto;
   margin: 5px;
@@ -236,6 +242,8 @@ button{
 .playground{
   width: 100%;
   position: relative;
+  text-align: center;
+
 }
 
 .test{
@@ -270,6 +278,13 @@ background-color: white;
     overflow: hidden;
 }
 
+#color_filter{
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
 @media (max-width: 500px){
   .footer{
     font-size: 10px;
@@ -277,4 +292,16 @@ background-color: white;
   header h1{
     font-size: 20px;
   }
+}
+
+@media (max-width: 630px){
+  /*#video{
+    min-width: 315px;
+        min-height: 236px;
+}*/
+#filterButtons {
+  width: 250px;
+  text-align: center;
+  margin: auto;
+
 }

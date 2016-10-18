@@ -16,8 +16,8 @@
         <li><a href="signout.php">Sign Out</a></li>
         <li><a href="signup.php">Sign Up</a></li>
         <li><a href="signin.php">Sign in</a></li>
-        <li><a href="profil.php">My Profile</a></li>
-        <li><a href="myalbum.php">My Album</a></li>
+        <li><a href="profil.php">Shooting</a></li>
+        <!-- <li><a href="myalbum.php">My Album</a></li> -->
         <li class="icon">
           <a href="javascript:void(0);" onclick="menu()" style="height: 20px;">&#9776;</a>
         </li>
