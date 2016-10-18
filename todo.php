@@ -9,11 +9,6 @@
 
 
 
-// TO DO
-// compte admin
-// auto log in : compte admin pour se connecter sur le compte d'un user sans le password;
-
-
 //TO FINISH//
 // Un fichier config/setup.php, capable de créer ou recréer le schéma de la base de
 //  données, en utilisant les infos contenues dans le fichier config/database.php.

@@ -50,29 +50,25 @@ if (isset($_SESSION['id']) AND $_SESSION['id'] > 0)
     <div class="clear" style="clear: both;"></div>
 
     <div id="all">
-    <div class="left-col">
+    <!-- <div class="left-col"> -->
         <div class="camera">
-            <div id="video-box" style="overflow: hidden; position: relative;">
+            <div id="video-box">
                 <video id="video" style="width: 100%"></video>
             </div>
             <canvas id="canvas" width="400" height="320" style="display: none;"></canvas>
         </div>
-        <div class="up">
+        <div class="photo_buttons">
             <div id="loading">
-              <form id="r" method="POST" action="sendpic.php" name="upload" enctype="multipart/form-data" onchange="display_name(this)" onsubmit="return submitForm(this);">
+              <form id="display_name" method="POST" action="sendpic.php" name="upload" enctype="multipart/form-data" onchange="display_name(this)" onsubmit="return submitForm(this);">
                 <input type="file" name="file_upload" id="file" class="inputfile"/>
                 <label for="file" id="select">Choose file</label>
                 <input type="submit" name="submit" value="Upload" id="choose"/>
               </form>
             </div>
-            <div id="phot">
-            <button id="photoButton" name="submit">Take photo</button></div>
+            <button id="photoButton" name="submit">Take photo</button>
+            <div id="message" ></div>
         </div>
-        <div id="message" ></div>
-<!--        <div class="button_cam">-->
-<!--            <button id="photoButton" name="submit">Take photo</button>-->
-<!--        </div>-->
-
+        <div id="centered">
         <div class="filters">
             <ul>
                 <?php $filters = array('dog', 'heart', 'Banana', 'yoshi', 'panda', 'masksmall', 'ironman', 'apple', 'Donkey_Kong' );?>
@@ -84,12 +80,13 @@ if (isset($_SESSION['id']) AND $_SESSION['id'] > 0)
                 <?php endforeach; ?>
             </ul>
         </div>
+      </div>
           <div id="filterButtons">
             <span id="text">
               Wish to add a special effect?</span>
           </div>
-      </div>
-      <div class="right-col">
+      <!-- </div> -->
+      <!-- <div class="right-col"> -->
         <h2><p>Album...</p></h2>
           <div id="stack" class="playground">
             <?php
@@ -102,7 +99,7 @@ if (isset($_SESSION['id']) AND $_SESSION['id'] > 0)
             }
             ?>
         </div>
-    </div>
+    <!-- </div> -->
     <div class="clear" style="clear: both;"></div>
   </div>
     <?php  include ('footer.php'); ?>

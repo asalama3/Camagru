@@ -90,10 +90,115 @@ ul.topnav li.icon {display: none;}
 }
 
 #all{
-  position: relative;
-  /*bottom : 50px;*/
   min-height: 100%;
 }
+
+.camera{
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+#video-box{
+  overflow: hidden;
+  position: relative;
+  width: 50%;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.photo_buttons{
+  text-align: center;
+  margin: 5 auto;
+  display: block;
+}
+
+#loading{
+  display:inline-block;
+}
+
+#photoButton{
+  display:inline-block;
+  font-size: 15px;
+  margin: 5px;
+  color: white;
+  border: none;
+  background-color: rgb(30, 45, 91);
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+button:active,
+button.active {
+  background-color: #417cb8;
+  transform: translateY(2px) translateX(1px);
+}
+
+#select {
+  font-family: 'Montserrat', sans-serif;
+  display: inline-block;
+  cursor: pointer;
+  color: rgb(30, 45, 91);
+}
+
+#select:hover {
+    text-decoration: underline;
+}
+
+#choose{
+  font-size: 15px;
+  border-radius: 3px;
+  box-sizing: content-box;
+  background-color: rgb(30, 45, 91);
+  color: white;
+  border: none;
+}
+
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+#centered{
+text-align: center;
+margin: 0 auto;
+/*width: 100%;*/
+/*top: 0;*/
+/*bottom: 0;*/
+}
+
+.filters{
+  /*height: 150px;*/
+  display: inline-block;
+  overflow-x: auto;
+}
+
+.filters ul {
+  width: 1000px;
+}
+
+.filters ul li {
+  list-style: none;
+  float: left;
+}
+
+.filters img {
+  width: 100px;
+  height: auto;
+}
+
+/*.filt{
+  display: block;
+  width: 100px;
+  height: 100px;
+  margin-left: 100px;
+}*/
+
 
 #filterButtons {
   width: 100%;
@@ -108,89 +213,17 @@ ul.topnav li.icon {display: none;}
   font-weight: bold;
 }
 
-.up{
-width: 100%;
-}
 
-button {
-  font-size: 12px;
-  margin: 5px;
-  display: inline-block;
-  color: white;
-  border: none;
-  background-color: rgb(30, 45, 91);
-  cursor: pointer;
-  border-radius: 3px;
-}
 
-button:active,
-button.active {
-  background-color: #417cb8;
-  transform: translateY(2px) translateX(1px);
-}
-
-#reset{
-  color: black;
-  background: white;
-}
-
-.inputfile {
-	width: 0.1px;
-	height: 0.1px;
-	opacity: 0;
-	overflow: hidden;
-	position: absolute;
-	z-index: -1;
-}
-
-#select {
-  font-family: 'Montserrat', sans-serif;
-  display: inline-block;
-  margin-left: 10px;
-  margin-top: 50px;
-  cursor: pointer;
-}
-
-#select:hover {
-    background-color: darkgray;
-}
-
-#choose{
-  font-size: 15px;
-  margin: 5px;
-  border: 1px solid;
-  border-radius: 2px;
-  box-sizing: content-box;
-}
-
-.filt{
-  display: block;
-  width: 100px;
-  height: 100px;
-  margin-left: 100px;
-}
-
-#r{
-  height: auto;
-  width: auto;
-  margin-bottom: 0;
-}
-
-#effect{
-  color: white;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 20px;
-  padding-left: 20px;
-  margin-top: 20px;
-}
-
-#file_photo {
-	width: 0.1px;
-	height: 0.1px;
-	opacity: 0;
-	overflow: hidden;
-	position: absolute;
-	z-index: -1;
+.footer{
+    position: absolute;
+    width: 100%;
+    height: 20px;
+    background-color: #333;
+    color: white;
+    text-align: center;
+    bottom: 0;
+    overflow: hidden;
 }
 
 /*#video{
@@ -200,17 +233,17 @@ button.active {
   z-index:10;
 }*/
 
-
+/*
 .left-col {
   float: left;
   width: 27%;
   margin-top: 90px;
-  /*background: red;*/
+  background: red;
 }
 
 .left-col .camera {
   width: 100%;
-  /*background: blue;*/
+  background: blue;
   text-align: center;
   margin-left: 5px;
 
@@ -219,7 +252,7 @@ button.active {
 .left-col .filters {
   width: 100%;
   height: 150px;
-  /*background: green;*/
+  background: green;
   display: inline-block;
   overflow-x: auto;
   margin-left: 5px;
@@ -259,30 +292,20 @@ width: 50%;
   float: left;
   width: 73%;
   height: auto;
-  /*background: green;*/
+  background: green;
 }
 
 .right-col > h2{
   margin: 0 auto;
   width: 98%;
-  /*color: #000;*/
+  color: #000;
   text-align: center;
   color: rgb(30, 45, 91);
-  /*background-color: darkgray;*/
-  /*margin-left: 500px;*/
-  /*margin-right: 20px;*/
-  /*border: 2px solid black;*/
 }
 
 .right-col .playground {
   width: 100%;
   text-align: center;
-  /*position: absolute;*/
-  /*left: 500px;*/
-  /*top: 150px;*/
-  /*right: 20px;*/
-  /*border: 2px solid black;*/
-  /*padding-left: 20px;*/
 }
 
 .right-col .playground img {
@@ -290,13 +313,11 @@ width: 50%;
   width: 32%;
   padding: 12px;
   background-color: white;
-  /*margin-bottom: 10px;*/
 }
 
 
 
 .left-col .up{
-  /*display: inline-block;*/
   width: 100%;
 }
 
@@ -311,15 +332,4 @@ width: 50%;
   width: 70%;
   display: inline;
 
-}
-
-.footer{
-    position: absolute;
-    width: 100%;
-    height: 20px;
-    background-color: #333;
-    color: white;
-    text-align: center;
-    bottom: 0;
-    overflow: hidden;
-}
+}*/

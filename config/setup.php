@@ -1,5 +1,5 @@
 <?php
-
+// variable de database dans pdo //
 try
 {
     $bdd = new PDO('mysql:localhost=8889', 'root', 'root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));

@@ -13,6 +13,11 @@ catch (Exception $e)
 // set_error_handler("var_dump");
 
 
+if (!isset($_SESSION['id']))
+{
+  header('Location: signin.php');
+}
+
 include ('header.php');
 
 $imgperpage = 10;
