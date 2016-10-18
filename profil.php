@@ -43,7 +43,7 @@ if (isset($_SESSION['id']) AND $_SESSION['id'] > 0)
           <li><a href="index.php">Gallery</a></li>
           <li><a href="myalbum.php">My Album</a></li>
           <li class="icon">
-            <a href="javascript:void(0);" onclick="menu()">&#9776;</a>
+            <a href="javascript:void(0);" onclick="menu()" style="height: 20px;">&#9776;</a>
           </li>
         </ul>
     </header>
@@ -70,14 +70,9 @@ if (isset($_SESSION['id']) AND $_SESSION['id'] > 0)
         </div>
         <div id="centered">
         <div class="filters">
-            <ul>
-                <?php $filters = array('dog', 'heart', 'Banana', 'yoshi', 'panda', 'masksmall', 'ironman', 'apple', 'Donkey_Kong' );?>
-                <?php foreach ($filters as $filter) :?>
-                    <li>
+            <ul><?php $filters = array('dog', 'heart', 'Banana', 'yoshi', 'panda', 'masksmall', 'ironman', 'apple', 'Donkey_Kong' );?><?php foreach ($filters as $filter) :?><li>
                         <label  for="./images/<?=$filter?>.png" ><img src="./images/<?=$filter?>.png" id="./images/<?=$filter?>.png" ></label>
-                        <!--                    <input class="radio" type="radio" name="dog" id="./images/--><?//=$filter?><!--.png"  />-->
-                    </li>
-                <?php endforeach; ?>
+                    </li><?php endforeach; ?>
             </ul>
         </div>
       </div>
@@ -85,9 +80,7 @@ if (isset($_SESSION['id']) AND $_SESSION['id'] > 0)
             <span id="text">
               Wish to add a special effect?</span>
           </div>
-      <!-- </div> -->
-      <!-- <div class="right-col"> -->
-        <h2><p>Album...</p></h2>
+        <h2><p>Snaps...</p></h2>
           <div id="stack" class="playground">
             <?php
             $allimages = $bdd->prepare("SELECT * FROM images WHERE user_id= ?");
@@ -95,11 +88,13 @@ if (isset($_SESSION['id']) AND $_SESSION['id'] > 0)
             $user_image = $allimages->fetch();
             while($user_image = $allimages->fetch())
             {
-                echo "<img src=\"" . $user_image['name'] . "\" onload='XXX(this, " . $user_image['id_image'] . ");' />";
+              echo "<div class=\"test\">" ;
+              echo "<img class=\"photo_style\" src=\"" . $user_image['name'] . "\" onload='XXX(this, " . $user_image['id_image'] . ");' />";
+              echo "</div>";
+
             }
             ?>
         </div>
-    <!-- </div> -->
     <div class="clear" style="clear: both;"></div>
   </div>
     <?php  include ('footer.php'); ?>

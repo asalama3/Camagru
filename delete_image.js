@@ -22,11 +22,17 @@ function XXX(element, id){
     del.onclick = delete_image;
 
 
-    // newdiv.style.width="30";
+    newdiv.style.width="30%";
+    // newdiv.style.backgroundColor="red";
+    newdiv.style.display="inline-block";
+    newdiv.style.margin="1%";
+    newdiv.style.minWidth="400px";
+    newdiv.style.textAlign="center";
 
 
-    newdiv.appendChild(del);
+
     newdiv.appendChild(element);
+    newdiv.appendChild(del);
     var currentdiv = document.getElementById("stack");
     currentdiv.insertBefore(newdiv, currentdiv.childNodes[0]);
 }
