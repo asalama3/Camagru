@@ -64,6 +64,10 @@ body{
   border-radius: 3px;
 }
 
+.end_of_file{
+
+}
+
 .footer{
   position: absolute;
   bottom: 0;
@@ -84,12 +88,17 @@ header{
     /*position: relative;*/
 }
 
-h1{
+h1 {
   float: left;
   font-size: 30px;
   margin: 10px;
   font-style: italic;
   font-weight: normal;
+}
+
+header a{
+  text-decoration: none;
+  color: white;
 }
 
 ul.topnav {
@@ -143,5 +152,11 @@ ul.topnav li.icon {display: none;}
     text-align: left;
     padding: 14px 16px;
 
+  }
+}
+
+@media (max-width: 500px){
+  .footer{
+    font-size: 10px;
   }
 }

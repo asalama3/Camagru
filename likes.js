@@ -1,23 +1,26 @@
 function like(count, but, id_image) {
     var xhr = new XMLHttpRequest();
 
-    // var test = document.getElementById(id_image).children;
 
-    if (but.style.color == ''){
-        but.style.color = 'rgb(119, 139, 166)';
-    }
-    else{
-        but.style.color = '';
-      //  console.log(but.id);
-        // document.getElementById(this.id).disabled = '';
-    }
     xhr.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
         console.log(this.responseText);
         // check if count is a number
         //     console.dir(but.firstElementChild);
-            count.innerHTML = this.responseText;
-
+        if (this.responseText === "please sign in")
+        {
+          alert(this.responseText);
+        }
+        else{
+          count.innerHTML = this.responseText;
+          if (but.style.color == ''){
+              but.style.color = 'rgb(119, 139, 166)';
+          }
+          else{
+              but.style.color = '';
+            //  console.log(but.id);
+          }
+          }
         }
     };
     xhr.open("POST", "likes.php", true);
@@ -98,9 +101,10 @@ function likes_image(img, liked, nbr_likes, id, nbr_comments){
       add_design(but, get_image_id_for(but));
     });
 
-    but.addEventListener('click', function(){
+
+      but.addEventListener('click', function(){
         like(count, but, get_image_id_for(but));
-    });
+      });
 
     count.style.margin = 3;
 
@@ -122,10 +126,19 @@ function likes_image(img, liked, nbr_likes, id, nbr_comments){
     });
 
 
+    img.style.cursor="pointer";
+    img.addEventListener("click", function(){
+      comment_img(comment, get_image_id_for( comment ));
+    });
+
     img.parentElement.appendChild(img_like, img);
     img.parentElement.appendChild(but, img);
     img.parentElement.appendChild(count, img);
     img.parentElement.appendChild(img_comment, img);
     img.parentElement.appendChild(comment, img);
     img.parentElement.appendChild(nbr_com, img);
+}
+
+if (logged_in == true) {
+  alert("hello");
 }

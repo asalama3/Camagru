@@ -42,7 +42,19 @@ body{
     width: 100%;
     height: auto;
     position: relative;
-    margin-bottom: 20px;
+    /*margin-bottom: 20px;*/
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+}
+
+.pages{
+  color: rgb(30, 45, 91);
+  text-decoration: none;
+}
+
+a a:visited a:hover a:active{
+  color : none;
 }
 
 .mystyle{

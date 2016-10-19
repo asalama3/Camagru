@@ -10,7 +10,7 @@ body{
   position: absolute;
   background-size: cover;
   width: 100%;
-  height: auto;
+  min-height: 100%;
 }
 
 header{
@@ -79,6 +79,14 @@ h4{
   color: white;
   position: absolute;
   text-align: center;
-  padding: 15px;
   bottom: 0;
+}
+
+
+@media (max-width:500px)
+{
+  .footer{
+    font-size: 10px;
+  }
+
 }

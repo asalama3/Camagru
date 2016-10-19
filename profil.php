@@ -90,7 +90,7 @@ if (isset($_SESSION['id']) AND $_SESSION['id'] > 0)
             $user_image = $allimages->fetch();
             while($user_image = $allimages->fetch())
             {
-              echo "<div class=\"test\">" ;
+              echo "<div class=\"mini\">" ;
               echo "<img class=\"photo_style\" src=\"" . $user_image['name'] . "\" onload='XXX(this, " . $user_image['id_image'] . ");' />";
               echo "</div>";
 

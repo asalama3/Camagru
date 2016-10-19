@@ -55,7 +55,7 @@ if(isset($_POST['inscription']))
          mail($mail, $subject, $message, $header);
 
           $erreur = "Your account is now created! </br>
-          Please confirm your account by clicking on the link sent to your email: .$mail.";
+          Please confirm your account by clicking on the link sent to your email: $mail.";
         }
         else
         {
@@ -91,7 +91,7 @@ if(isset($_POST['inscription']))
         <div id="formpage">
       <!-- <h1>Sign Up !</h1> -->
       <form method='POST' action="">
-        <img src="./images/sign_up.png"  />  
+        <img src="./images/sign_up.png"  />
         <table align="center">
           <tr>
             <td>

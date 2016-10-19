@@ -1,5 +1,7 @@
 <?php
 session_start();
+// print_r($_SESSION);
+
 try
 {
     $bdd = new PDO('mysql:localhost=8889;dbname=camagru', 'root', 'root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
@@ -32,8 +34,7 @@ if (!isset($_SESSION['id']))
   </head>
   <body>
     <header>
-      <h1>C A M A G R U</h1>
-      <!-- <h1><a href="index.php">C A M A G R U</a></h1> -->
+      <h1><a href="index.php">C A M A G R U</a></h1>
         <ul class="topnav" id="myTopnav">
           <li><a href="" style="padding-top: 36px; pointer-events: none;
          cursor: default; "></a></li>
@@ -41,7 +42,7 @@ if (!isset($_SESSION['id']))
           <li><a href="profil.php" class="menu">Shooting</a></li>
           <li><a href="index.php" class="menu">Gallery</a></li>
           <li class="icon">
-              <a href="javascript:void(0);" onclick="menu()">&#9776;</a>
+              <a href="javascript:void(0);" onclick="menu()" style="height: 20px;">&#9776;</a>
           </li>
         </ul>
     </header>
@@ -72,9 +73,11 @@ if (isset($_SESSION['id']))
   }
 }
 ?>
+<div class="end_of_file">
     <input type="text" placeholder="Write a comment..." id="comment" name="comment" />
     <input type="submit" name="submit" value="Submit" id="submit_comment"/>
   </div>
+</div>
 </div>
     <?php  include ('footer.php'); ?>
   </body>

@@ -1,8 +1,10 @@
 <?php
 // variable de database dans pdo //
+include ('database.php');
+
 try
 {
-    $bdd = new PDO('mysql:localhost=8889', 'root', 'root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+    $bdd = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 }
 catch (Exception $e)
 {

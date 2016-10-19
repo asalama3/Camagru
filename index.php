@@ -12,15 +12,15 @@ catch (Exception $e)
 // ini_set('display_errors', 'On');
 // set_error_handler("var_dump");
 
-
-if (!isset($_SESSION['id']))
-{
-  header('Location: signin.php');
-}
+//
+// if (!isset($_SESSION['id']))
+// {
+//   header('Location: signin.php');
+// }
 
 include ('header.php');
 
-$imgperpage = 10;
+$imgperpage = 7;
 $imgtotal = $bdd->prepare('SELECT * from images');
 $imgtotal->execute(array());
 $imgtotal = $imgtotal->rowCount();
@@ -51,8 +51,8 @@ $start = ($currentpage-1)*$imgperpage;
 //echo "<pre>";
 //print_r($_SERVER);
 
-if (isset($_SESSION['id']))
-{
+// if (isset($_SESSION['id']))
+// {
 $allimages = $bdd->prepare('SELECT * FROM images ORDER BY id_image DESC LIMIT '.$start.','.$imgperpage);
 $allimages->execute(array($_SESSION['id']));
 $images = $allimages->fetch();
@@ -88,8 +88,8 @@ while( $images = $allimages->fetch() )
     echo "<img class=\"stylephoto\"  src=\"" . $images['name'] . "\" onload='likes_image(this, ". $ret .", ". $ct .", " . $images['id_image'] .", " . $nbr . ");' >" ;
     echo "</div>";
     echo "</div>";
-}
-}
+  }
+// }
 ?>
     <div class="clear" style="clear: both;"></div>
     <div class="pagination">
@@ -98,7 +98,7 @@ while( $images = $allimages->fetch() )
             if ($i == $currentpage) {
                 echo $i . ' ';
             } else {
-                echo '<a href="index.php?page=' . $i . '">' . $i . '</a> ';
+                echo '<a class="pages" href="index.php?page=' . $i . '">' . $i . ' </a> ';
             }
         }
         ?>
@@ -109,5 +109,4 @@ while( $images = $allimages->fetch() )
 
   </body>
   <script type="text/javascript" src="./style_like.js"></script>
-
 </html>

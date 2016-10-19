@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 try
 {
   $bdd = new PDO('mysql:localhost=8889;dbname=camagru', 'root', 'root');
@@ -69,13 +70,14 @@ if (isset($_POST['recup_submit'], $_POST['recup_mail']))
               <div align=\"center\">
                 Bonjour $pseudo,
                 Voici votre code de récupération: <b>$recup_code</b><br />
-                Cliquez <a href=\"".$_SERVER['REQUEST_SCHEME']."://".$_SERVER['HTTP_HOST']."/Camagru/forgotyourpasswd.php?section=code\" >ici</a> pour réinitialiser votre mot de passe.
+
+                Cliquez ici <a href=\"".$_SERVER['HTTP_HOST']."/Camagru/forgotyourpasswd.php?section=code\"></a> pour réinitialiser votre mot de passe.
             </div>
           </body>
         </html>
         ";
         mail($recup_mail, $subject, $message, $header);
-        header("Location:".$_SERVER['REQUEST_SCHEME']."://".$_SERVER['HTTP_HOST']."/Camagru/forgotyourpasswd.php?section=code");
+        // header("Location:".$_SERVER['REQUEST_SCHEME']."://".$_SERVER['HTTP_HOST']."/Camagru/forgotyourpasswd.php?section=code");
       }
       else
       {
@@ -104,7 +106,7 @@ if (isset($_POST['check_submit'], $_POST['check_code']))
     if ($check_req == 1){
       $up_req = $bdd->prepare('UPDATE forgotpasswd SET confirm = 1 WHERE email = ?');
       $up_req->execute(array($_SESSION['recup_mail']));
-      header("Location: ".$_SERVER['REQUEST_SCHEME']."://".$_SERVER['HTTP_HOST']."/Camagru/forgotyourpasswd.php?section=changepasswd");
+      header("Location: ".$_SERVER['HTTP_HOST']."/Camagru/forgotyourpasswd.php?section=changepasswd");
     }
     else {
       $erreur = "Invalid code";
