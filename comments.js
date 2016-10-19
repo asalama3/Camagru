@@ -1,6 +1,7 @@
 function get_image_id( element ) {
-  if (element.className == "comment_image")
+  if (element.className == "tryout")
   {
+    console.log(element.id);
     return element.id;
   }
   else
@@ -21,11 +22,18 @@ function LeaveComment( id_image ){
   xhr.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
       console.log(this.responseText);
-      document.getElementById("comment").value = "";
-      comment.innerHTML = this.responseText;
-      console.log(comment);
-
-      // add user name with session id and ":"//
+      // document.getElementById("comment").value = "";
+      // comment.innerHTML = this.responseText;
+      // console.log(comment);
+	
+  
+      data = JSON.parse(xhr.responseText);
+      console.log("comment : " + data['comment']);
+      console.log("user : " + data['username']);
+      console.log("nbr_com : " + data['nbr_comments']);
+      
+      comment.innerHTML = "<a style='font-weight: bold; font-size: 20px; margin-top: 10px; display: inline-block;'>" + data['username'] + "</a>" + ":" + data['comment'];
+      // get count from function like in add likes and comments.js
       test.parentElement.insertBefore(comment, test);
     }
   }

@@ -6,7 +6,7 @@ function delete_image() {
             todel.parentNode.removeChild(todel);
         }
         else{
-            // error
+            alert("Could not delete picture");
         }
     };
     xhr.open("POST", "delete_image.php", true);

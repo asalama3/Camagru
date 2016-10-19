@@ -13,7 +13,7 @@ catch (Exception $e)
 
 
 try {
-    $database = 'camagru';
+    // $database = 'camagru';
     $req = "CREATE DATABASE IF NOT EXISTS $database DEFAULT CHARACTER SET utf8";
     $bdd->exec($req);
     }
@@ -21,6 +21,9 @@ catch (PDOException $e)
 {
     die('Erreur: ' . $e->getMessage());
 }
+$_DBNAME = 'dbname=' . $database;
+
+
 try {
     $user = "CREATE TABLE IF NOT EXISTS camagru.users (
                       user_id INT NOT NULL AUTO_INCREMENT,
@@ -29,7 +32,7 @@ try {
                       password VARCHAR(255) NULL,
                       confirmkey VARCHAR(255) NULL,
                       confirm INT (1) NULL,
-                      PRIMARY KEY (id),
+                      PRIMARY KEY (user_id),
                       UNIQUE INDEX username_UNIQUE (username ASC),
                       UNIQUE INDEX email_UNIQUE (email ASC))";
 

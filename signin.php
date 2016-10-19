@@ -32,7 +32,7 @@ if (isset($_POST['formconnect'])) {
         $_SESSION['id'] = $userinfo['user_id'];
         $_SESSION['username'] = $userinfo['username'];
         $_SESSION['email'] = $userinfo['email'];
-        header("Location: ./profil.php?id=" . $_SESSION['id']);
+        header("Location: ./profil.php?user_id=" . $_SESSION['id']);
       }
     }
       else

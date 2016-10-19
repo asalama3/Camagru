@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 try
 {
   $bdd = new PDO('mysql:localhost=8889;dbname=camagru', 'root', 'root');
@@ -27,7 +26,7 @@ if (isset($_POST['recup_submit'], $_POST['recup_mail']))
     $recup_mail = htmlspecialchars($_POST['recup_mail']);
     if (filter_var($recup_mail, FILTER_VALIDATE_EMAIL))
     {
-      $mailexists = $bdd->prepare('SELECT id, username FROM users WHERE email = ?');
+      $mailexists = $bdd->prepare('SELECT user_id, username FROM users WHERE email = ?');
       $mailexists->execute(array($recup_mail));
       $mailexists_count = $mailexists->rowCount();
       if ($mailexists_count == 1)
@@ -53,8 +52,12 @@ if (isset($_POST['recup_submit'], $_POST['recup_mail']))
         {
           $recup_insert = $bdd->prepare('INSERT INTO forgotpasswd(email, code) VALUES (?,?)');
           $recup_insert->execute(array($recup_mail, $recup_code));
+          // $ret = $recup_insert->fetch();
+          
         }
 
+        $server = $_SERVER['SERVER_NAME'];
+        $port = $_SERVER['SERVER_PORT'];
         $subject = 'Récupération de Mot de Passe';
         $header= 'MIME-Version: 1.0' . "\r\n";
         $header.='From:"andreasalama2@gmail.com"<andreasalama2@gmail.com>'. "\r\n";
@@ -70,43 +73,42 @@ if (isset($_POST['recup_submit'], $_POST['recup_mail']))
               <div align=\"center\">
                 Bonjour $pseudo,
                 Voici votre code de récupération: <b>$recup_code</b><br />
-
-                Cliquez ici <a href=\"".$_SERVER['HTTP_HOST']."/Camagru/forgotyourpasswd.php?section=code\"></a> pour réinitialiser votre mot de passe.
+                Cliquez <a href='http://$server:$port/Camagru/forgotyourpasswd.php?section=code'>ici </a> pour réinitialiser votre mot de passe.
             </div>
           </body>
         </html>
         ";
         mail($recup_mail, $subject, $message, $header);
-        // header("Location:".$_SERVER['REQUEST_SCHEME']."://".$_SERVER['HTTP_HOST']."/Camagru/forgotyourpasswd.php?section=code");
+        $erreur = "A code was sent to your email to reset your password";
       }
       else
       {
-        $erreur = "Cette adresse mail n'est pas enregistree";
+        $erreur = "Email address not registered";
       }
     }
     else
     {
-      $erreur = "adresse mail invalide";
+      $erreur = "invalid email address";
     }
   }
   else
   {
-    $erreur = "Veuillez entrer votre adresse mail.";
+    $erreur = "Please enter your email address.";
   }
 }
 
 if (isset($_POST['check_submit'], $_POST['check_code']))
 {
     if (!empty($_POST['check_code']))
-  {
-    $check_code = htmlspecialchars($_POST['check_code']);
-    $check_req = $bdd->prepare('SELECT id FROM forgotpasswd WHERE email = ? AND code = ?');
-    $check_req->execute(array($_SESSION['recup_mail'], $check_code));
-    $check_req = $check_req->rowCount();
-    if ($check_req == 1){
+    {
+      $check_code = htmlspecialchars($_POST['check_code']);
+      $check_req = $bdd->prepare('SELECT id FROM forgotpasswd WHERE email = ? AND code = ?');
+      $check_req->execute(array($_SESSION['recup_mail'], $check_code));
+      $check_req = $check_req->rowCount();
+      if ($check_req == 1){
       $up_req = $bdd->prepare('UPDATE forgotpasswd SET confirm = 1 WHERE email = ?');
       $up_req->execute(array($_SESSION['recup_mail']));
-      header("Location: ".$_SERVER['HTTP_HOST']."/Camagru/forgotyourpasswd.php?section=changepasswd");
+      header("Location: http://$server:$port/Camagru/forgotyourpasswd.php?section=changepasswd");
     }
     else {
       $erreur = "Invalid code";
@@ -138,7 +140,7 @@ if (isset($_POST['change_submit']))
           $insert_passwd->execute(array($passwd, $_SESSION['recup_mail']));
           $del_req = $bdd->prepare('DELETE FROM forgotpasswd WHERE email = ?');
           $del_req->execute(array($_SESSION['recup_mail']));
-          header("Location: ".$_SERVER['REQUEST_SCHEME']."://".$_SERVER['HTTP_HOST']."/Camagru/signin.php");
+          header("Location: http://$server:$port/Camagru/signin.php");
         }
         else {
           $erreur = "Your passwords don't match";

@@ -18,7 +18,8 @@ body{
   min-width: 500px;
   display: block;
   margin: 0 auto;
-  position: relative;
+  /*position: relative;*/
+  /*min-height: 100%;*/
 }
 
 .style{
@@ -27,6 +28,18 @@ body{
   padding: 12px;
   background-color: white;
   margin-top: 20px;
+}
+
+.comment_image button{
+    background-color: transparent;
+    border: 1px solid transparent;
+        /*background : none;*/
+    /*border: none;*/
+    /*padding : 0 !important;*/
+    font: inherit;
+    cursor : pointer;
+    outline : none;
+    outline-offset : 0;
 }
 
 .comment_image{
@@ -64,8 +77,8 @@ body{
   border-radius: 3px;
 }
 
-.end_of_file{
-
+.tryout{
+  padding-bottom: 20px;
 }
 
 .footer{
@@ -79,7 +92,6 @@ body{
   display: block;
 }
 
-/*HEADER RESPONSIVE*/
 header{
     display: block;
     color: white;

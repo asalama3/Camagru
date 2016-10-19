@@ -15,6 +15,8 @@ function like(count, but, id_image) {
           count.innerHTML = this.responseText;
           if (but.style.color == ''){
               but.style.color = 'rgb(119, 139, 166)';
+              but.outlineoffset = '0';
+
           }
           else{
               but.style.color = '';
@@ -59,13 +61,14 @@ function get_image_id_for( element ) {
   }
 }
 
-function likes_image(img, liked, nbr_likes, id, nbr_comments){
+function likes_image(img, liked, nbr_likes, id, nbr_comments, owner){
     var but = document.createElement("BUTTON");
     var img_like = document.createElement("img");
     var count = document.createElement("span");
     var comment = document.createElement("BUTTON");
     var img_comment = document.createElement("img");
     var nbr_com = document.createElement("span");
+    var owner_obj = document.createElement("span");
 
     if (liked)
     {
@@ -97,9 +100,7 @@ function likes_image(img, liked, nbr_likes, id, nbr_comments){
     but.onmouseover = over_like;
     but.onmouseout = out_like;
 
-    window.addEventListener("DOMContentLoaded", function() {
-      add_design(but, get_image_id_for(but));
-    });
+
 
 
       but.addEventListener('click', function(){
@@ -137,4 +138,11 @@ function likes_image(img, liked, nbr_likes, id, nbr_comments){
     img.parentElement.appendChild(img_comment, img);
     img.parentElement.appendChild(comment, img);
     img.parentElement.appendChild(nbr_com, img);
+    var child = document.createElement("span");
+    child.innerHTML = owner;
+    child.style.display= "block";
+    // child.style.padding= "30";
+    child.style.float="left";
+    img.parentElement.appendChild(child, img);
+    // document.body.appendChild(owner);
 }

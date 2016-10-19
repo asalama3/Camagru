@@ -14,10 +14,41 @@ if (isset($_SESSION['id']) AND $_SESSION['id'] > 0 )
   $add_comment->execute(array($_SESSION['id'], intval($_POST['id']), htmlspecialchars($_POST['comment']) ));
 }
 
-echo(htmlspecialchars($_POST['comment']));
+// SELECT images.user_id FROM `images` INNER JOIN `comments` ON images.id_image=comments.id_image
 
-$req_owner_image = $bdd->prepare('SELECT user_id, email FROM comments, users WHERE comments.user_id = users.id');
-$req_owner_image->execute();
+
+$get_userid = $bdd->prepare('SELECT user_id FROM `images` WHERE id_image=?;');
+$get_userid->execute(array(intval($_POST['id'])));
+$ret = $get_userid->fetch();
+
+$get_username = $bdd->prepare('SELECT username from users WHERE user_id=? ');
+$get_username->execute(array($ret['user_id']));
+$username = $get_username->fetch();
+
+$get_nbr_comments = $bdd->prepare("SELECT COUNT(*) AS 'com' FROM comments WHERE id_image=?");
+$get_nbr_comments->execute(array(intval($_POST['id]'])));
+  if($result = $get_nbr_comments->fetch())
+  {
+    $nbr = intval($result['com']);
+  }
+
+
+$data = [];
+$data['nbr_comments'] = $nbr;
+$data['username'] = $username['username'];
+$data['comment'] = $_POST['comment'];
+$json = json_encode($data);
+
+echo $json;
+
+// echo back in json => ALL GOOD WITH JS
+// json_encode()
+// en JS : response['username']
+// {"username" : $username, "comment" : }
+
+
+$req_owner_image = $bdd->prepare('SELECT user_id, email FROM comments, users WHERE comments.user_id = users.user_id');
+// $req_owner_image->execute();
 $owner_img = $req_owner_image->fetch();
 
 $mail = $owner_img['email'];

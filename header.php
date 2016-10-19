@@ -14,6 +14,7 @@
         <li><a href="" style="padding-top: 36px; pointer-events: none;
        cursor: default; "></a></li>
        <?php if (isset($_SESSION['id'])){ ?>
+        <li><a href="delete_account.php">Delete Account</a></li>
         <li><a href="signout.php">Sign Out</a></li>
         <?php } ?>
         <?php if (!isset($_SESSION['id'])){ ?>

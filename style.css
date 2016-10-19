@@ -21,7 +21,7 @@ body{
 
 .imageposition{
     width: 30%;
-    min-width: 400px;
+    min-width: 370px;
     margin: 1%;
     text-align: center;
     display: inline-block;
@@ -29,7 +29,7 @@ body{
 
 .test{
   width: 30%;
-  min-width: 400px;
+  min-width: 370px;
   margin: 1%;
   text-align: center;
   display: inline-block;
@@ -83,6 +83,19 @@ a a:visited a:hover a:active{
     overflow: hidden;
 }
 
+.imageposition button {
+    background-color: transparent;
+    border: 1px solid transparent;
+        /*background : none;*/
+    /*border: none;*/
+    /*padding : 0 !important;*/
+    /*font: inherit;*/
+    cursor : pointer;
+    outline : none;
+    outline-offset : 0;
+}
+
+.imageposition 
 @media (max-width: 500px){
   .footer{
     font-size: 10px;
