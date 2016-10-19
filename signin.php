@@ -29,7 +29,7 @@ if (isset($_POST['formconnect'])) {
       $userexists = $requser->rowCount();
       if ($userexists == 1) {
         $userinfo = $requser->fetch();
-        $_SESSION['id'] = $userinfo['id'];
+        $_SESSION['id'] = $userinfo['user_id'];
         $_SESSION['username'] = $userinfo['username'];
         $_SESSION['email'] = $userinfo['email'];
         header("Location: ./profil.php?id=" . $_SESSION['id']);

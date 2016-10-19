@@ -20,7 +20,7 @@ if (!isset($_SESSION['id']))
 if (isset($_SESSION['id']) AND $_SESSION['id'] > 0)
 {
   $getid = intval($_SESSION['id']);
-  $requser = $bdd->prepare('SELECT * FROM users WHERE id=?');
+  $requser = $bdd->prepare('SELECT * FROM users WHERE user_id=?');
   $requser->execute(array($getid));
   $userinfo = $requser->fetch();
 }

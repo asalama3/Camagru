@@ -23,7 +23,7 @@ catch (PDOException $e)
 }
 try {
     $user = "CREATE TABLE IF NOT EXISTS camagru.users (
-                      id INT NOT NULL AUTO_INCREMENT,
+                      user_id INT NOT NULL AUTO_INCREMENT,
                       username VARCHAR(45) NULL,
                       email VARCHAR(255) NULL,
                       password VARCHAR(255) NULL,
