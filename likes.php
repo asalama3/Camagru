@@ -9,10 +9,6 @@ catch (Exception $e)
     die('Erreur: ' . $e->getMessage());
 }
 
-// if (!isset($_SESSION['id']))
-// {
-//     header('Location: signin.php');
-// }
 
 if (isset($_SESSION['id']) AND $_SESSION['id'] > 0) {
     $requser = $bdd->prepare("SELECT user_id, id_image FROM likes WHERE user_id=? AND id_image=?");
@@ -26,7 +22,7 @@ if (isset($_SESSION['id']) AND $_SESSION['id'] > 0) {
     }
 }
 else{
-   echo "please sign in";
+   echo "Please sign in to like this picture";
    return ;
 }
 

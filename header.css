@@ -3,6 +3,7 @@ header{
     color: white;
     background-color: #333;
     height: 52px;
+    position: relative;
 }
 
 h1{

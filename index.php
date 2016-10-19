@@ -12,11 +12,6 @@ catch (Exception $e)
 // ini_set('display_errors', 'On');
 // set_error_handler("var_dump");
 
-//
-// if (!isset($_SESSION['id']))
-// {
-//   header('Location: signin.php');
-// }
 
 include ('header.php');
 
@@ -51,8 +46,7 @@ $start = ($currentpage-1)*$imgperpage;
 //echo "<pre>";
 //print_r($_SERVER);
 
-// if (isset($_SESSION['id']))
-// {
+
 $allimages = $bdd->prepare('SELECT * FROM images ORDER BY id_image DESC LIMIT '.$start.','.$imgperpage);
 $allimages->execute(array($_SESSION['id']));
 $images = $allimages->fetch();
@@ -89,10 +83,10 @@ while( $images = $allimages->fetch() )
     echo "</div>";
     echo "</div>";
   }
-// }
+
 ?>
     <div class="clear" style="clear: both;"></div>
-    <div class="pagination">
+    <div class="pagination" style="height: 50px;">
         <?php
         for($i=1;$i<=$totalpages;$i++) {
             if ($i == $currentpage) {

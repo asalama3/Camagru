@@ -138,7 +138,3 @@ function likes_image(img, liked, nbr_likes, id, nbr_comments){
     img.parentElement.appendChild(comment, img);
     img.parentElement.appendChild(nbr_com, img);
 }
-
-if (logged_in == true) {
-  alert("hello");
-}

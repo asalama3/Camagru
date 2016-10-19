@@ -10,9 +10,9 @@ catch (Exception $e)
 {
     die('Erreur: ' . $e->getMessage());
 }
-error_reporting(-1);
-ini_set('display_errors', 'On');
-set_error_handler("var_dump");
+// error_reporting(-1);
+// ini_set('display_errors', 'On');
+// set_error_handler("var_dump");
 
 // if (!isset($_SESSION['id']))
 // {
@@ -30,6 +30,8 @@ if (!isset($_SESSION['id']))
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="comment.css" />
+    <script type="text/javascript" src="./likes.js"></script>
+
     <title>Camagru</title>
   </head>
   <body>
@@ -52,6 +54,32 @@ if (!isset($_SESSION['id']))
 <?php
 if (isset($_SESSION['id']))
 {
+
+  $alllikes = $bdd->prepare('SELECT * FROM likes where id_image=? and user_id=?' );
+  $alllikes->execute( array($images['id_image'], $_SESSION['id'] ) );
+
+  if ( $liked = $alllikes->fetch() ) {
+    $ret = $liked['id_image'] != null ? 'true' : 'false';
+  } else {
+    $ret = "false";
+  }
+
+  $count = $bdd->prepare("SELECT COUNT(*) AS 'num' FROM likes WHERE id_image=?");
+  $count->execute(array($images['id_image']));
+  if($result = $count->fetch())
+  {
+    $ct = intval($result['num']);
+  }
+
+  $nbr_comments = $bdd->prepare("SELECT COUNT(*) AS 'com' FROM comments WHERE id_image=?");
+  $nbr_comments->execute(array($images['id_image']));
+  if($result = $nbr_comments->fetch())
+  {
+    $nbr = intval($result['com']);
+  }
+
+
+
   $user = '<a style="font-weight: bold;">'.$_SESSION['username'].'</a>';
   $id = intval($_GET['id_image']);
   $image = $bdd->prepare('SELECT * FROM images WHERE id_image=?');
@@ -59,7 +87,7 @@ if (isset($_SESSION['id']))
   $img = $image->fetch();
 
   echo "<div class=\"comment_image\" id=\"" . $_GET['id_image'] . "\" >" ;
-  echo "<img class=\"style\" src=\"" . $img['name'] . "\">";
+  echo "<img class=\"style\" src=\"" . $img['name'] . "\" onload='likes_image(this, ". $ret .", ". $ct .", " . $_GET['id_image'] .", " . $nbr . ");' >";
 
   $allcomments = $bdd->prepare('SELECT * FROM comments WHERE id_image=?');
   $allcomments->execute(array($_GET['id_image']));

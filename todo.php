@@ -17,7 +17,7 @@
 
 
 // IMPOSSIBLE, LAST PB //
-// page gallery: pagination se cache en responsive sous le footer
+// page gallery: pagination se cache en responsive sous le footer: ajouter une height worked dunno why
 // page comment: les comments vont en dessous du footer apres plusieurs comments
 // page comment: avoir le session id des que je click sur submit comme en refresh page
 // forgotpasswd: server redirection not working + review code
@@ -28,5 +28,9 @@
 // delete image: error post // message d'erreur pop up peur importe pb dans la delete
 
 // au sign up je peux me connecter sans passer par l'email de confirmation de compte... bloquer
-// when deleting account, delete EVERYTHING (comments, likes, pictures .... from user) DONEE 
+// when deleting account, delete EVERYTHING (comments, likes, pictures .... from user) DONEE
+
+
+// file pour les likes apres le DOM is ready
+// diviser file likes.js pour avoir les likes et comments dans commentaire page juste le total uniquement comment non clickable et likes peu etre clicke
 ?>
