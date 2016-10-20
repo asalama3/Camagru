@@ -11,13 +11,12 @@ include ('init.php');
 // {
 //   die('Erreur: ' . $e->getMessage());
 // }
-// ini_set('display_errors', 1);
-// error_reporting(E_ALL);
-
 if (!isset($_SESSION['id']))
 {
-  header('Location: signin.php');
+  header('Location: ./signin.php');
+  return;
 }
+
 
 if (isset($_SESSION['id']) AND $_SESSION['id'] > 0)
 {

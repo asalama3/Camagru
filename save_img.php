@@ -25,7 +25,14 @@ $json = str_replace('data:image/png;base64,', "", $json);
 $json = preg_replace("/&filter=.*/", "", $json);
 $unencodedData = base64_decode($json);
 
-$dest = imagecreatefromstring($unencodedData);
+set_error_handler(function ($no, $msg, $file, $line) {
+    throw new ErrorException($msg, 0, $no, $file, $line);
+});
+try {
+    $dest = @imagecreatefromstring($unencodedData);
+} catch (Exception $e) {
+    return ;
+}
 
 $file = $_POST['filter'];
 $file = preg_replace("/.*\//", "", $file); // remplacer tout ce quil y a jusqua le / par rien pur garder le nom du file
@@ -33,12 +40,26 @@ $file = preg_replace("/.*\//", "", $file); // remplacer tout ce quil y a jusqua 
 // TEST IF $file exists
 
 if ($file) {
-    $src = imagecreatefrompng("./images/" . $file);
+    try
+    {
+        $src = imagecreatefrompng("./images/" . $file);
+    }
+    catch (Exception $e)
+    {
+        return ;
+    }
 
     $width = imagesx($src);
     $height = imagesy($src);
 
-    imagecopy($dest, $src, 140, 30, 0, 0, $width, $height);
+    try
+    {
+        imagecopy($dest, $src, 140, 30, 0, 0, $width, $height);
+    }
+    catch (Exception $e)
+    {
+        return ;
+    }
 }
 else{
     echo "Bad filter";

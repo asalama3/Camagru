@@ -1,29 +1,14 @@
 <?php
 session_start();
-// print_r($_SESSION);
 
 include ('init.php');
 
-// include ('database.php');
-// try
-// {
-//     $bdd = new PDO('$DB_DSN, ;$DBNAME', $DB_USER, $DB_PASSWORD, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-// }
-// catch (Exception $e)
-// {
-//     die('Erreur: ' . $e->getMessage());
-// }
+
 // error_reporting(-1);
 // ini_set('display_errors', 'On');
 // set_error_handler("var_dump");
 
-// if (!isset($_SESSION['id']))
-// {
-//     alert('Please sign in before leaving a comment');
-//     header('Location: signin.php');
-// }
-// else{
-// }
+
 if (!isset($_SESSION['id']))
 {
     header('Location: signin.php');
@@ -60,7 +45,7 @@ if (isset($_SESSION['id']))
 {
 
   $alllikes = $bdd->prepare('SELECT * FROM likes where id_image=? and user_id=?' );
-  $alllikes->execute( array($_GET['id_image'], $_SESSION['id'] ) );
+  $alllikes->execute( array(intval($_GET['id_image']), $_SESSION['id'] ) );
 
   if ( $liked = $alllikes->fetch() ) {
     $ret = $liked['id_image'] != null ? 'true' : 'false';
@@ -69,21 +54,21 @@ if (isset($_SESSION['id']))
   }
 
   $count = $bdd->prepare("SELECT COUNT(*) AS 'num' FROM likes WHERE id_image=?");
-  $count->execute(array($_GET['id_image']));
+  $count->execute(array(intval($_GET['id_image'])));
   if($result = $count->fetch())
   {
     $ct = intval($result['num']);
   }
 
   $nbr_comments = $bdd->prepare("SELECT COUNT(*) AS 'com' FROM comments WHERE id_image=?");
-  $nbr_comments->execute(array($_GET['id_image']));
+  $nbr_comments->execute(array(intval($_GET['id_image'])));
   if($result = $nbr_comments->fetch())
   {
     $nbr = intval($result['com']);
   }
 
     $get_userid = $bdd->prepare('SELECT user_id FROM `images` WHERE id_image=?');
-    $get_userid->execute(array($_GET['id_image']));
+    $get_userid->execute(array(intval($_GET['id_image'])));
     if ($user = $get_userid->fetch())
     {
         $user_id= $user['user_id'];
@@ -96,7 +81,6 @@ if (isset($_SESSION['id']))
         $usr_nm=$username['username'];
     }
 
-  $user = '<a style="font-weight: bold;">'.$_SESSION['username'].'</a>';
   $id = intval($_GET['id_image']);
   $image = $bdd->prepare('SELECT * FROM images WHERE id_image=?');
   $image->execute(array($id));
@@ -114,8 +98,23 @@ if (isset($_SESSION['id']))
 
   while ($display = $allcomments->fetch())
   {
+    $get_useridbis = $bdd->prepare('SELECT user_id FROM `comments` WHERE id_image=?');
+    $get_useridbis->execute(array(intval($_GET['id_image'])));
+    if ($user_com = $getuseridbis->fetch())
+    {
+        $usr_id= $user_com['user_id'];
+    }
+
+    $get_usernm = $bdd->prepare('SELECT username from users WHERE user_id=?');
+    $get_usernm->execute(array($usr_id));
+    if ($usernamecom = $get_usernm->fetch())
+    {
+        $usr_nm=$usernamecom['username'];
+    }
+  $user_name_styled = '<a style="font-weight: bold;">'.$usr_nm.'</a>';
+
     echo "<div class=\"comments\" />";
-    echo $user . ':'. $display['content'];
+    echo $user_name_styled . ':'. $display['content'];
     echo "</div>";
     
   }
