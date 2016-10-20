@@ -49,7 +49,7 @@ try {
                       id_image INT NOT NULL AUTO_INCREMENT,
                       user_id INT (11) NOT NULL,
                       lien_image VARCHAR(1000) NOT NULL,
-                      date VARCHAR(32) NOT NULL,
+                      created_at DATETIME NOT NULL default CURRENT_TIMESTAMP,
                       PRIMARY KEY (id_image),
                       name MEDIUMTEXT NOT NULL)";
 

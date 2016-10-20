@@ -16,7 +16,7 @@ if (isset($_GET['username']) && isset($_GET['key']) && !empty($_GET['username'])
 
   $pseudo = htmlspecialchars(urldecode($_GET['username']));
   $key = $_GET['key'];
-
+  // echo $_GET['key'];
   $requser = $bdd->prepare("SELECT * FROM users WHERE username=? AND confirmkey = ?");
   $requser->execute(array($pseudo, $key));
   $userexists = $requser->rowCount();
@@ -39,6 +39,7 @@ if (isset($_GET['username']) && isset($_GET['key']) && !empty($_GET['username'])
     echo "User doesn't exist!";
   }
 }
+
  ?>
 <!DOCTYPE html>
 <html>

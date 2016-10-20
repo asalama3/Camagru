@@ -10,9 +10,9 @@ include ('init.php');
 // {
 //   die('Erreur: ' . $e->getMessage());
 // }
-// error_reporting(-1);
-// ini_set('display_errors', 'On');
-// set_error_handler("var_dump");
+error_reporting(-1);
+ini_set('display_errors', 'On');
+set_error_handler("var_dump");
 if(isset($_POST['inscription']))
 {
   $pseudo = htmlspecialchars($_POST['pseudo']);
@@ -37,6 +37,7 @@ if(isset($_POST['inscription']))
           {
             $key .= mt_rand(0, 9);
           }
+          echo $key;
           $insertuser = $bdd->prepare("INSERT INTO users(username, email, password, confirmkey) VALUES(?, ?, ?, ?)");
           $insertuser->execute(array($pseudo, $mail, $mdp, $key));
 
@@ -87,6 +88,8 @@ if(isset($_POST['inscription']))
   <header>
     <h1>C A M A G R U</h1>
     <ul>
+<?php
+?>
       <li><a href="signin.php">Sign in</a></li>
     </ul>
   </header>

@@ -40,7 +40,7 @@ if (isset($_SESSION['id']) AND $_SESSION['id'] > 0)
         <ul class="topnav" id="myTopnav">
           <li><a href="" style="padding-top: 36px; pointer-events: none;
            cursor: default; "></a></li>
-          <li><a href="delete_account.php">Delete Account</a></li>
+          <li><a href="delete_account.php" onclick="return confirm('Are you sure?')">Delete Account</a></li>
           <li><a href="signout.php">Sign Out</a></li>
           <li><a href="index.php">Gallery</a></li>
           <!-- <li><a href="myalbum.php">My Album</a></li> -->

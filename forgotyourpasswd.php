@@ -11,8 +11,12 @@ include ('init.php');
 // {
 //   die('Erreur: ' . $e->getMessage());
 // }
- // ini_set('display_errors', 1);
- // error_reporting(E_ALL);
+//  ini_set('display_errors', 1);
+//  error_reporting(E_ALL);
+
+
+  $server = $_SERVER['SERVER_NAME'];
+  $port = $_SERVER['SERVER_PORT'];
 
 if (isset($_GET['section']))
 {
@@ -58,9 +62,7 @@ if (isset($_POST['recup_submit'], $_POST['recup_mail']))
           // $ret = $recup_insert->fetch();
 
         }
-
-        $server = $_SERVER['SERVER_NAME'];
-        $port = $_SERVER['SERVER_PORT'];
+      
         $subject = 'Récupération de Mot de Passe';
         $header= 'MIME-Version: 1.0' . "\r\n";
         $header.='From:"andreasalama2@gmail.com"<andreasalama2@gmail.com>'. "\r\n";
@@ -83,7 +85,7 @@ if (isset($_POST['recup_submit'], $_POST['recup_mail']))
         ";
         mail($recup_mail, $subject, $message, $header);
         $erreur = "A code was sent to your email to reset your password";
-      }
+      } 
       else
       {
         $erreur = "Email address not registered";
@@ -176,7 +178,6 @@ if (isset($_POST['change_submit']))
      <h2 align ="center">Reset Password</h2>
      <div align="center">
      <?php if ($section == 'code'){ ?>
-       <h4>A code was sent to your email:</h4>
        <form class="forgot_passwd" action="" method="post">
          <input type="text" name="check_code" placeholder="Code" class="change"></br></br>
          <input type="submit" name="check_submit" value="Submit" class="button">

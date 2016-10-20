@@ -15,6 +15,11 @@ include ('init.php');
 
 //var_dump($_POST);
 //die;
+
+error_reporting(-1);
+ini_set('display_errors', 'On');
+set_error_handler("var_dump");
+
 $json = file_get_contents("php://input");
 $json = str_replace('data:image/png;base64,', "", $json);
 $json = preg_replace("/&filter=.*/", "", $json);

@@ -13,7 +13,20 @@ include ('init.php');
 //   die('Erreur: ' . $e->getMessage());
 // }
 
-// if account is confirmed if confirm == 1 ok sinon alert
+$confirm = $bdd->prepare('SELECT confirm FROM users WHERE email=?');
+// print_r($_POST);
+$confirm->execute(array($_POST['mailconnect']));
+$result = $confirm->fetch();
+//  print_r($result);
+if ($_POST['mailconnect'] && $result['confirm'] == 0)
+{
+//  session_destroy();
+//  print_r($_POST);
+  // alert("Please activate your account with the link sent to you by email");
+  // header("Location: ./signin.php");
+ // return ;
+}
+
 if (isset($_POST['formconnect'])) {
   $mailconnect = htmlspecialchars($_POST['mailconnect']);
   $mdpconnect = $_POST['mdpconnect'];
@@ -26,7 +39,7 @@ if (isset($_POST['formconnect'])) {
   {
     $erreur = "Incomplete Fields";
   }
-  if (password_verify($mdpconnect, $hsh)) {
+  if ($result['confirm'] && password_verify($mdpconnect, $hsh)) {
     if (!empty($mailconnect) AND !empty($mdpconnect)) {
       $requser = $bdd->prepare("SELECT * FROM users WHERE email = ?");
       $requser->execute(array($mailconnect));
@@ -44,6 +57,11 @@ if (isset($_POST['formconnect'])) {
           $erreur = "Incomplete Fields";
         }
     }
+  else if ($result['confirm'] == 0)
+  {
+    session_destroy();
+    $erreur = "Your account was not validated";
+  }
   else
   {
     $erreur = "Invalid email or password";
@@ -99,7 +117,6 @@ if (isset($_POST['formconnect'])) {
         }
         ?>
       </form>
-
   </div>
     <?php  include ('footer.php'); ?>
   </body>

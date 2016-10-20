@@ -4,9 +4,7 @@ function delete_image() {
     xhr.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             todel.parentNode.removeChild(todel);
-        }
-        else{
-            alert("Could not delete picture");
+            console.log(this.responseText);
         }
     };
     xhr.open("POST", "delete_image.php", true);
@@ -36,10 +34,3 @@ function XXX(element, id){
     var currentdiv = document.getElementById("stack");
     currentdiv.insertBefore(newdiv, currentdiv.childNodes[0]);
 }
-
-// window.onload=function alertlog(){
-//     window.alert("Please log in first to see this page");
-//     location="signin.php";
-//
-//     return(false);
-// }
