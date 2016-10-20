@@ -1,15 +1,18 @@
 <?php
 session_start();
-try
-{
-  $bdd = new PDO('mysql:localhost=8889;dbname=camagru', 'root', 'root');
-}
-catch (Exception $e)
-{
-  die('Erreur: ' . $e->getMessage());
-}
- ini_set('display_errors', 1);
- error_reporting(E_ALL);
+
+include ('init.php');
+
+// try
+// {
+//   $bdd = new PDO('mysql:localhost=8889;dbname=camagru', 'root', 'root');
+// }
+// catch (Exception $e)
+// {
+//   die('Erreur: ' . $e->getMessage());
+// }
+ // ini_set('display_errors', 1);
+ // error_reporting(E_ALL);
 
 if (isset($_GET['section']))
 {
@@ -53,7 +56,7 @@ if (isset($_POST['recup_submit'], $_POST['recup_mail']))
           $recup_insert = $bdd->prepare('INSERT INTO forgotpasswd(email, code) VALUES (?,?)');
           $recup_insert->execute(array($recup_mail, $recup_code));
           // $ret = $recup_insert->fetch();
-          
+
         }
 
         $server = $_SERVER['SERVER_NAME'];

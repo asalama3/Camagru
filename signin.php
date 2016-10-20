@@ -1,15 +1,19 @@
 <?php
 session_start();
-try
-{
-  $bdd = new PDO('mysql:localhost=8889;dbname=camagru', 'root', 'root');
-}
-catch (Exception $e)
-{
-  die('Erreur: ' . $e->getMessage());
-}
+
+include ('init.php');
 
 
+// try
+// {
+//   $bdd = new PDO('mysql:localhost=8889;dbname=camagru', 'root', 'root');
+// }
+// catch (Exception $e)
+// {
+//   die('Erreur: ' . $e->getMessage());
+// }
+
+// if account is confirmed if confirm == 1 ok sinon alert
 if (isset($_POST['formconnect'])) {
   $mailconnect = htmlspecialchars($_POST['mailconnect']);
   $mdpconnect = $_POST['mdpconnect'];

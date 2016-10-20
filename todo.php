@@ -22,7 +22,7 @@
 //ok page comment: avoir le session id des que je click sur submit comme en refresh page
 // forgotpasswd: server redirection not working + review code
 // add js filter on video?
-// double check database file situation with PDO in each file
+//ok double check database file situation with PDO in each file
 //ok on ne sait pas a qui appartient les photos dans la gallery : ajouter le owner de la photo
 //ok dans comments : ajouter les likes et comments en dessous de photo et owner de la photo
 // ok delete image: error post // message d'erreur pop up peur importe pb dans la delete

@@ -1,13 +1,17 @@
 <?php
 session_start();
-try
-{
-  $bdd = new PDO('mysql:localhost=8889;dbname=camagru', 'root', 'root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-}
-catch (Exception $e)
-{
-  die('Erreur: ' . $e->getMessage());
-}
+
+include ('init.php');
+
+
+// try
+// {
+//   $bdd = new PDO('mysql:localhost=8889;dbname=camagru', 'root', 'root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+// }
+// catch (Exception $e)
+// {
+//   die('Erreur: ' . $e->getMessage());
+// }
 
 //var_dump($_POST);
 //die;

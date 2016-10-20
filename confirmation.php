@@ -1,12 +1,15 @@
 <?php
-try
-{
-  $bdd = new PDO('mysql:localhost=8889;dbname=Camagru', 'root', 'root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-}
-catch (Exception $e)
-{
-  die('Erreur: ' . $e->getMessage());
-}
+
+include ('init.php');
+
+// try
+// {
+//   $bdd = new PDO('mysql:localhost=8889;dbname=Camagru', 'root', 'root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+// }
+// catch (Exception $e)
+// {
+//   die('Erreur: ' . $e->getMessage());
+// }
 
 if (isset($_GET['username']) && isset($_GET['key']) && !empty($_GET['username']) && !empty($_GET['key']))
 {

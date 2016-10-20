@@ -49,7 +49,7 @@ try {
                       id_image INT NOT NULL AUTO_INCREMENT,
                       user_id INT (11) NOT NULL,
                       lien_image VARCHAR(1000) NOT NULL,
-                      created_at DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+                      date VARCHAR(32) NOT NULL,
                       PRIMARY KEY (id_image),
                       name MEDIUMTEXT NOT NULL)";
 
@@ -106,5 +106,5 @@ catch (PDOException $e)
 }
 
 
-echo 'ok';
+// echo 'ok';
 ?>

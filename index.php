@@ -1,13 +1,15 @@
 <?php
 session_start();
-try
-{
-    $bdd = new PDO('mysql:localhost=8889;dbname=camagru', 'root', 'root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-}
-catch (Exception $e)
-{
-    die('Erreur: ' . $e->getMessage());
-}
+include ('init.php');
+
+// try
+// {
+//     $bdd = new PDO('mysql:localhost=8889;dbname=camagru', 'root', 'root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+// }
+// catch (Exception $e)
+// {
+//     die('Erreur: ' . $e->getMessage());
+// }
 // error_reporting(-1);
 // ini_set('display_errors', 'On');
 // set_error_handler("var_dump");
@@ -89,7 +91,7 @@ while( $images = $allimages->fetch() )
     {
         $usr_nm=$username['username'];
     }
-    
+
     echo "<div class=\"test\">" ;
     echo "<div class=\"imageposition\" id=\"" . $images['id_image'] . "\" >" ;
     echo "<img class=\"stylephoto\"  src=\"" . $images['name'] . "\" onload=" .'"'. "likes_image(this, ". $ret .", ". $ct .", " . $images['id_image'] .", " . $nbr . ", '$usr_nm');".'"'. ">";

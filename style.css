@@ -86,16 +86,13 @@ a a:visited a:hover a:active{
 .imageposition button {
     background-color: transparent;
     border: 1px solid transparent;
-        /*background : none;*/
-    /*border: none;*/
-    /*padding : 0 !important;*/
-    /*font: inherit;*/
+    font: inherit;
     cursor : pointer;
     outline : none;
     outline-offset : 0;
 }
 
-.imageposition 
+.imageposition
 @media (max-width: 500px){
   .footer{
     font-size: 10px;

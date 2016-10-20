@@ -1,15 +1,18 @@
 <?php
-try
-{
-  $bdd = new PDO('mysql:localhost=8889;dbname=camagru', 'root', 'root');
-}
-catch (Exception $e)
-{
-  die('Erreur: ' . $e->getMessage());
-}
-error_reporting(-1);
-ini_set('display_errors', 'On');
-set_error_handler("var_dump");
+
+include ('init.php');
+
+// try
+// {
+//   $bdd = new PDO('mysql:localhost=8889;dbname=camagru', 'root', 'root');
+// }
+// catch (Exception $e)
+// {
+//   die('Erreur: ' . $e->getMessage());
+// }
+// error_reporting(-1);
+// ini_set('display_errors', 'On');
+// set_error_handler("var_dump");
 if(isset($_POST['inscription']))
 {
   $pseudo = htmlspecialchars($_POST['pseudo']);
