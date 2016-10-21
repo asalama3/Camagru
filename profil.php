@@ -42,7 +42,6 @@ if (isset($_SESSION['id']) AND $_SESSION['id'] > 0)
           <li><a href="delete_account.php" onclick="return confirm('Are you sure?')">Delete Account</a></li>
           <li><a href="signout.php">Sign Out</a></li>
           <li><a href="index.php">Gallery</a></li>
-          <!-- <li><a href="myalbum.php">My Album</a></li> -->
           <li class="icon">
             <a href="javascript:void(0);" onclick="menu()" style="height: 20px;">&#9776;</a>
           </li>
@@ -51,7 +50,6 @@ if (isset($_SESSION['id']) AND $_SESSION['id'] > 0)
     <div class="clear" style="clear: both;"></div>
 
     <div id="all">
-    <!-- <div class="left-col"> -->
         <div class="camera">
             <div id="video-box">
                 <video id="video" style="width: 100%"></video>

@@ -7,4 +7,5 @@ $DB_USER = 'root';
 $DB_PASSWORD = 'root';
 
 $DATA_CONNECT = $DB_DSN.";dbname=".$database;
+// echo $DATA_CONNECT;
 ?>

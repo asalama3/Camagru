@@ -22,16 +22,24 @@ catch (PDOException $e)
 }
 $_DBNAME = 'dbname=' . $database;
 
+try {
+    $req = "USE $database";
+    $bdd->exec($req);
+    }
+catch (PDOException $e)
+{
+    die('Erreur: ' . $e->getMessage());
+}
+
 
 try {
-    $user = "CREATE TABLE IF NOT EXISTS camagru.users (
-                      user_id INT NOT NULL AUTO_INCREMENT,
+    $user = "CREATE TABLE IF NOT EXISTS users (
+                      user_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                       username VARCHAR(45) NULL,
                       email VARCHAR(255) NULL,
                       password VARCHAR(255) NULL,
                       confirmkey VARCHAR(255) NULL,
                       confirm INT (1) NULL,
-                      PRIMARY KEY (user_id),
                       UNIQUE INDEX username_UNIQUE (username ASC),
                       UNIQUE INDEX email_UNIQUE (email ASC))";
 
@@ -44,12 +52,11 @@ catch (PDOException $e)
 }
 
 try {
-    $images = "CREATE TABLE IF NOT EXISTS camagru.images (
-                      id_image INT NOT NULL AUTO_INCREMENT,
+    $images = "CREATE TABLE IF NOT EXISTS images (
+                      id_image INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                       user_id INT (11) NOT NULL,
                       lien_image VARCHAR(1000) NOT NULL,
                       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-                      PRIMARY KEY (id_image),
                       name MEDIUMTEXT NOT NULL,
                       FOREIGN KEY (user_id) REFERENCES users(user_id))";
 
@@ -63,12 +70,11 @@ catch (PDOException $e)
 }
 
 try {
-    $pass = "CREATE TABLE IF NOT EXISTS camagru.forgotpasswd (
-                      id INT(11) NOT NULL AUTO_INCREMENT,
+    $pass = "CREATE TABLE IF NOT EXISTS forgotpasswd (
+                      id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
                       email VARCHAR(255) NOT NULL,
                       code INT(11) NOT NULL,
-                      confirm  INT(11) NOT NULL,
-                      PRIMARY KEY (id))";
+                      confirm  INT(11) NOT NULL)";
 
     $bdd->exec($pass);
 }
@@ -78,9 +84,12 @@ catch (PDOException $e)
 }
 
 try {
-    $like = "CREATE TABLE IF NOT EXISTS camagru.likes (
+    $like = "CREATE TABLE IF NOT EXISTS likes (
+                      id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,        
                       user_id INT(11) NOT NULL,
-                      id_image INT(11) NOT NULL)";
+                      id_image INT(11) NOT NULL,
+                      FOREIGN KEY (user_id) REFERENCES users(user_id),
+                      FOREIGN KEY (id_image) REFERENCES images(id_image))";
 
     $bdd->exec($like);
 }
@@ -90,12 +99,11 @@ catch (PDOException $e)
 }
 
 try {
-    $comments = "CREATE TABLE IF NOT EXISTS camagru.comments (
+    $comments = "CREATE TABLE IF NOT EXISTS comments (
+      id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
       user_id INT(11) NOT NULL,
       id_image INT(11) NOT NULL,
       content TEXT NOT NULL,
-      id INT NOT NULL AUTO_INCREMENT,
-      PRIMARY KEY (id),
       FOREIGN KEY (user_id) REFERENCES users(user_id),
       FOREIGN KEY (id_image) REFERENCES images(id_image))";
 

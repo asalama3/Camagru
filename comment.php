@@ -13,7 +13,6 @@ if (!isset($_SESSION['id']))
 {
     header('Location: signin.php');
 }
-// echo $_SESSION['username'];
  ?>
 <html>
   <head>
@@ -92,41 +91,20 @@ if (isset($_SESSION['id']))
   echo "<img class=\"style\" src=\"" . $img['name'] . "\" onload= " .'"'. "add_info(this, ". $ret .", ". $ct .", " . $_GET['id_image'] .", " . $nbr . ", '$usr_nm');".'"'.">";
   echo "</div>" ;
 
-
   $allcom = $bdd->prepare('SELECT * FROM comments WHERE id_image=?');
   $allcom->execute(array($_GET['id_image']));
   $display = $allcom->fetchAll(PDO::FETCH_ASSOC);
 
   foreach ($display as $com){
+    $username = $bdd->prepare('SELECT username FROM users WHERE user_id=?');
+    $username->execute(array($com["user_id"]));
+    $result = $username->fetch()[0];
+    $user_name_styled = '<a style="font-weight: bold;">'.$result.'</a>';
+
     echo "<div class=\"comments\" />";
-    echo $com['content'];
+    echo $result . ':'.$com['content'];
     echo "</div>";
   }
-
-  // $allcomments = $bdd->prepare('SELECT * FROM comments WHERE id_image=?');
-  // $allcomments->execute(array($_GET['id_image']));
-
-  // while ($display = $allcomments->fetch())
-  // {
-  //   $user_added_comment = $bdd->prepare('SELECT user_id FROM comments WHERE id_image=?');
-  //   $user_added_comment->execute(array(intval($_GET['id_image'])));
-  //   while ($user_comment = $user_added_comment->fetch())
-  //   {
-  //       $usr_id= $user_comment['user_id'];
-
-  //   $username_comment = $bdd->prepare('SELECT username from users WHERE user_id=?');
-  //   $username_comment->execute(array($usr_id));
-  //   while ($usr = $username_comment->fetch())
-  //   {  
-  //     $usr_nm_final=$usr['username'];
-  //   }
-  //     $user_name_styled = '<a style="font-weight: bold;">'.$usr_nm_final.'</a>';
-
-  //   echo "<div class=\"comments\" />";
-  //   echo $user_name_styled . ':'. $display['content'];
-  //   echo "</div>";
-  // }
-  // }
 }
 ?>
 
