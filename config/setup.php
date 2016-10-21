@@ -13,7 +13,6 @@ catch (Exception $e)
 
 
 try {
-    // $database = 'camagru';
     $req = "CREATE DATABASE IF NOT EXISTS $database DEFAULT CHARACTER SET utf8";
     $bdd->exec($req);
     }
@@ -51,7 +50,8 @@ try {
                       lien_image VARCHAR(1000) NOT NULL,
                       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
                       PRIMARY KEY (id_image),
-                      name MEDIUMTEXT NOT NULL)";
+                      name MEDIUMTEXT NOT NULL,
+                      FOREIGN KEY (user_id) REFERENCES users(user_id))";
 
 
     $bdd->exec($images);
@@ -95,7 +95,10 @@ try {
       id_image INT(11) NOT NULL,
       content TEXT NOT NULL,
       id INT NOT NULL AUTO_INCREMENT,
-      PRIMARY KEY (id))";
+      PRIMARY KEY (id),
+      FOREIGN KEY (user_id) REFERENCES users(user_id),
+      FOREIGN KEY (id_image) REFERENCES images(id_image))";
+
 
     $bdd->exec($comments);
 

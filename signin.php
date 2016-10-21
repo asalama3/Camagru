@@ -3,33 +3,21 @@ session_start();
 
 include ('init.php');
 
+error_reporting(-1);
+ini_set('display_errors', 'On');
+// set_error_handler("var_dump");
 
-// try
-// {
-//   $bdd = new PDO('mysql:localhost=8889;dbname=camagru', 'root', 'root');
-// }
-// catch (Exception $e)
-// {
-//   die('Erreur: ' . $e->getMessage());
-// }
-
-$confirm = $bdd->prepare('SELECT confirm FROM users WHERE email=?');
-// print_r($_POST);
-$confirm->execute(array($_POST['mailconnect']));
-$result = $confirm->fetch();
 //  print_r($result);
-if ($_POST['mailconnect'] && $result['confirm'] == 0)
-{
-//  session_destroy();
-//  print_r($_POST);
-  // alert("Please activate your account with the link sent to you by email");
-  // header("Location: ./signin.php");
- // return ;
-}
+
 
 if (isset($_POST['formconnect'])) {
   $mailconnect = htmlspecialchars($_POST['mailconnect']);
   $mdpconnect = $_POST['mdpconnect'];
+
+  $confirm = $bdd->prepare('SELECT confirm FROM users WHERE email=?');
+  $confirm->execute(array($mailconnect));
+  $result = $confirm->fetch();
+
 
   $hash = $bdd->prepare("SELECT password FROM users WHERE email = ?");
   $hash->execute(array($mailconnect));
@@ -59,7 +47,7 @@ if (isset($_POST['formconnect'])) {
           $erreur = "Incomplete Fields";
         }
     }
-    else if ($result['confirm'] == 0)
+    else
     {
       session_destroy();
       $erreur = "Your account was not validated";
@@ -115,8 +103,6 @@ if (isset($_POST['formconnect'])) {
         {
           // echo '<font color="red">' .$erreur. "</font>";
           echo "<p style='color:red;'>" .$erreur. "</p>";
-
-
         }
         ?>
       </form>

@@ -39,21 +39,16 @@
 
 
 // Fix and protect all functions that interact with user input (like with imagecreatefromstring)
-// Replace htmlspecialchar by base64_encode
-// NOT DOING // Protect from brute-force attack on change passwd && confirmation
+// Square in image when onclick()
+// comment.php : nb of likes at load && if liked or not
+// Proper username for each comment TODOOOOOOOOO
+// .htaccess to protect .gitignore && fix error message (http://stackoverflow.com/questions/22888216/403-forbidden-you-dont-have-permission-to-access)
+// Check if id_image exists in DB => if not redirect to gallery
+// Delete message after submit
+// Comment size when inserted in JS
+// Comment number when posting a comment ?
 
 
-// username already exists OKKKKKK
-
-// "Your account was not validated" if user doesn't exist OKKKKKK
-
-// Proper username for each comment OKKKKKKKK
-
-// add intval to protect $_GET['whatever'] OKKKK
-
-// Fix popup at delete account OKKKKKKK
-
-// .htaccess to protect folders and files OKKKKKKK
 
 
 ?>

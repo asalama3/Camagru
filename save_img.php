@@ -37,11 +37,12 @@ try {
 $file = $_POST['filter'];
 $file = preg_replace("/.*\//", "", $file); // remplacer tout ce quil y a jusqua le / par rien pur garder le nom du file
 
-// TEST IF $file exists
 
 if ($file) {
-    try
-    {
+    set_error_handler(function ($no, $msg, $file, $line) {
+    throw new ErrorException($msg, 0, $no, $file, $line);
+});
+try {
         $src = imagecreatefrompng("./images/" . $file);
     }
     catch (Exception $e)
@@ -51,9 +52,11 @@ if ($file) {
 
     $width = imagesx($src);
     $height = imagesy($src);
-
-    try
-    {
+    
+    set_error_handler(function ($no, $msg, $file, $line) {
+    throw new ErrorException($msg, 0, $no, $file, $line);
+});
+try {
         imagecopy($dest, $src, 140, 30, 0, 0, $width, $height);
     }
     catch (Exception $e)
