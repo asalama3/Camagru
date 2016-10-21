@@ -2,14 +2,7 @@
 
 include ('init.php');
 
-// try
-// {
-//   $bdd = new PDO('mysql:localhost=8889;dbname=camagru', 'root', 'root');
-// }
-// catch (Exception $e)
-// {
-//   die('Erreur: ' . $e->getMessage());
-// }
+
 error_reporting(-1);
 ini_set('display_errors', 'On');
 set_error_handler("var_dump");
@@ -31,13 +24,19 @@ if(isset($_POST['inscription']))
         $mailexists = $reqmail->rowCount();
         if ($mailexists == 0)
         {
+          $requsername = $bdd->prepare("SELECT * FROM users WHERE username = ? ");
+          $requsername->execute(array($pseudo));
+          $usernameexists = $requsername->rowCount();
+          if ($usernameexists == 0)
+          {
+
           $keylength = 12;
           $key = "";
           for($i=1;$i<$keylength;$i++)
           {
             $key .= mt_rand(0, 9);
           }
-          echo $key;
+          // echo $key;
           $insertuser = $bdd->prepare("INSERT INTO users(username, email, password, confirmkey) VALUES(?, ?, ?, ?)");
           $insertuser->execute(array($pseudo, $mail, $mdp, $key));
 
@@ -60,6 +59,9 @@ if(isset($_POST['inscription']))
 
           $erreur = "Your account is now created! </br>
           Please confirm your account by clicking on the link sent to your email: $mail.";
+        }else {
+          $erreur = "Username already used!";
+        }
         }
         else
         {

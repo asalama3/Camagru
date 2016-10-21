@@ -39,7 +39,9 @@ if (isset($_POST['formconnect'])) {
   {
     $erreur = "Incomplete Fields";
   }
-  if ($result['confirm'] && password_verify($mdpconnect, $hsh)) {
+  if (password_verify($mdpconnect, $hsh)) {
+    if ($result['confirm'])
+    {
     if (!empty($mailconnect) AND !empty($mdpconnect)) {
       $requser = $bdd->prepare("SELECT * FROM users WHERE email = ?");
       $requser->execute(array($mailconnect));
@@ -57,10 +59,11 @@ if (isset($_POST['formconnect'])) {
           $erreur = "Incomplete Fields";
         }
     }
-  else if ($result['confirm'] == 0)
-  {
-    session_destroy();
-    $erreur = "Your account was not validated";
+    else if ($result['confirm'] == 0)
+    {
+      session_destroy();
+      $erreur = "Your account was not validated";
+    }
   }
   else
   {

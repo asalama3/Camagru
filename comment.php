@@ -13,6 +13,7 @@ if (!isset($_SESSION['id']))
 {
     header('Location: signin.php');
 }
+// echo $_SESSION['username'];
  ?>
 <html>
   <head>
@@ -45,7 +46,7 @@ if (isset($_SESSION['id']))
 {
 
   $alllikes = $bdd->prepare('SELECT * FROM likes where id_image=? and user_id=?' );
-  $alllikes->execute( array(intval($_GET['id_image']), $_SESSION['id'] ) );
+  $alllikes->execute( array(!empty(intval($_GET['id_image'])), $_SESSION['id'] ) );
 
   if ( $liked = $alllikes->fetch() ) {
     $ret = $liked['id_image'] != null ? 'true' : 'false';
@@ -98,31 +99,31 @@ if (isset($_SESSION['id']))
 
   while ($display = $allcomments->fetch())
   {
-    $get_useridbis = $bdd->prepare('SELECT user_id FROM `comments` WHERE id_image=?');
-    $get_useridbis->execute(array(intval($_GET['id_image'])));
-    if ($user_com = $getuseridbis->fetch())
+    $user_added_comment = $bdd->prepare('SELECT user_id FROM comments WHERE id_image=?');
+    $user_added_comment->execute(array(intval($_GET['id_image'])));
+    while ($user_comment = $user_added_comment->fetch())
     {
-        $usr_id= $user_com['user_id'];
+        $usr_id= $user_comment['user_id'];
     }
 
-    $get_usernm = $bdd->prepare('SELECT username from users WHERE user_id=?');
-    $get_usernm->execute(array($usr_id));
-    if ($usernamecom = $get_usernm->fetch())
+    $username_comment = $bdd->prepare('SELECT username from users WHERE user_id=?');
+    $username_comment->execute(array($usr_id));
+    while ($usr = $username_comment->fetch())
     {
-        $usr_nm=$usernamecom['username'];
+        $usr_nm_final=$usr['username'];
     }
-  $user_name_styled = '<a style="font-weight: bold;">'.$usr_nm.'</a>';
+  $user_name_styled = '<a style="font-weight: bold;">'.$usr_nm_final.'</a>';
 
     echo "<div class=\"comments\" />";
     echo $user_name_styled . ':'. $display['content'];
     echo "</div>";
-    
+
   }
 }
 ?>
 
 <div class="end_of_file">
-<div class="tryout" id= "<?php echo $_GET['id_image']; ?>" /> 
+<div class="tryout" id= "<?php echo $_GET['id_image']; ?>" />
     <input type="text" placeholder="Write a comment..."  name="comment" id="comment"/>
     <input type="submit" name="submit" value="Submit" id="submit_comment"/>
   </div>

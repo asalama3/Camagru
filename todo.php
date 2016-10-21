@@ -38,23 +38,22 @@
 
 
 
-// username already exists
-
-// Proper username for each comment
-
+// Fix and protect all functions that interact with user input (like with imagecreatefromstring)
 // Replace htmlspecialchar by base64_encode
+// NOT DOING // Protect from brute-force attack on change passwd && confirmation
+
+
+// username already exists OKKKKKK
+
+// "Your account was not validated" if user doesn't exist OKKKKKK
+
+// Proper username for each comment OKKKKKKKK
 
 // add intval to protect $_GET['whatever'] OKKKK
 
 // Fix popup at delete account OKKKKKKK
 
-// Fix and protect all functions that interact with user input (like with imagecreatefromstring)
-
-// "Your account was not validated" if user doesn't exist
-
-// NOT DOING // Protect from brute-force attack on change passwd && confirmation
-
-// .htaccess to protect folders and files
+// .htaccess to protect folders and files OKKKKKKK
 
 
 ?>
