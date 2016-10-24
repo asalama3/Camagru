@@ -20,40 +20,89 @@ var oldfilter = null;
     var canvasContext = canvas.getContext('2d');
 
 
-    navigator.getUserMedia = (navigator.getUserMedia ||
-      navigator.webkitGetUserMedia ||
-      navigator.mozGetUserMedia ||
-      navigator.msGetUserMedia);
+        //
+        // navigator.getUserMedia = (navigator.getUserMedia || navigator.mozGetUserMedia ||
+        //   navigator.webkitGetUserMedia ||
+        //   navigator.mediaDevices.getUserMedia ||
+        //   navigator.msGetUserMedia);
+        //
+        // if (navigator.getUserMedia) {
+        //   function gotStream(stream) {
+        //     if (navigator.mozGetUserMedia) {
+        //       video.mozSrcObject = stream;
+        //     } else {
+        //       var vendorURL = window.URL || window.webkitURL;
+        //       video.src = vendorURL.createObjectURL(stream);
+        //     }
+        //     video.play();
+        //   }
+        //
+        //   function error(message) {
+        //     console.log(message);
+        //   }
+        //
+        //   function start() {
+        //     this.disabled = true;
+        //     navigator.getUserMedia( {
+        //
+        //       audio: false,
+        //       video: {
+        //         mandatory: {
+        //           maxWidth: 320,
+        //           maxHeight: 240
+        //         }
+        //       }
+        //     },
+        //     gotStream,
+        //     error);
+        //   }
 
-    if (navigator.getUserMedia) {
-      function gotStream(stream) {
-        if (navigator.mozGetUserMedia) {
-          video.mozSrcObject = stream;
-        } else {
-          var vendorURL = window.URL || window.webkitURL;
-          video.src = vendorURL.createObjectURL(stream);
+
+    // Older browsers might not implement mediaDevices at all, so we set an empty object first
+    if (navigator.mediaDevices === undefined) {
+      navigator.mediaDevices = {};
+    }
+
+    // Some browsers partially implement mediaDevices. We can't just assign an object
+    // with getUserMedia as it would overwrite existing properties.
+    // Here, we will just add the getUserMedia property if it's missing.
+    if (navigator.mediaDevices.getUserMedia === undefined) {
+      navigator.mediaDevices.getUserMedia = function(constraints) {
+
+        // First get ahold of the legacy getUserMedia, if present
+        var getUserMedia = (navigator.getUserMedia ||
+          navigator.webkitGetUserMedia ||
+          navigator.mozGetUserMedia || navigator.mediaDevices.getUserMedia ||
+            navigator.msGetUserMedia);
+
+        // Some browsers just don't implement it - return a rejected promise with an error
+        // to keep a consistent interface
+        if (!getUserMedia) {
+          return Promise.reject(new Error('getUserMedia is not implemented in this browser'));
         }
+
+        // Otherwise, wrap the call to the old navigator.getUserMedia with a Promise
+        return new Promise(function(resolve, reject) {
+          getUserMedia.call(navigator, constraints, resolve, reject);
+        });
+      }
+    }
+
+    navigator.mediaDevices.getUserMedia({ audio: false, video: true })
+    .then(function(stream) {
+      var video = document.querySelector('video');
+      // Older browsers may not have srcObject
+      video.src = window.URL.createObjectURL(stream);
+      video.onloadedmetadata = function(e) {
         video.play();
-      }
+      };
+    })
+    .catch(function(err) {
+      console.log(err.name + ": " + err.message);
+    });
 
-      function error(message) {
-        console.log(message);
-      }
 
-      function start() {
-        this.disabled = true;
-        navigator.getUserMedia( {
-          audio: false,
-          video: {
-            mandatory: {
-              maxWidth: 320,
-              maxHeight: 240
-            }
-          }
-        },
-        gotStream,
-        error);
-      }
+
 
       function takePhoto() {
           if (filter) {
@@ -85,40 +134,27 @@ var oldfilter = null;
               xhr.send(im +"&filter=" + filter);
 
           }
-          else
-          {
-              alert('Please select a filter');
-          }
       }
 
         function ffilter(event) {
-            if (filter_nbr == 1) {
-                var test = document.getElementById('ffff' + filter);
-                document.getElementById("video-box").removeChild(test);
-                filter = null;
-                filter_nbr = 0;
-            }
+          document.getElementById("photoButton").disabled = false;
+          document.getElementById("photoButton").addEventListener('click', takePhoto);
+
             filter = event.target.id;
-            console.log("filter is : " + filter);
 
             if (filter != oldfilter) {
-
+                if (oldfilter)
+                {
+                  var test = document.getElementById('ffff' + oldfilter);
+                  document.getElementById("video-box").removeChild(test);
+                }
                 var test = document.createElement("img");
                 test.src = filter;
                 test.id = 'ffff' + filter;
-                test.style.width = '130px';
-                test.style.height = '130px';
-                test.style.position = 'absolute';
-                test.style.top = 0;
-                test.style.left = 0;
-                // test.draggable = true;
-                test.addEventListener('dragstart', dragStart, false);
+                test.style.top = 3;
+                test.style.right = 11;
                 document.getElementById("video-box").appendChild(test);
-                filter_nbr = 1;
                 oldfilter = filter;
-            }
-            else {
-                oldfilter = null;
             }
         }
 
@@ -139,8 +175,8 @@ var oldfilter = null;
       }
       function drop(e) {
         z++;
-        draggedElement.style.left = (e.clientX - x) + "px";
-        draggedElement.style.top = (e.clientY - y) + "px";
+        // draggedElement.style.left = (e.clientX - x) + "px";
+        // draggedElement.style.top = (e.clientY - y) + "px";
         if (e.stopPropagation) {
           e.stopPropagation();
         }
@@ -157,8 +193,8 @@ var oldfilter = null;
         e.preventDefault();
       }
 
-      window.onload = start;
-      document.getElementById("photoButton").addEventListener('click', takePhoto);
+      // window.onload = start;
+      // document.getElementById("photoButton").addEventListener('click', takePhoto);
 
       var container = document.body;
       container.addEventListener('drop', drop, false);
@@ -205,11 +241,11 @@ var oldfilter = null;
         };
         buttonsDiv.addEventListener("click", filterClicked, false);
       }
-    } else {
-      document.getElementById("photoButton").disabled = true;
+    // } else {
+      // document.getElementById("photoButton").disabled = true;
 
-      alert("Sorry, you can't capture video from your webcam in this web browser. Try the latest desktop version of Firefox, Chrome or Opera.");
-    }
+      // alert("Sorry, you can't capture video from your webcam in this web browser. Try the latest desktop version of Firefox, Chrome or Opera.");
+    // }
   })();
 
 function submitForm(oFormElement) {

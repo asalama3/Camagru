@@ -3,9 +3,15 @@ session_start();
 
 include ('init.php');
 
-error_reporting(-1);
-ini_set('display_errors', 'On');
-set_error_handler("var_dump");
+// error_reporting(-1);
+// ini_set('display_errors', 'On');
+// set_error_handler("var_dump");
+
+if (!isset($_POST['filter']))
+{
+  header("Location: signin.php");
+  exit();
+}
 
 $json = file_get_contents("php://input");
 $json = str_replace('data:image/png;base64,', "", $json);

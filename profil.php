@@ -56,12 +56,12 @@ if (isset($_SESSION['id']) AND $_SESSION['id'] > 0)
                 <input type="submit" name="submit" value="Upload" id="choose"/>
               </form>
             </div>
-            <button id="photoButton" name="submit">Take photo</button>
+            <button id="photoButton" name="submit" disabled="disabled">Take photo</button>
             <div id="message" ></div>
         </div>
         <div id="centered">
         <div class="filters">
-            <ul><?php $filters = array('dog', 'heart', 'Banana', 'yoshi', 'panda', 'objet', 'apple', 'Donkey_Kong' );?><?php foreach ($filters as $filter) :?><li>
+            <ul><?php $filters = array('dog', 'heart', 'Banana', 'yoshi', 'panda', 'apple', 'Donkey_Kong' );?><?php foreach ($filters as $filter) :?><li>
                         <label  for="./images/<?=$filter?>.png" ><img src="./images/<?=$filter?>.png" id="./images/<?=$filter?>.png" ></label>
                     </li><?php endforeach; ?>
             </ul>
@@ -84,7 +84,6 @@ if (isset($_SESSION['id']) AND $_SESSION['id'] > 0)
               echo "<div class=\"mini\">" ;
               echo "<img class=\"photo_style\" src=\"" . $user_image['name'] . "\" onload='XXX(this, " . $user_image['id_image'] . ");' />";
               echo "</div>";
-
             }
             ?>
         </div>

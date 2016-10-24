@@ -58,7 +58,7 @@ try {
                       lien_image VARCHAR(1000) NOT NULL,
                       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
                       name MEDIUMTEXT NOT NULL,
-                      FOREIGN KEY (user_id) REFERENCES users(user_id))";
+                      FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE)";
 
 
     $bdd->exec($images);
@@ -74,7 +74,7 @@ try {
                       id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
                       email VARCHAR(255) NOT NULL,
                       code INT(11) NOT NULL,
-                      confirm  INT(11) NOT NULL)";
+                      confirm  INT(11) NULL)";
 
     $bdd->exec($pass);
 }
@@ -102,8 +102,8 @@ try {
       user_id INT(11) NOT NULL,
       id_image INT(11) NOT NULL,
       content TEXT NOT NULL,
-      FOREIGN KEY (user_id) REFERENCES users(user_id),
-      FOREIGN KEY (id_image) REFERENCES images(id_image))";
+      FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
+      FOREIGN KEY (id_image) REFERENCES images(id_image) ON DELETE CASCADE)";
 
 
     $bdd->exec($comments);
@@ -114,6 +114,4 @@ catch (PDOException $e)
     die('Erreur: ' . $e->getMessage());
 }
 
-
-// echo 'ok';
 ?>

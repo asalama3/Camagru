@@ -57,9 +57,9 @@ if(isset($_POST['inscription']))
           ';
 
          mail($mail, $subject, $message, $header);
-
+         $decode_email = base64_decode($mail);
           $erreur = "Your account is now created! </br>
-          Please confirm your account by clicking on the link sent to your email: $mail.";
+          Please confirm your account by clicking on the link sent to your email: $decode_email";
         }else {
           $erreur = "Username already used!";
         }
