@@ -55,26 +55,16 @@ var oldfilter = null;
         error);
       }
 
-      // function getRandomNumberWithMax (max) {
-      //   return Math.floor(Math.random() * max);
-      // }
-
       function takePhoto() {
           if (filter) {
               canvasContext.drawImage(video, 0, 0, 400, 320);
               var element = document.createElement("img");
               var im = canvas.toDataURL('image/png');
-              // var angle = getRandomNumberWithMax(30) - 15;
-              // element.style.transform="rotate(" + angle + "deg)";
-              // element.style.top = getRandomNumberWithMax(50) + "px";
-              // element.style.left = getRandomNumberWithMax(50) + "px";
-              // element.style.zIndex = z;
               element.style.boxshadow = "2px 2px 2px #888888";
               element.style.padding = "10px";
               element.style.backgroundColor = "white";
               element.style.filter = video.style.filter;
               element.style.webkitFilter = video.style.webkitFilter;
-              // element.className = "photo";
               element.addEventListener('dragstart', dragStart, false);
 
                var xhr = new XMLHttpRequest();
@@ -138,17 +128,6 @@ var oldfilter = null;
         }
 
 
-
-        // display filter on camera
-        // attention au cursor
-        // effacer l;ancier filtre sil y en a un
-        // si un filtre est selectionner le removechild avant de reclicker.
-        // clientx clienty filter mouseup 0-100 inside div;
-
-
-
-
-
       var draggedElement;
       var x, y, z = 0;
 
@@ -158,12 +137,10 @@ var oldfilter = null;
         y = e.clientY - draggedElement.offsetTop;
         e.dataTransfer.setDragImage(draggedElement, x, y);
       }
-//function drop, dragenter, dragover jouent sur les filtres//
       function drop(e) {
         z++;
         draggedElement.style.left = (e.clientX - x) + "px";
         draggedElement.style.top = (e.clientY - y) + "px";
-        // draggedElement.style.zIndex = z;
         if (e.stopPropagation) {
           e.stopPropagation();
         }
@@ -195,11 +172,9 @@ var oldfilter = null;
             return filterArray[i];
           }
         }
-        // Not found
         return null;
       };
 
-//filtres//
       thisBrowserSupportsCssFilters = function () {
         var prefixes = " -webkit- -moz- -o- -ms- ".split(" ");
         var el = document.createElement('div');
@@ -214,7 +189,6 @@ var oldfilter = null;
           var button = document.createElement("button");
           button.id = item.name;
           button.innerHTML = item.name;
-          // This will cause a re-flow of the page but I don't care
           buttonsDiv.appendChild(button);
         });
 
@@ -231,26 +205,19 @@ var oldfilter = null;
         };
         buttonsDiv.addEventListener("click", filterClicked, false);
       }
-//end filtres//
     } else {
       document.getElementById("photoButton").disabled = true;
 
       alert("Sorry, you can't capture video from your webcam in this web browser. Try the latest desktop version of Firefox, Chrome or Opera.");
     }
-
-     // window.location = "profil.php?element="+element;
-
-
-    //function to get all images in stack and XXX's them
   })();
 
 function submitForm(oFormElement) {
     var xhr = new XMLHttpRequest();
     xhr.onload = function () {
-        var element = document.getElementById("message"); // display message on html
+        var element = document.getElementById("message");
         var resp = this.responseText;
         console.log(resp);
-         // console.dir(resp.split("&"));
         if ((resp == 'No file selected') || (resp == 'No filter selected') || (resp == 'Wrong file format') || (resp == 'Too large file') || (resp == 'Bad filter')) {
             alert(resp);
             document.getElementById("select").innerHTML = "Choose file";
@@ -262,7 +229,6 @@ function submitForm(oFormElement) {
                 var img = document.createElement("img");
                 img.src = resp.split("&")[0];
 
-                // img.src = tmp;
                 XXX(img, resp.split("&")[1]);
 
                 element.innerHTML = "SUCCESS!!!";
@@ -278,7 +244,6 @@ function submitForm(oFormElement) {
 
         xhr.open(oFormElement.method, oFormElement.action, true);
        var fform = new FormData(oFormElement);
-        // console.log(filter);
         fform.append("filter", filter);
         xhr.send(fform);
         oFormElement.reset();

@@ -85,11 +85,9 @@ catch (PDOException $e)
 
 try {
     $like = "CREATE TABLE IF NOT EXISTS likes (
-                      id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,        
+                      id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
                       user_id INT(11) NOT NULL,
-                      id_image INT(11) NOT NULL,
-                      FOREIGN KEY (user_id) REFERENCES users(user_id),
-                      FOREIGN KEY (id_image) REFERENCES images(id_image))";
+                      id_image INT(11) NOT NULL)";
 
     $bdd->exec($like);
 }

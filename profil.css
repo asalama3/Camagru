@@ -33,7 +33,6 @@ h1{
   font-weight: normal;
 }
 
-
 h2{
   text-align: center;
   font-style: italic;
@@ -43,7 +42,6 @@ ul.topnav {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    /*overflow: hidden;*/
     background-color: #333;
 }
 
@@ -203,18 +201,10 @@ button.active {
   height: auto;
 }
 
-/*.filt{
-  display: block;
-  width: 100px;
-  height: 100px;
-  margin-left: 100px;
-}*/
 
 #filterButtons {
   width: 100%;
   text-align: center;
-  /*flex-direction: row;*/
-  /*flex-wrap: wrap;*/
 }
 
 #reset{
@@ -254,16 +244,10 @@ button{
   display: inline-block;
 }
 
-
 .photo_style{
 box-shadow: 2px 2px 2px #888888;
 padding: 10px;
 background-color: white;
-  /*width: 30%;*/
-  /*min-width: 400px;*/
-  /*margin: 1%;*/
-  /*text-align: center;*/
-  /*display: inline-block;*/
 }
 
 
@@ -295,13 +279,9 @@ background-color: white;
 }
 
 @media (max-width: 630px){
-  /*#video{
-    min-width: 315px;
-        min-height: 236px;
-}*/
 #filterButtons {
   width: 250px;
   text-align: center;
   margin: auto;
-
+}
 }

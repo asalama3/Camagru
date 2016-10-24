@@ -89,7 +89,7 @@ while( $images = $allimages->fetch() )
     $get_username->execute(array($user_id));
     if ($username = $get_username->fetch())
     {
-        $usr_nm=$username['username'];
+        $usr_nm=base64_decode($username['username']);
     }
 
     echo "<div class=\"test\">" ;

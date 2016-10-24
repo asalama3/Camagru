@@ -6,10 +6,11 @@ include ('init.php');
 error_reporting(-1);
 ini_set('display_errors', 'On');
 set_error_handler("var_dump");
+
 if(isset($_POST['inscription']))
 {
-  $pseudo = htmlspecialchars($_POST['pseudo']);
-  $mail = htmlspecialchars($_POST['mail']);
+  $pseudo = base64_encode(htmlspecialchars($_POST['pseudo']));
+  $mail = base64_encode(htmlspecialchars($_POST['mail']));
   $mdp = password_hash($_POST['mdp'], PASSWORD_BCRYPT);
 
   if (!empty($_POST['pseudo']) AND !empty($_POST['mail']) AND !empty($_POST['mdp']))
@@ -17,7 +18,7 @@ if(isset($_POST['inscription']))
     $pseudolength = strlen($pseudo);
     if ($pseudolength <= 255)
     {
-      if (filter_var($mail, FILTER_VALIDATE_EMAIL))
+      if (filter_var(base64_decode($mail), FILTER_VALIDATE_EMAIL))
       {
         $reqmail = $bdd->prepare("SELECT * FROM users WHERE email = ? ");
         $reqmail->execute(array($mail));
@@ -68,16 +69,22 @@ if(isset($_POST['inscription']))
           $erreur = "Email address already used!";
         }
       }
+      else{
+        $erreur = "Invalid email";
+      }
     }
     else
     {
-      $erreur = "Your username can't be more than 255 characters !";
+      $erreur = "Your username can't be more than 192 characters !";
     }
   }
   else
   {
     $erreur = "Incomplete field!";
   }
+}
+else{
+  $erreur = "PROBLEM";
 }
 ?>
 <html>
@@ -103,12 +110,12 @@ if(isset($_POST['inscription']))
         <table align="center">
           <tr>
             <td>
-              <input type="text" placeholder="Username" id="pseudo" name="pseudo" value="<?php if (isset($pseudo)) { echo $pseudo; } ?>" />
+              <input type="text" placeholder="Username" id="pseudo" name="pseudo" value="<?php if (isset($pseudo)) { echo base64_decode($pseudo); } ?>" />
             </td>
           </tr>
           <tr>
             <td>
-              <input type="email" placeholder="Email" id="mail" name="mail" value="<?php if (isset($mail)) { echo $mail; } ?>" />
+              <input type="email" placeholder="Email" id="mail" name="mail" value="<?php if (isset($mail)) { echo base64_decode($mail); } ?>" />
             </td>
           </tr>
           <tr>

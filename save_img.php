@@ -3,19 +3,6 @@ session_start();
 
 include ('init.php');
 
-
-// try
-// {
-//   $bdd = new PDO('mysql:localhost=8889;dbname=camagru', 'root', 'root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-// }
-// catch (Exception $e)
-// {
-//   die('Erreur: ' . $e->getMessage());
-// }
-
-//var_dump($_POST);
-//die;
-
 error_reporting(-1);
 ini_set('display_errors', 'On');
 set_error_handler("var_dump");
@@ -52,12 +39,12 @@ try {
 
     $width = imagesx($src);
     $height = imagesy($src);
-    
+
     set_error_handler(function ($no, $msg, $file, $line) {
     throw new ErrorException($msg, 0, $no, $file, $line);
 });
 try {
-        imagecopy($dest, $src, 140, 30, 0, 0, $width, $height);
+        imagecopy($dest, $src, 225, 10, 0, 0, $width, $height);
     }
     catch (Exception $e)
     {
@@ -68,15 +55,12 @@ else{
     echo "Bad filter";
     exit;
 }
-// grace a echo on envoie une reponse a l'ajaax, ma photo finale
-// ob sert a convertir mon image en string pour ensuite la reconvertir en base64 pour l'envoyer a ajax et la save
-// dans database.
+
 
 ob_start();
 imagepng($dest);
 $contents =  ob_get_contents();
 ob_end_clean();
-//echo $dest;
 echo 'data:image/png;base64,' . base64_encode($contents);
 
 $req = $bdd->prepare("INSERT INTO images(name, lien_image, user_id) VALUES(?, ?, ?)");

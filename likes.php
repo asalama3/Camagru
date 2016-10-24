@@ -12,8 +12,8 @@ include ('init.php');
 //     die('Erreur: ' . $e->getMessage());
 // }
 
-echo $_SESSION['id'];
-echo $_POST['id'];
+// echo $_SESSION['id'];
+// echo $_POST['id'];
 
 if (isset($_SESSION['id']) AND $_SESSION['id'] > 0) {
     $requser = $bdd->prepare("SELECT user_id, id_image FROM likes WHERE user_id=? AND id_image=?");

@@ -3,14 +3,6 @@ session_start();
 
 include ('init.php');
 
-// try
-// {
-//   $bdd = new PDO('mysql:localhost=8889;dbname=camagru', 'root', 'root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-// }
-// catch (Exception $e)
-// {
-//   die('Erreur: ' . $e->getMessage());
-// }
 if (!isset($_SESSION['id']))
 {
   header('Location: ./signin.php');
@@ -69,7 +61,7 @@ if (isset($_SESSION['id']) AND $_SESSION['id'] > 0)
         </div>
         <div id="centered">
         <div class="filters">
-            <ul><?php $filters = array('dog', 'heart', 'Banana', 'yoshi', 'panda', 'masksmall', 'ironman', 'apple', 'Donkey_Kong' );?><?php foreach ($filters as $filter) :?><li>
+            <ul><?php $filters = array('dog', 'heart', 'Banana', 'yoshi', 'panda', 'objet', 'apple', 'Donkey_Kong' );?><?php foreach ($filters as $filter) :?><li>
                         <label  for="./images/<?=$filter?>.png" ><img src="./images/<?=$filter?>.png" id="./images/<?=$filter?>.png" ></label>
                     </li><?php endforeach; ?>
             </ul>

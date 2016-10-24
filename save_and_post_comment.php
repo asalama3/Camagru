@@ -31,7 +31,7 @@ $get_username = $bdd->prepare('SELECT username from users WHERE user_id=? ');
 $get_username->execute(array($id));
 while ($username = $get_username->fetch())
 {
-  $final_username=$username['username'];
+  $final_username=base64_decode($username['username']);
 }
 
 $get_nbr_comments = $bdd->prepare("SELECT COUNT(*) AS 'com' FROM comments WHERE id_image=?");

@@ -25,16 +25,17 @@ function LeaveComment( id_image ){
       // document.getElementById("comment").value = "";
       // comment.innerHTML = this.responseText;
       // console.log(comment);
-	
-  
+
+
       data = JSON.parse(xhr.responseText);
       console.log("comment : " + data['comment']);
       console.log("user : " + data['username']);
       console.log("nbr_com : " + data['nbr_comments']);
-      
-      comment.innerHTML = "<a style='font-weight: bold; font-size: 20px; margin-top: 10px; display: inline-block;'>" + data['username'] + "</a>" + ":" + data['comment'];
+
+      comment.innerHTML = "<a style='font-weight: bold; font-size: 20px; margin-top: 10px; display: inline-block;'>" + data['username'] + "</a>" + ":" + "<a style='font-size: 20px;'>" + data['comment'] + "</a>";
       // get count from function like in add likes and comments.js
       test.parentElement.insertBefore(comment, test);
+      document.getElementById("comment").value = "";
     }
   }
   xhr.open("POST", "save_and_post_comment.php", true);

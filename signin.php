@@ -11,7 +11,7 @@ ini_set('display_errors', 'On');
 
 
 if (isset($_POST['formconnect'])) {
-  $mailconnect = htmlspecialchars($_POST['mailconnect']);
+  $mailconnect = base64_encode(htmlspecialchars($_POST['mailconnect']));
   $mdpconnect = $_POST['mdpconnect'];
 
   $confirm = $bdd->prepare('SELECT confirm FROM users WHERE email=?');
@@ -37,8 +37,8 @@ if (isset($_POST['formconnect'])) {
       if ($userexists == 1) {
         $userinfo = $requser->fetch();
         $_SESSION['id'] = $userinfo['user_id'];
-        $_SESSION['username'] = $userinfo['username'];
-        $_SESSION['email'] = $userinfo['email'];
+        $_SESSION['username'] = base64_decode($userinfo['username']);
+        $_SESSION['email'] = base64_decode($userinfo['email']);
         header("Location: ./profil.php?user_id=" . $_SESSION['id']);
       }
     }
