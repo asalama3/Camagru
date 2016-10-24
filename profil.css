@@ -111,6 +111,7 @@ ul.topnav li.icon {display: none;}
   margin: 0 auto;
 }
 
+
 .photo_buttons{
   text-align: center;
   margin: 5 auto;
@@ -269,6 +270,12 @@ background-color: white;
   width: 100%;
 }
 
+#video-box img{
+  width: 130px;
+  height: 130px;
+  position: absolute;
+}
+
 @media (max-width: 500px){
   .footer{
     font-size: 10px;
@@ -283,5 +290,9 @@ background-color: white;
   width: 250px;
   text-align: center;
   margin: auto;
+}
+#video-box img{
+  width: 60px;
+  height: 60px;
 }
 }
