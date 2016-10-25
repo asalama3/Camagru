@@ -6,6 +6,11 @@ header{
     position: relative;
 }
 
+header a{
+  text-decoration: none;
+  color: white;
+}
+
 h1{
   float: left;
   font-size: 30px;

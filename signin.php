@@ -68,7 +68,7 @@ if (isset($_POST['formconnect'])) {
   </head>
   <body>
     <header>
-      <h1>C A M A G R U</h1>
+      <h1><a href="index.php">C A M A G R U</a></h1>
         <ul>
           <li><a href="signup.php">Sign Up</a></li>
         </ul>
@@ -101,7 +101,6 @@ if (isset($_POST['formconnect'])) {
 
         if (isset($erreur))
         {
-          // echo '<font color="red">' .$erreur. "</font>";
           echo "<p style='color:red;'>" .$erreur. "</p>";
         }
         ?>

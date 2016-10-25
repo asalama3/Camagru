@@ -4,7 +4,7 @@ function delete_image() {
     xhr.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             todel.parentNode.removeChild(todel);
-            console.log(this.responseText);
+            // console.log(this.responseText);
         }
     };
     xhr.open("POST", "delete_image.php", true);
@@ -25,7 +25,9 @@ function XXX(element, id){
     newdiv.style.margin="1%";
     newdiv.style.minWidth="400px";
     newdiv.style.textAlign="center";
-
+    element.style.boxshadow = "2px 2px 2px #888888";
+    element.style.padding = "10px";
+    element.style.backgroundColor = "white"; 
 
 
     newdiv.appendChild(element);

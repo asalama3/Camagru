@@ -101,7 +101,7 @@ try {
       id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
       user_id INT(11) NOT NULL,
       id_image INT(11) NOT NULL,
-      content TEXT NOT NULL,
+      content VARCHAR(255) NOT NULL,
       FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
       FOREIGN KEY (id_image) REFERENCES images(id_image) ON DELETE CASCADE)";
 

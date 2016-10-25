@@ -20,7 +20,7 @@ if (!isset($_SESSION['id']))
     <meta charset="utf-8">
     <link rel="stylesheet" href="comment.css" />
     <script type="text/javascript" src="./likes.js"></script>
-    <script type="text/javascript" src="./add_likes_and_comments.js"></script>
+    <script type="text/javascript" src="./insert_owner_and_comment.js"></script>
 
     <title>Camagru</title>
   </head>
@@ -67,14 +67,13 @@ if (isset($_SESSION['id']))
     {
         $usr_nm=base64_decode($username['username']);
     }
-
   $id = intval($_GET['id_image']);
   $image = $bdd->prepare('SELECT * FROM images WHERE id_image=?');
   $image->execute(array($id));
   $img = $image->fetch();
 
-  echo "<div class=\"comment_image\" >" ;
-  echo "<img class=\"style\" src=\"" . $img['name'] . "\" onload= " .'"'. "add_info(this, '$usr_nm');".'"'.">";
+  echo "<div class=\"comment_image\">" ;
+  echo "<img class=\"style\" src=\"" . $img['name'] .  "\" onload= " .'"'. "add_info(this, '$usr_nm');".'"'.">";
   echo "</div>" ;
   echo "<div style='clear:both;'>";
   echo "</div>" ;

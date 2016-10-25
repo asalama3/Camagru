@@ -31,19 +31,19 @@ $get_username = $bdd->prepare('SELECT username from users WHERE user_id=? ');
 $get_username->execute(array($id));
 while ($username = $get_username->fetch())
 {
-  $final_username=base64_decode($username['username']);
+  $final_username=base64_decode(htmlentities($username['username']));
 }
 
-$get_nbr_comments = $bdd->prepare("SELECT COUNT(*) AS 'com' FROM comments WHERE id_image=?");
-$get_nbr_comments->execute(array(intval($_POST['id]'])));
-  if($result = $get_nbr_comments->fetch())
-  {
-    $nbr = intval($result['com']);
-  }
+// $get_nbr_comments = $bdd->prepare("SELECT COUNT(*) AS 'com' FROM comments WHERE id_image=?");
+// $get_nbr_comments->execute(array(intval($_POST['id]'])));
+//   if($result = $get_nbr_comments->fetch())
+//   {
+//     $nbr = intval($result['com']);
+//   }
 
 
 $data = [];
-$data['nbr_comments'] = $nbr;
+// $data['nbr_comments'] = $nbr;
 $data['username'] = $final_username;
 $data['comment'] = $_POST['comment'];
 $json = json_encode($data);

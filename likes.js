@@ -4,8 +4,7 @@ function like(count, but, id_image) {
 
     xhr.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-        console.log(this.responseText);
-        // check if count is a number
+        // console.log(this.responseText);
         //     console.dir(but.firstElementChild);
         if (this.responseText === "please sign in")
         {
@@ -39,20 +38,13 @@ function out_like(){
 }
 
 function comment_img(comment, id_image){
-  console.log(id_image);
+  // console.log(id_image);
   window.location.assign("comment.php?id_image=" + id_image);
 }
 
-// function get_image_id_for2(element) {
-//   while(element.class !== 'imageposition') {
-//     element = element.parent;
-//   }
-//   return element.id;
-// }
-
 function get_image_id_for( element ) {
   if( element.className === "imageposition" ) {
-    console.log(element.className);
+    // console.log(element.className);
 
      return element.id;
   } else {
@@ -139,10 +131,8 @@ function likes_image(img, liked, nbr_likes, id, nbr_comments, owner){
     img.parentElement.appendChild(comment, img);
     img.parentElement.appendChild(nbr_com, img);
     var child = document.createElement("span");
-    child.innerHTML = owner;
+    child.innerHTML = escape(owner);
     child.style.display= "block";
-    // child.style.padding= "30";
     child.style.float="left";
     img.parentElement.appendChild(child, img);
-    // document.body.appendChild(owner);
 }

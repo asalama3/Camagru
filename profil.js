@@ -20,7 +20,6 @@ var oldfilter = null;
     var canvasContext = canvas.getContext('2d');
 
 
-        //
         // navigator.getUserMedia = (navigator.getUserMedia || navigator.mozGetUserMedia ||
         //   navigator.webkitGetUserMedia ||
         //   navigator.mediaDevices.getUserMedia ||
@@ -98,7 +97,7 @@ var oldfilter = null;
       };
     })
     .catch(function(err) {
-      console.log(err.name + ": " + err.message);
+      alert(err.name + ": " + err.message);
     });
 
 
@@ -263,7 +262,7 @@ function submitForm(oFormElement) {
     xhr.onload = function () {
         var element = document.getElementById("message");
         var resp = this.responseText;
-        console.log(resp);
+        // console.log(resp);
         if ((resp == 'No file selected') || (resp == 'No filter selected') || (resp == 'Wrong file format') || (resp == 'Too large file') || (resp == 'Bad filter')) {
             alert(resp);
             document.getElementById("select").innerHTML = "Choose file";
@@ -271,7 +270,6 @@ function submitForm(oFormElement) {
         }
         else {
             if (filter) {
-                console.log("salut");
                 var img = document.createElement("img");
                 img.src = resp.split("&")[0];
 
@@ -298,7 +296,6 @@ function submitForm(oFormElement) {
 
 
 function func(){
-  console.log("func");
     document.getElementById("message").innerHTML="";
     document.getElementById("select").innerHTML = "Choose file";
 }

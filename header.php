@@ -9,7 +9,7 @@
     <script type="text/javascript" src="./header.js"></script>
 </head>
 <header>
-    <h1>C A M A G R U</h1>
+  <h1><a href="index.php">C A M A G R U</a></h1>
     <ul class="topnav" id="myTopnav">
         <li><a href="" style="padding-top: 36px; pointer-events: none;
        cursor: default; "></a></li>

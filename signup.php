@@ -102,7 +102,7 @@ else{
   </head>
   <body>
   <header>
-    <h1>C A M A G R U</h1>
+    <h1><a href="index.php">C A M A G R U</a></h1>
     <ul>
 <?php
 ?>
