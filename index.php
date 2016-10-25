@@ -2,18 +2,6 @@
 session_start();
 include ('init.php');
 
-// try
-// {
-//     $bdd = new PDO('mysql:localhost=8889;dbname=camagru', 'root', 'root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-// }
-// catch (Exception $e)
-// {
-//     die('Erreur: ' . $e->getMessage());
-// }
-// error_reporting(-1);
-// ini_set('display_errors', 'On');
-// set_error_handler("var_dump");
-
 
 include ('header.php');
 
@@ -51,7 +39,6 @@ $start = ($currentpage-1)*$imgperpage;
 
 $allimages = $bdd->prepare('SELECT * FROM images ORDER BY id_image DESC LIMIT '.$start.','.$imgperpage);
 $allimages->execute();
-// $images = $allimages->fetch();
 
 while( $images = $allimages->fetch() )
 {

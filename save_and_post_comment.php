@@ -69,11 +69,8 @@ if ($owner_info = $get_owner_email->fetch())
     $owner_set_email=$owner_info['email'];
 }
 
-// $req_owner_image = $bdd->prepare('SELECT user_id, email FROM images, users WHERE images.user_id = users.user_id');
-// $req_owner_image->execute();
-// $owner_img = $req_owner_image->fetch();
 
-$mail = $owner_set_email;
+$mail = base64_decode($owner_set_email);
 $subject = 'New Comment';
 $header='MIME-Version: 1.0' . "\r\n";
 $header.='From:"andrea salama"<andreasalama2@gmail.com>'. "\r\n";

@@ -21,7 +21,6 @@ function XXX(element, id){
 
 
     newdiv.style.width="20%";
-    // newdiv.style.backgroundColor="red";
     newdiv.style.display="inline-block";
     newdiv.style.margin="1%";
     newdiv.style.minWidth="400px";

@@ -3,19 +3,6 @@ session_start();
 
 include ('init.php');
 
-// try
-// {
-//   $bdd = new PDO('mysql:localhost=8889;dbname=camagru', 'root', 'root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-// }
-// catch (Exception $e)
-// {
-//   die('Erreur: ' . $e->getMessage());
-// }
-// ini_set('display_errors', 1);
-// error_reporting(E_ALL);
-
-//$test = file_get_contents("php://input");
-
 
 $upload_file = $_FILES['file_upload']['tmp_name'];
 
@@ -27,13 +14,13 @@ if (empty($imageFileType))
     exit();
 }
 else {
-  if ($imageFileType == "jpeg") {
+  if ($imageFileType == "jpeg" || $imageFileType == "JPEG") {
     $dest = imagecreatefromjpeg($upload_file);
-  } else if ($imageFileType == "png") {
+  } else if ($imageFileType == "png" || $imageFileType == "PNG") {
     $dest = imagecreatefrompng($upload_file);
-  } else if ($imageFileType == "jpg") {
+  } else if ($imageFileType == "jpg" || $imageFileType == "JPG") {
     $dest = imagecreatefromjpeg($upload_file);
-  } else if ($imageFileType == "gif") {
+  } else if ($imageFileType == "gif" || $imageFileType == "GIF") {
     $dest = imagecreatefromgif($upload_file);
   } else {
       echo "Wrong file format";
@@ -75,9 +62,6 @@ else{
     echo "Bad filter";
     exit();
 }
-// grace a echo on envoie une reponse a l'ajaax, ma photo finale
-// ob sert a convertir mon image en string pour ensuite la reconvertir en base64 pour l'envoyer a ajax et la save
-// dans database.
 
 
 ob_start();

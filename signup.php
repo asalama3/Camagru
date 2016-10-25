@@ -3,14 +3,24 @@
 include ('init.php');
 
 
-error_reporting(-1);
-ini_set('display_errors', 'On');
-set_error_handler("var_dump");
+$array = explode("/", __DIR__);
+$repo = $array[5];
+
 
 if(isset($_POST['inscription']))
 {
   $pseudo = base64_encode(htmlspecialchars($_POST['pseudo']));
   $mail = base64_encode(htmlspecialchars($_POST['mail']));
+
+
+  $password_check = preg_match('/^\S*(?=\S{8,})(?=\S*[\d])\S*$/', $_POST['mdp']);
+
+  if (!$password_check)
+  {
+    $erreur = "Your password must contain at least one number or must be at least 8 characters";
+  }
+else{
+
   $mdp = password_hash($_POST['mdp'], PASSWORD_BCRYPT);
 
   if (!empty($_POST['pseudo']) AND !empty($_POST['mail']) AND !empty($_POST['mdp']))
@@ -37,7 +47,6 @@ if(isset($_POST['inscription']))
           {
             $key .= mt_rand(0, 9);
           }
-          // echo $key;
           $insertuser = $bdd->prepare("INSERT INTO users(username, email, password, confirmkey) VALUES(?, ?, ?, ?)");
           $insertuser->execute(array($pseudo, $mail, $mdp, $key));
 
@@ -50,15 +59,15 @@ if(isset($_POST['inscription']))
           <html>
             <body>
               <div align="center">
-                <a href="http://'.$_SERVER["HTTP_HOST"].'/Camagru/confirmation.php?username='.urldecode($pseudo).'&key='.$key.'">Confirmez votre compte !</a>
+                <a href="http://'.$_SERVER["HTTP_HOST"].'/'.$repo.'/confirmation.php?username='.urldecode($pseudo).'&key='.$key.'">Confirmez votre compte !</a>
               </div>
             </body>
           </html>
           ';
+          $decode_email = base64_decode($mail);
+          mail($decode_email, $subject, $message, $header);
 
-         mail($mail, $subject, $message, $header);
-         $decode_email = base64_decode($mail);
-          $erreur = "Your account is now created! </br>
+          $ok = "Your account is now created! </br>
           Please confirm your account by clicking on the link sent to your email: $decode_email";
         }else {
           $erreur = "Username already used!";
@@ -83,8 +92,6 @@ if(isset($_POST['inscription']))
     $erreur = "Incomplete field!";
   }
 }
-else{
-  $erreur = "PROBLEM";
 }
 ?>
 <html>
@@ -104,7 +111,6 @@ else{
   </header>
       <div id="register">
         <div id="formpage">
-      <!-- <h1>Sign Up !</h1> -->
       <form method='POST' action="">
         <img src="./images/sign_up.png"  />
         <table align="center">
@@ -130,6 +136,10 @@ else{
       if (isset($erreur))
       {
         echo '<font color="red">' .$erreur. "</font>";
+      }
+      if (isset($ok))
+      {
+        echo '<font color="green">' .$ok. "</font>";
       }
       ?>
     </div>

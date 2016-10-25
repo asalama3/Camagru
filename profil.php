@@ -78,7 +78,6 @@ if (isset($_SESSION['id']) AND $_SESSION['id'] > 0)
             <?php
             $allimages = $bdd->prepare("SELECT * FROM images WHERE user_id= ?");
             $allimages->execute(array($_SESSION['id']));
-            $user_image = $allimages->fetch();
             while($user_image = $allimages->fetch())
             {
               echo "<div class=\"mini\">" ;

@@ -153,6 +153,16 @@ var oldfilter = null;
                 test.id = 'ffff' + filter;
                 test.style.top = 3;
                 test.style.right = 11;
+
+                // if (test.src == null)
+                // {
+                  // test.style.visibility = "hidden";
+                // }
+                if (test.id == "ffff")
+                {
+                  test.style.display = "none";
+
+                }
                 document.getElementById("video-box").appendChild(test);
                 oldfilter = filter;
             }
@@ -267,7 +277,7 @@ function submitForm(oFormElement) {
 
                 XXX(img, resp.split("&")[1]);
 
-                element.innerHTML = "SUCCESS!!!";
+                element.innerHTML = "SUCCESS!!";
                 window.setTimeout(func, 3000);
             }
             else {

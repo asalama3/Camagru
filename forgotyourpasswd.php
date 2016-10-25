@@ -3,20 +3,13 @@ session_start();
 
 include ('init.php');
 
-// try
-// {
-//   $bdd = new PDO('mysql:localhost=8889;dbname=camagru', 'root', 'root');
-// }
-// catch (Exception $e)
-// {
-//   die('Erreur: ' . $e->getMessage());
-// }
-//  ini_set('display_errors', 1);
-//  error_reporting(E_ALL);
-
 
   $server = $_SERVER['SERVER_NAME'];
   $port = $_SERVER['SERVER_PORT'];
+
+
+  $array = explode("/", __DIR__);
+  $repo = $array[5];
 
 if (isset($_GET['section']))
 {
@@ -30,8 +23,9 @@ if (isset($_POST['recup_submit'], $_POST['recup_mail']))
 {
   if (!empty($_POST['recup_mail']))
   {
-    $recup_mail = htmlspecialchars($_POST['recup_mail']);
-    if (filter_var($recup_mail, FILTER_VALIDATE_EMAIL))
+    $recup_mail = base64_encode(htmlspecialchars($_POST['recup_mail']));
+
+    if (filter_var(base64_decode($recup_mail), FILTER_VALIDATE_EMAIL))
     {
       $mailexists = $bdd->prepare('SELECT user_id, username FROM users WHERE email = ?');
       $mailexists->execute(array($recup_mail));
@@ -39,14 +33,13 @@ if (isset($_POST['recup_submit'], $_POST['recup_mail']))
       if ($mailexists_count == 1)
       {
         $pseudo = $mailexists->fetch();
-        $pseudo = $pseudo['username'];
+        $pseudo = base64_decode($pseudo['username']);
         $_SESSION['recup_mail'] = $recup_mail;
         $recup_code = "";
         for ($i=0; $i < 8 ; $i++)
         {
           $recup_code .= mt_rand(0,9);
         }
-
         $mail_recup_exists = $bdd->prepare('SELECT id FROM forgotpasswd WHERE email = ?');
         $mail_recup_exists->execute(array($recup_mail));
         $mail_recup_exists = $mail_recup_exists->rowCount();
@@ -59,12 +52,9 @@ if (isset($_POST['recup_submit'], $_POST['recup_mail']))
         {
           $recup_insert = $bdd->prepare('INSERT INTO forgotpasswd(email, code) VALUES (?,?)');
           $recup_insert->execute(array($recup_mail, $recup_code));
-          // $ret = $recup_insert->fetch();
-
         }
-      
         $subject = 'Récupération de Mot de Passe';
-        $header= 'MIME-Version: 1.0' . "\r\n";
+        $header = 'MIME-Version: 1.0' . "\r\n";
         $header.='From:"andreasalama2@gmail.com"<andreasalama2@gmail.com>'. "\r\n";
         $header.='Content-Type:text/html; charset="utf-8"'. "\r\n";
         $header.='Content-Transfer-Encoding: 8bit';
@@ -78,14 +68,14 @@ if (isset($_POST['recup_submit'], $_POST['recup_mail']))
               <div align=\"center\">
                 Bonjour $pseudo,
                 Voici votre code de récupération: <b>$recup_code</b><br />
-                Cliquez <a href='http://$server:$port/Camagru/forgotyourpasswd.php?section=code'>ici </a> pour réinitialiser votre mot de passe.
+                Cliquez <a href='http://$server:$port/$repo/forgotyourpasswd.php?section=code'>ici </a> pour réinitialiser votre mot de passe.
             </div>
           </body>
         </html>
         ";
-        mail($recup_mail, $subject, $message, $header);
+        mail(base64_decode($recup_mail), $subject, $message, $header);
         $erreur = "A code was sent to your email to reset your password";
-      } 
+      }
       else
       {
         $erreur = "Email address not registered";
@@ -113,7 +103,7 @@ if (isset($_POST['check_submit'], $_POST['check_code']))
       if ($check_req == 1){
       $up_req = $bdd->prepare('UPDATE forgotpasswd SET confirm = 1 WHERE email = ?');
       $up_req->execute(array($_SESSION['recup_mail']));
-      header("Location: http://$server:$port/Camagru/forgotyourpasswd.php?section=changepasswd");
+      header("Location: http://$server:$port/$repo/forgotyourpasswd.php?section=changepasswd");
     }
     else {
       $erreur = "Invalid code";
@@ -134,35 +124,41 @@ if (isset($_POST['change_submit']))
     $check_confirm = $check_confirm['confirm'];
     if ($check_confirm == 1)
     {
-      $passwd = htmlspecialchars($_POST['change_passwd']);
-      $passwdc = htmlspecialchars($_POST['change_passwdc']);
-      if (!empty($passwd) AND !empty($passwdc))
-      {
-        if ($passwd == $passwdc)
+      if (!empty($_POST['change_passwd']) AND !empty($_POST['change_passwdc']))
         {
-          $passwd = sha1($passwd);
-          $insert_passwd = $bdd->prepare('UPDATE users SET password = ? WHERE email = ?');
-          $insert_passwd->execute(array($passwd, $_SESSION['recup_mail']));
-          $del_req = $bdd->prepare('DELETE FROM forgotpasswd WHERE email = ?');
-          $del_req->execute(array($_SESSION['recup_mail']));
-          header("Location: http://$server:$port/Camagru/signin.php");
+          $password_check = preg_match('/^\S*(?=\S{8,})(?=\S*[\d])\S*$/', $_POST['change_passwd']);
+          if ($password_check)
+          {
+            if ($_POST['change_passwd'] == $_POST['change_passwdc'])
+            {
+              $passwd = password_hash($_POST['change_passwd'], PASSWORD_BCRYPT);
+              $insert_passwd = $bdd->prepare('UPDATE users SET password = ? WHERE email = ?');
+              $insert_passwd->execute(array($passwd, $_SESSION['recup_mail']));
+              $del_req = $bdd->prepare('DELETE FROM forgotpasswd WHERE email = ?');
+              $del_req->execute(array($_SESSION['recup_mail']));
+              header("Location: http://$server:$port/$repo/signin.php");
+            }
+            else {
+            $erreur = "Your passwords don't match";
+            }
+          }
+          else{
+            $erreur = "Your password must contain at least one number or must be at least 8 characters";
+          }
         }
-        else {
-          $erreur = "Your passwords don't match";
-        }
-      }
       else {
         $erreur = "Please fill out all fields";
       }
     }
     else {
       $erreur = "Please validate your email with the verification code sent to you by email";
+      }
     }
-  }
-  else{
-    $erreur = "Please fill out all fields";
-  }
+    else{
+      $erreur = "Please fill out all fields";
+    }
 }
+
  ?>
  <!DOCTYPE html>
  <html>
@@ -186,7 +182,7 @@ if (isset($_POST['change_submit']))
          <h4>New Password :</h4>
          <form class="forgot_passwd" action="" method="post">
            <input type="password" name="change_passwd" placeholder="New Password" class="change"></br>
-           <input type="password" name="change_passwdc" placeholder="Confirm your new password" class="change"></br></br>
+           <input type="password" name="change_passwdc" placeholder="Confirm New Password" class="change"></br></br>
            <input type="submit" name="change_submit" value="Submit" class="button">
          </form>
        <?php } else {?>
